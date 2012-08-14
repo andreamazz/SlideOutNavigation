@@ -1,3 +1,5 @@
+# OsX
+.DS_Store
 # Xcode
 build/*
 *.pbxuser
