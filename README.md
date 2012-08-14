@@ -1,8 +1,10 @@
-SlideOutNavigation
+AMSlideOutNavigationController
 ==================
 
 SlideOut Navigation Controller for iOS.
 This controller replicates the behaviour of the 'slide-out' navigation of applications like Facebook or Steam.
+The project currently mimics FB's app styling, you can change all the table colors in the ```AMSlideOutGlobals.h```
+ARC only.
 
 Part of the code is based off [this blog post made by Nick Harris](http://nickharris.wordpress.com/2012/02/05/ios-slide-out-navigation-code/)
 
@@ -15,18 +17,18 @@ Setup
 * Add the ```AMSlideOut``` folder to your project
 * Link against ```QuartzCore``` framework
 * Import ```AMSlideOutNavigationController.h``` in your AppDelegate
-* Init ```AMSlideOutNavigationController```  using the following data structure.
+* Init ```AMSlideOutNavigationController```  using the data structure as follows.
 
 Init data
 --------------------
-The ViewControllers presented by the SlideOut navigation are arranged in sections and rows of a table.
-You need to init the controller passing an array of sections. Each section item is a dictionary, containing the section title and an array describing the ViewControllers. Each item of this array is a dictionary containing the title, icon (if present) and the reference to the ViewController.
+The ViewControllers presented by the SlideOut navigation are arranged in sections and rows of a UITableView.
+You need to init the controller passing an array of sections. Each section item is a dictionary, containing the section title and an array describing the ViewControllers. Each item of this array is a dictionary containing the title, 44x44 icon (if present) and the reference to the ViewController. Check out the sample code to better understand how to setup your views.
 
 Sample
 --------------------
 	UIViewController* controller;
 	
-	// Section
+	// First controller
 	controller = [[UIViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
 	
 	NSMutableDictionary* item1 = [[NSMutableDictionary alloc] init];
@@ -34,6 +36,7 @@ Sample
 	[item1 setObject:controller forKey:kSOController];
 	[item1 setObject:@"icon1.png" forKey:kSOViewIcon];
 	
+	// Second controller
 	controller = [[UIViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
 	
 	NSMutableDictionary* item2 = [[NSMutableDictionary alloc] init];
@@ -42,10 +45,11 @@ Sample
 	[item2 setObject:@"icon2.png" forKey:kSOViewIcon];
 	
 	NSArray *controllers = [[NSArray alloc] initWithObjects:item1, item2, nil];
-	
+
+	// First Section	
 	NSDictionary* section1 = [NSDictionary dictionaryWithObjectsAndKeys:controllers, kSOSection, @"First Section", kSOSectionTitle, nil];
 	
-	// Items displayed
+	// Items collection
 	NSArray* items = [NSArray arrayWithObjects:section1, nil];
 
 	self.slideoutController = [AMSlideOutNavigationController slideOutNavigationWithMenuItems:items];
