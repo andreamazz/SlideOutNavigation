@@ -35,6 +35,49 @@
 	return [[AMSlideOutNavigationController alloc] initWithMenuItems:items];
 }
 
+- (id)init
+{
+	self = [super init];
+	if (self) {
+		_menuVisible = NO;
+		self.menuItems = [[NSMutableArray alloc] init];
+	}
+	return self;
+}
+
++ (id)slideOutNavigation
+{
+	return [[AMSlideOutNavigationController alloc] init];
+}
+
+- (void)addSectionWithTitle:(NSString*)title
+{
+	NSMutableDictionary* section = [[NSMutableDictionary alloc] init];
+	[section setObject:title forKey:kSOSectionTitle];
+	[section setObject:[[NSMutableArray alloc] init] forKey:kSOSection];
+	
+	[self.menuItems addObject:section];
+}
+
+- (void)addViewController:(UIViewController*)controller withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section
+{
+	if (section < [self.menuItems count]) {
+		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
+		[item setObject:controller forKey:kSOController];
+		[item setObject:title forKey:kSOViewTitle];
+		[item setObject:icon forKey:kSOViewIcon];
+		
+		[[[self.menuItems objectAtIndex:section] objectForKey:kSOSection] addObject:item];
+	} else {
+		NSLog(@"AMSlideOutNavigation: section index out of bounds");
+	}
+}
+
+- (void)addViewControllerToLastSection:(UIViewController*)controller withTitle:(NSString*)title andIcon:(NSString*)icon
+{
+	[self addViewController:controller withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
+}
+
 - (void)setContentViewController:(UIViewController *)controller
 {
 	// Sets the view controller as the new root view controller for the navigation controller

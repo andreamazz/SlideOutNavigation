@@ -17,51 +17,25 @@
 	
 	
 	UIViewController* controller;
+
+	self.slideoutController = [AMSlideOutNavigationController slideOutNavigation];
 	
-	// First Section
+	[self.slideoutController addSectionWithTitle:@"Section One"];
+	
 	controller = [[UIViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+	[self.slideoutController addViewControllerToLastSection:controller withTitle:@"First View" andIcon:@"icon1.png"];
+
+	controller = [[UIViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
+	[self.slideoutController addViewControllerToLastSection:controller withTitle:@"Second View" andIcon:@"icon2.png"];
+
+	[self.slideoutController addSectionWithTitle:@"Section Two"];
 	
-	NSMutableDictionary* item1 = [[NSMutableDictionary alloc] init];
-	[item1 setObject:@"First View" forKey:kSOViewTitle];
-	[item1 setObject:controller forKey:kSOController];
-	[item1 setObject:@"icon1.png" forKey:kSOViewIcon];
+	controller = [[UIViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+	[self.slideoutController addViewControllerToLastSection:controller withTitle:@"First View" andIcon:@"icon1.png"];
 	
 	controller = [[UIViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
+	[self.slideoutController addViewControllerToLastSection:controller withTitle:@"Second View" andIcon:@"icon2.png"];
 	
-	NSMutableDictionary* item2 = [[NSMutableDictionary alloc] init];
-	[item2 setObject:@"Second View" forKey:kSOViewTitle];
-	[item2 setObject:controller forKey:kSOController];
-	[item2 setObject:@"icon2.png" forKey:kSOViewIcon];
-	
-	NSArray *controllers = [[NSArray alloc] initWithObjects:item1, item2, nil];
-	
-	NSDictionary* section1 = [NSDictionary dictionaryWithObjectsAndKeys:controllers, kSOSection, @"First Section", kSOSectionTitle, nil];
-	
-	
-	// Second Section
-	controller = [[UIViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
-	
-	NSMutableDictionary* item3 = [[NSMutableDictionary alloc] init];
-	[item3 setObject:@"First View" forKey:kSOViewTitle];
-	[item3 setObject:controller forKey:kSOController];
-	[item3 setObject:@"icon1.png" forKey:kSOViewIcon];
-	
-	controller = [[UIViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
-	
-	NSMutableDictionary* item4 = [[NSMutableDictionary alloc] init];
-	[item4 setObject:@"Second View" forKey:kSOViewTitle];
-	[item4 setObject:controller forKey:kSOController];
-	[item4 setObject:@"" forKey:kSOViewIcon];
-	
-	controllers = [[NSArray alloc] initWithObjects:item3, item4, nil];
-	
-	NSDictionary* section2 = [NSDictionary dictionaryWithObjectsAndKeys:controllers, kSOSection, @"Second Section", kSOSectionTitle, nil];
-	
-	
-	// Items displayed
-	NSArray* items = [NSArray arrayWithObjects:section1, section2, nil];
-	
-	self.slideoutController = [AMSlideOutNavigationController slideOutNavigationWithMenuItems:items];
 	[self.window setRootViewController:self.slideoutController];
 	
     [self.window makeKeyAndVisible];

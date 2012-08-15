@@ -3,7 +3,7 @@ AMSlideOutNavigationController
 
 SlideOut Navigation Controller for iOS.
 This controller replicates the behaviour of the 'slide-out' navigation of applications like Facebook or Steam.
-The project currently mimics FB's app styling, you can change all the table colors in the ```AMSlideOutGlobals.h```
+The project currently mimics FB's app styling, you can change all the table colors in the ```AMSlideOutGlobals.h```. 
 ARC only.
 
 Part of the code is based off [this blog post made by Nick Harris](http://nickharris.wordpress.com/2012/02/05/ios-slide-out-navigation-code/)
@@ -22,38 +22,41 @@ Setup
 Init data
 --------------------
 The ViewControllers presented by the SlideOut navigation are arranged in sections and rows of a UITableView.
-You need to init the controller passing an array of sections. Each section item is a dictionary, containing the section title and an array describing the ViewControllers. Each item of this array is a dictionary containing the title, 44x44 icon (if present) and the reference to the ViewController. Check out the sample code to better understand how to setup your views.
+You need to init the controller passing an array of sections. Each section item is a dictionary, containing the section title and an array describing the ViewControllers. Each item of this array is a dictionary containing the title, 44x44 icon (if present) and the reference to the ViewController. 
+
+You can use the following helper methods to setup your views:
+
+* ```addSectionWithTitle:``` to add a section
+* ```addViewControllerToLastSection:withTitle:andIcon:``` to add a viewcontroller to the last section
+* ```addViewController:withTitle:andIcon:toSection:``` to add a viewcontroller to a specific section
+
+You can also pass the complete data structure to the init method, but it's not recommended.
+Check out the sample to understand how these methods work.
 
 Sample
 --------------------
-	UIViewController* controller;
-	
-	// First controller
+	self.slideoutController = [AMSlideOutNavigationController slideOutNavigation];
+
+	// Add a first section
+	[self.slideoutController addSectionWithTitle:@"Section One"];
+
+	// Add two viewcontrollers to the first section
 	controller = [[UIViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
-	
-	NSMutableDictionary* item1 = [[NSMutableDictionary alloc] init];
-	[item1 setObject:@"First View" forKey:kSOViewTitle];
-	[item1 setObject:controller forKey:kSOController];
-	[item1 setObject:@"icon1.png" forKey:kSOViewIcon];
-	
-	// Second controller
+	[self.slideoutController addViewControllerToLastSection:controller withTitle:@"First View" andIcon:@"icon1.png"];
+
 	controller = [[UIViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
-	
-	NSMutableDictionary* item2 = [[NSMutableDictionary alloc] init];
-	[item2 setObject:@"Second View" forKey:kSOViewTitle];
-	[item2 setObject:controller forKey:kSOController];
-	[item2 setObject:@"icon2.png" forKey:kSOViewIcon];
-	
-	NSArray *controllers = [[NSArray alloc] initWithObjects:item1, item2, nil];
+	[self.slideoutController addViewControllerToLastSection:controller withTitle:@"Second View" andIcon:@"icon2.png"];
 
-	// First Section	
-	NSDictionary* section1 = [NSDictionary dictionaryWithObjectsAndKeys:controllers, kSOSection, @"First Section", kSOSectionTitle, nil];
-	
-	// Items collection
-	NSArray* items = [NSArray arrayWithObjects:section1, nil];
+	// Add a first section
+	[self.slideoutController addSectionWithTitle:@"Section Two"];
 
-	self.slideoutController = [AMSlideOutNavigationController slideOutNavigationWithMenuItems:items];
-	[self.window setRootViewController:self.slideoutController];
+	// Add two viewcontrollers to the second section
+	controller = [[UIViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+	[self.slideoutController addViewControllerToLastSection:controller withTitle:@"First View" andIcon:@"icon1.png"];
+
+	controller = [[UIViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
+	// Blank icon will result in a row with only text, with different indentation
+	[self.slideoutController addViewControllerToLastSection:controller withTitle:@"Second View" andIcon:@""];
 
 MIT License
 --------------------

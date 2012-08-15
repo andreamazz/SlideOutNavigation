@@ -42,6 +42,11 @@
 @property (strong, nonatomic)	UITableView*			tableView;
 
 + (id)slideOutNavigationWithMenuItems:(NSArray*)items;
++ (id)slideOutNavigation;
 - (id)initWithMenuItems:(NSArray*)items;
+
+- (void)addViewControllerToLastSection:(UIViewController*)controller withTitle:(NSString*)title andIcon:(NSString*)icon;
+- (void)addViewController:(UIViewController*)controller withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section;
+- (void)addSectionWithTitle:(NSString*)title;
 
 @end
