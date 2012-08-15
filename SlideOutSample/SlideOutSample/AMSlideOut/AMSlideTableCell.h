@@ -25,7 +25,12 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface AMSlideTableCell : UITableViewCell
+
+@property (nonatomic, strong) UILabel*	badge;
+
+- (void)setBadgeText:(NSString*)text;
 
 @end

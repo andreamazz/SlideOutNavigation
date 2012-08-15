@@ -27,6 +27,8 @@
 #define kSOViewTitle	@"title"
 #define kSOController	@"controller"
 #define kSOViewIcon		@"icon"
+#define kSOViewTag		@"tag"
+#define kSOViewBadge	@"badge"
 #define kSOSection		@"section"
 #define kSOSectionTitle	@"title"
 
@@ -38,6 +40,7 @@
 // Table Cell
 #define kImagePadding		50
 #define kTextPadding		20
+#define kBadgePosition		220
 #define kCellBackground		[UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0].CGColor
 #define kUpperSeparator		[UIColor colorWithRed:0.24 green:0.27 blue:0.33 alpha:1.0].CGColor
 #define kLowerSeparator		[UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0].CGColor

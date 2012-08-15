@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Andrea Mazzini. All rights reserved.
 //
 
+#import "AppDelegate.h"
+
 #import "SecondViewController.h"
 
 @interface SecondViewController ()
@@ -14,26 +16,24 @@
 
 @implementation SecondViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (IBAction)badge1:(id)sender
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+	[((AppDelegate*)[[UIApplication sharedApplication] delegate]) setBadgeValue:@"1" forTag:1];
 }
 
-- (void)viewDidLoad
+- (IBAction)badge2:(id)sender
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+	[((AppDelegate*)[[UIApplication sharedApplication] delegate]) setBadgeValue:@":)" forTag:2];
 }
 
-- (void)viewDidUnload
+- (IBAction)badge3:(id)sender
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+	[((AppDelegate*)[[UIApplication sharedApplication] delegate]) setBadgeValue:@"20+" forTag:3];
+}
+
+- (IBAction)badge4:(id)sender
+{
+	[((AppDelegate*)[[UIApplication sharedApplication] delegate]) setBadgeValue:@"10" forTag:4];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

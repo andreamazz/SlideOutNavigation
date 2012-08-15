@@ -16,4 +16,6 @@
 
 @property (strong, nonatomic) AMSlideOutNavigationController*	slideoutController;
 
+- (void)setBadgeValue:(NSString*)value forTag:(int)tag;
+
 @end

@@ -9,9 +9,11 @@
 #import "AMSlideTableCell.h"
 #import "AMSlideOutGlobals.h"
 
-
+#define kBadgeFont		[UIFont fontWithName:@"Helvetica" size:12]
 
 @implementation AMSlideTableCell
+
+@synthesize badge = _badge;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -22,6 +24,10 @@
 		self.textLabel.shadowOffset = CGSizeMake(0, 1);
 		self.textLabel.shadowColor = kFontShadowColor;
 		self.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
+		
+		self.badge = [[UILabel alloc] init];
+		
+		[self addSubview:self.badge];
     }
     return self;
 }
@@ -34,6 +40,32 @@
 	} else {
 		self.textLabel.frame = CGRectMake(kTextPadding, 0, kSlideValue - kTextPadding, 44);
 	}
+	
+	// Set badge properties
+	self.badge.font = kBadgeFont;
+	self.badge.textColor = kCellFontColor;
+	self.badge.adjustsFontSizeToFitWidth = YES;
+	self.badge.textAlignment = UITextAlignmentCenter;
+	self.badge.opaque = YES;
+	self.badge.backgroundColor = [UIColor clearColor];
+	self.badge.shadowOffset = CGSizeMake(0, 1);
+	self.badge.shadowColor = kFontShadowColor;
+	
+	self.badge.layer.cornerRadius = 8;
+	self.badge.layer.backgroundColor = [[UIColor blackColor] CGColor];
+}
+
+- (void)setBadgeText:(NSString*)text
+{
+	if (text == nil || [text isEqualToString:@""]) {
+		[self.badge setAlpha:0];
+	} else {
+		CGSize fontSize = [text sizeWithFont:kBadgeFont];
+		CGRect badgeFrame = CGRectMake(kBadgePosition - (fontSize.width + 15.0) / 2.0, 12, fontSize.width + 15.0, 20);
+		self.badge.frame = badgeFrame;
+		self.badge.text = text;
+		[self.badge setAlpha:1];
+	}
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -44,10 +76,10 @@
 - (void)drawRect:(CGRect)aRect
 {
 	CGContextRef context = UIGraphicsGetCurrentContext();
-		
+	
 	CGContextSetFillColorWithColor(context, kCellBackground);
 	CGContextFillRect(context, self.bounds);
-
+	
 	CGContextSetStrokeColorWithColor(context, kUpperSeparator);
     CGContextBeginPath(context);
 	CGContextSetLineWidth(context, 2.0);

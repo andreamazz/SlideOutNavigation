@@ -59,23 +59,38 @@
 	[self.menuItems addObject:section];
 }
 
-- (void)addViewController:(UIViewController*)controller withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section
+- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section
 {
 	if (section < [self.menuItems count]) {
 		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
 		[item setObject:controller forKey:kSOController];
 		[item setObject:title forKey:kSOViewTitle];
 		[item setObject:icon forKey:kSOViewIcon];
-		
+		[item setObject:[NSNumber numberWithInt:tag] forKey:kSOViewTag];
 		[[[self.menuItems objectAtIndex:section] objectForKey:kSOSection] addObject:item];
 	} else {
 		NSLog(@"AMSlideOutNavigation: section index out of bounds");
 	}
 }
 
-- (void)addViewControllerToLastSection:(UIViewController*)controller withTitle:(NSString*)title andIcon:(NSString*)icon
+- (void)setBadgeValue:(NSString*)value forTag:(int)tag
 {
-	[self addViewController:controller withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
+	for (NSDictionary* section in self.menuItems) {
+		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
+			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
+				[item setObject:value forKey:kSOViewBadge];
+			}
+		}
+	}
+	// Save and reselect the row after the reload
+	NSIndexPath *ipath = [self.tableView indexPathForSelectedRow];
+	[self.tableView reloadData];
+	[self.tableView selectRowAtIndexPath:ipath animated:NO scrollPosition:UITableViewScrollPositionNone];
+}
+
+- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon
+{
+	[self addViewController:controller tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
 }
 
 - (void)setContentViewController:(UIViewController *)controller
@@ -181,6 +196,8 @@
 	[selection setBackgroundColor:kSelectionBackground];
 	cell.selectedBackgroundView = selection;
 
+	[(AMSlideTableCell*)cell setBadgeText:[dict objectForKey:kSOViewBadge]];
+	
 	NSString* image = [dict objectForKey:kSOViewIcon];
 	if (image != nil && ![image isEqualToString:@""]) {
 		cell.imageView.image = [UIImage imageNamed:image];
@@ -200,6 +217,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+	NSString* title = [self tableView:tableView titleForHeaderInSection:section];
+	if (title == nil || [title isEqualToString:@""]) {
+		return 0;
+	}
     return 22;
 }
 

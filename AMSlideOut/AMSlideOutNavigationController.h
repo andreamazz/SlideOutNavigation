@@ -45,8 +45,9 @@
 + (id)slideOutNavigation;
 - (id)initWithMenuItems:(NSArray*)items;
 
-- (void)addViewControllerToLastSection:(UIViewController*)controller withTitle:(NSString*)title andIcon:(NSString*)icon;
-- (void)addViewController:(UIViewController*)controller withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section;
+- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon;
+- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section;
 - (void)addSectionWithTitle:(NSString*)title;
+- (void)setBadgeValue:(NSString*)value forTag:(int)tag;
 
 @end
