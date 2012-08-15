@@ -10,7 +10,7 @@ Part of the code is based off [this blog post made by Nick Harris](http://nickha
 
 Screenshot
 --------------------
-![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut.png)
+![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut1508.png)
 
 Setup
 --------------------
