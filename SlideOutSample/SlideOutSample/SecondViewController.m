@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+#import "FirstViewController.h"
 #import "SecondViewController.h"
 
 @interface SecondViewController ()
@@ -33,7 +34,8 @@
 
 - (IBAction)badge4:(id)sender
 {
-	[((AppDelegate*)[[UIApplication sharedApplication] delegate]) setBadgeValue:@"10" forTag:4];
+	FirstViewController* viewController = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+	[self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -22,7 +22,6 @@ Setup
 Init data
 --------------------
 The ViewControllers presented by the SlideOut navigation are arranged in sections and rows of a UITableView.
-You need to init the controller passing an array of sections. Each section item is a dictionary, containing the section title and an array describing the ViewControllers. Each item of this array is a dictionary containing the title, 44x44 icon (if present), a numeric tag and the reference to the ViewController. 
 
 You can use the following helper methods to setup your views:
 
@@ -30,13 +29,20 @@ You can use the following helper methods to setup your views:
 * ```addViewControllerToLastSection:tagged:withTitle:andIcon:``` to add a viewcontroller to the last section
 * ```addViewController:tagged:withTitle:andIcon:toSection:``` to add a viewcontroller to a specific section
 
+To create a new section:
+
+	// Note: Leave the title blank to hide the section header
+	[self.slideoutController addSectionWithTitle:@"Section"];
+
+To create a new row:
+
+	[self.slideoutController addViewControllerToLastSection:controller		// Your UIViewController
+													 tagged:1				// Used to change the object's properties, i.e. the badge
+												  withTitle:@"First View"	
+													andIcon:@"icon1.png"];	// 44x44 icon held in the project's resources
+
+The main data structure is an array of sections. Each section item is a dictionary, containing the section title and an array describing the ViewControllers. Each item of this array is a dictionary containing the title, icon's file name, a numeric tag and the reference to the ViewController. 
 You can also pass the complete data structure to the init method, but it's not recommended. 
-
-	[self.slideoutController addViewControllerToLastSection:controller
-													 tagged:1
-												  withTitle:@"First View"
-													andIcon:@"icon1.png"];
-
 Check out the sample to understand how these methods work.
 
 Sample
@@ -77,7 +83,7 @@ Set the badge value (NSString) via the method ```setBadgeValue:forTag:```. This 
 
 Icons
 --------------------
-The icon must be 44x44. Blank icon name will result in a row with only text, with different indentation
+The icon must be 44x44. Blank icon name will result in a row with only text, with different indentation.
 
 
 MIT License
