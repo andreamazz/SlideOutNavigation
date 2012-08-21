@@ -35,7 +35,15 @@
 	
 	// Add two viewcontrollers to the second section	
 	controller = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
-	[self.slideoutController addViewControllerToLastSection:controller tagged:3 withTitle:@"First View" andIcon:@"icon1.png"];
+	[self.slideoutController addViewControllerToLastSection:controller
+													 tagged:3
+												  withTitle:@"First View"
+													andIcon:@"icon1.png"
+											   beforeChange:^{
+												   NSLog(@"Changing viewController");
+											   } onCompletition:^{
+												   NSLog(@"Done");
+											   }];
 	
 	controller = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
 	[self.slideoutController addViewControllerToLastSection:controller tagged:4 withTitle:@"Second View" andIcon:@"icon2.png"];

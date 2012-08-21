@@ -30,6 +30,8 @@
 #define kSOViewTag		@"tag"
 #define kSOViewBadge	@"badge"
 #define kSOSection		@"section"
+#define kSOBeforeBlock	@"before"
+#define kSOAfterBlock	@"after"
 #define kSOSectionTitle	@"title"
 
 // SlideOut Controller

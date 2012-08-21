@@ -27,7 +27,9 @@ You can use the following helper methods to setup your views:
 
 * ```addSectionWithTitle:``` to add a section
 * ```addViewControllerToLastSection:tagged:withTitle:andIcon:``` to add a viewcontroller to the last section
+* ```addViewControllerToLastSection:tagged:withTitle:andIcon:beforeChange:onCompletition:``` to add a viewcontroller and call a block before and after the view switch
 * ```addViewController:tagged:withTitle:andIcon:toSection:``` to add a viewcontroller to a specific section
+* ```addViewController:tagged:withTitle:andIcon:toSection:beforeChange:onCompletition:``` to add a viewcontroller to a specific section and call a block before and after the switch
 
 To create a new section:
 
@@ -63,8 +65,16 @@ Sample
 	[self.slideoutController addSectionWithTitle:@"Section Two"];
 
 	// Add two viewcontrollers to the second section
-	controller = [[UIViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
-	[self.slideoutController addViewControllerToLastSection:controller tagged:3 withTitle:@"First View" andIcon:@"icon1.png"];
+	controller = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+	[self.slideoutController addViewControllerToLastSection:controller
+													 tagged:3
+												  withTitle:@"First View"
+													andIcon:@"icon1.png"
+											   beforeChange:^{
+												   NSLog(@"Changing viewController");
+											   } onCompletition:^{
+												   NSLog(@"Done");
+											   }];
 
 	controller = [[UIViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
 	[self.slideoutController addViewControllerToLastSection:controller tagged:4 withTitle:@"Second View" andIcon:@"icon2.png"];

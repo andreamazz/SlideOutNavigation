@@ -28,13 +28,16 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AMSlideOutGlobals.h"
 
+typedef void (^AMSlideOutBeforeHandler)(void);
+typedef void (^AMSlideOutCompletionHandler)(void);
+
 @interface AMSlideOutNavigationController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 {
-	BOOL								_menuVisible;
-	__strong UIView*					_overlayView;
-	__strong UIBarButtonItem*			_barButton;
-	__strong UITapGestureRecognizer*	_tapGesture;
-	__strong UIPanGestureRecognizer*	_panGesture;
+	BOOL									_menuVisible;
+	__strong UIView*						_overlayView;
+	__strong UIBarButtonItem*				_barButton;
+	__strong UITapGestureRecognizer*		_tapGesture;
+	__strong UIPanGestureRecognizer*		_panGesture;
 }
 
 @property (strong, nonatomic)	NSMutableArray*			menuItems;
@@ -46,7 +49,10 @@
 - (id)initWithMenuItems:(NSArray*)items;
 
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon;
+- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon beforeChange:(void(^)())before onCompletition:(void(^)())after;
+
 - (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section;
+- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletition:(void(^)())after;
 - (void)addSectionWithTitle:(NSString*)title;
 - (void)setBadgeValue:(NSString*)value forTag:(int)tag;
 

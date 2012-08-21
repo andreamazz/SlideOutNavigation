@@ -61,11 +61,27 @@
 
 - (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section
 {
+	[self addViewControllerToLastSection:controller
+								  tagged:tag
+							   withTitle:title
+								 andIcon:icon
+							beforeChange:nil
+						  onCompletition:nil];
+}
+
+- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section  beforeChange:(void(^)())before onCompletition:(void(^)())after
+{
 	if (section < [self.menuItems count]) {
 		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
 		[item setObject:controller forKey:kSOController];
 		[item setObject:title forKey:kSOViewTitle];
 		[item setObject:icon forKey:kSOViewIcon];
+		if (before) {
+			[item setObject:[before copy] forKey:kSOBeforeBlock];
+		}
+		if (after) {
+			[item setObject:[after copy] forKey:kSOAfterBlock];
+		}
 		[item setObject:[NSNumber numberWithInt:tag] forKey:kSOViewTag];
 		[[[self.menuItems objectAtIndex:section] objectForKey:kSOSection] addObject:item];
 	} else {
@@ -91,6 +107,11 @@
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon
 {
 	[self addViewController:controller tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
+}
+
+- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon beforeChange:(void(^)())before onCompletition:(void(^)())after
+{
+	[self addViewController:controller tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1) beforeChange:before onCompletition:after];
 }
 
 - (void)setContentViewController:(UIViewController *)controller
@@ -233,8 +254,16 @@
 {
 	NSDictionary* dict = [[[self.menuItems objectAtIndex:indexPath.section] objectForKey:kSOSection] objectAtIndex:indexPath.row];
 	
+	AMSlideOutBeforeHandler before = [dict objectForKey:kSOBeforeBlock];
+	if (before) {
+		before();
+	}
 	[self setContentViewController:[dict objectForKey:kSOController]];
     [self hideSideMenu];
+	AMSlideOutBeforeHandler after = [dict objectForKey:kSOAfterBlock];
+	if (after) {
+		after();
+	}
 }
 
 - (void)toggleMenu
