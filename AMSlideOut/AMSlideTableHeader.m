@@ -35,16 +35,15 @@
 {
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
-	CGColorRef startColor = kGradientUp.CGColor;
-	CGColorRef endColor = kGradientDown.CGColor;	
+	UIColor* startColor = kGradientUp;
+	UIColor* endColor = kGradientDown;
 		
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat locations[] = { 0.0, 1.0 };
 	
-    NSArray *colors = [NSArray arrayWithObjects:(__bridge id)(startColor), endColor, nil];
+    NSArray *colors = [NSArray arrayWithObjects:(__bridge id)startColor.CGColor, (__bridge id)endColor.CGColor, nil];
 	
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace,	(__bridge CFArrayRef)colors, locations);
-	
 	
 	CGPoint startPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
 	CGPoint endPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
@@ -57,7 +56,6 @@
 	
 	CGGradientRelease(gradient);
 	CGColorSpaceRelease(colorSpace);
-	
 	
 	CGContextSetStrokeColorWithColor(context, kUpperSeparator);
     CGContextBeginPath(context);
@@ -73,7 +71,6 @@
     CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height);
     CGContextStrokePath(context);
 	
-		
 }
 
 @end
