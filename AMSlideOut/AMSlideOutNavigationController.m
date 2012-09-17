@@ -172,6 +172,8 @@
 	[_panGesture setMaximumNumberOfTouches:2];
 	[_panGesture setDelegate:self];
 	[_overlayView addGestureRecognizer:_panGesture];
+
+	[_contentController.view addGestureRecognizer:_panGesture];
 	
 	// Select the first view controller
 	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
@@ -335,8 +337,10 @@
     if ([gesture state] == UIGestureRecognizerStateBegan || [gesture state] == UIGestureRecognizerStateChanged) {
         
         CGPoint translation = [gesture translationInView:[piece superview]];
-        
         [piece setCenter:CGPointMake([piece center].x + translation.x, [piece center].y)];
+		if (piece.frame.origin.x < 0) {
+			[piece setFrame:CGRectMake(0, piece.frame.origin.y, piece.frame.size.width, piece.frame.size.height)];
+		}
         [gesture setTranslation:CGPointZero inView:[piece superview]];
     }
     else if ([gesture state] == UIGestureRecognizerStateEnded) {
