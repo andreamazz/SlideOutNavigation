@@ -344,8 +344,15 @@
         [gesture setTranslation:CGPointZero inView:[piece superview]];
     }
     else if ([gesture state] == UIGestureRecognizerStateEnded) {
-		// Hide the slide menu only if the view is released under a certain threshold
-		if (self.contentController.view.frame.origin.x < kSlideValue) {
+		// Hide the slide menu only if the view is released under a certain threshold, the threshold is lower when the menu is hidden
+		float threshold;
+		if (_menuVisible) {
+			threshold = kSlideValue;
+		} else {
+			threshold = kSlideValue / 2;
+		}
+			
+		if (self.contentController.view.frame.origin.x < threshold) {
 			[self hideSideMenu];
 		} else {
 			[self showSideMenu];
