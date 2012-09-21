@@ -118,6 +118,8 @@
 {
 	// Sets the view controller as the new root view controller for the navigation controller
 	[self.contentController setViewControllers:[NSArray arrayWithObject:controller] animated:NO];
+	self.contentView = self.contentController.view;
+	[self.view addSubview:self.contentView];
 	[self.contentController.topViewController.navigationItem setLeftBarButtonItem:_barButton];
 }
 
@@ -133,20 +135,19 @@
 	
 	// The content is displayed in a UINavigationController
 	self.contentController = [[UINavigationController alloc] init];
-	self.contentController.view.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.contentController.view.layer.shadowOffset = CGSizeMake(-10, 0);
-    self.contentController.view.layer.shadowOpacity = 0.4;
-    self.contentController.view.layer.shadowRadius = 10.0;
-    self.contentController.view.clipsToBounds = NO;
+	self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.contentView.layer.shadowOffset = CGSizeMake(-10, 0);
+    self.contentView.layer.shadowOpacity = 0.4;
+    self.contentView.layer.shadowRadius = 10.0;
+    self.contentView.clipsToBounds = NO;
 	
-	/* The transparent overlay view will catch all the user touches in the content area 
+	/* The transparent overlay view will catch all the user touches in the content area
 	 when the slide menu is visible */
 	_overlayView = [[UIView alloc] initWithFrame:self.contentController.view.frame];
 	_overlayView.userInteractionEnabled = YES;
 	_overlayView.backgroundColor = [UIColor clearColor];
 	
 	[view addSubview:self.tableView];
-	[view addSubview:self.contentController.view];
 	
 	self.view = view;
 }

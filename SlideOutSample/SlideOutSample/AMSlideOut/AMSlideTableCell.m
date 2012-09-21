@@ -13,7 +13,7 @@
 
 @implementation AMSlideTableCell
 
-@synthesize badge = _badge;
+@synthesize badge = _badgeValue;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
