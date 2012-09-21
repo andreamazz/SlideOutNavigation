@@ -119,6 +119,7 @@
 	// Sets the view controller as the new root view controller for the navigation controller
 	[self.contentController setViewControllers:[NSArray arrayWithObject:controller] animated:NO];
 	self.contentView = self.contentController.view;
+	[self.contentView removeFromSuperview];
 	[self.view addSubview:self.contentView];
 	[self.contentController.topViewController.navigationItem setLeftBarButtonItem:_barButton];
 }
