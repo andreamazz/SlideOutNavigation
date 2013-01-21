@@ -127,11 +127,11 @@
 
 - (void)loadView
 {
-	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height)];
 	[view setBackgroundColor:kBackground];
 	
 	// Table View setup
-	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
+	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height - 20)];
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.backgroundColor = kBackground;
 	
