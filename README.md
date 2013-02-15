@@ -81,6 +81,30 @@ Sample
 	
 	[self.window setRootViewController:self.slideoutController];
 
+
+Storyboard
+--------------------
+If you use Storyboard you can easily integrate AMSlideOutNavigationController within your AppDelegate.
+Just set a Storyboard ID for each of your ViewController that will become a root element of the navigation tree:
+![SlideOutNavigationStoryboard](http://www.eflatgames.com/github/AMSlideOutStory.png)
+
+then instantiate your ViewControllers in your AppDelegate like this:
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+
+    UIViewController* controller;
+	
+    self.slideoutController = [AMSlideOutNavigationController slideOutNavigation];
+	
+    [self.slideoutController addSectionWithTitle:@""];
+	
+    controller = [storyboard instantiateViewControllerWithIdentifier:@"FirstController"];
+    [self.slideoutController addViewControllerToLastSection:controller tagged:1 withTitle:@"First View" andIcon:@""];
+	
+    controller = [storyboard instantiateViewControllerWithIdentifier:@"SecondController"];
+    [self.slideoutController addViewControllerToLastSection:controller tagged:2 withTitle:@"Second View" andIcon:@""];
+	
+    [self.window setRootViewController:self.slideoutController];
+
 Sections
 --------------------
 Leave the section name blank if you don't want the section header visible.
