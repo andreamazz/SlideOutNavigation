@@ -85,10 +85,13 @@ Sample
 Storyboard
 --------------------
 If you use Storyboard you can easily integrate AMSlideOutNavigationController within your AppDelegate.
+
 Just set a Storyboard ID for each of your ViewController that will become a root element of the navigation tree:
+
 ![SlideOutNavigationStoryboard](http://www.eflatgames.com/github/AMSlideOutStory.png)
 
 then instantiate your ViewControllers in your AppDelegate like this:
+
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
 
     UIViewController* controller;
