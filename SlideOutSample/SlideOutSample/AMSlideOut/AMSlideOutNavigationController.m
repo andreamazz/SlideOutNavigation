@@ -127,7 +127,7 @@
 
 - (void)loadView
 {
-	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height)];
+	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
 	[view setBackgroundColor:kBackground];
 	
 	// Table View setup
@@ -343,6 +343,9 @@
         [piece setCenter:CGPointMake([piece center].x + translation.x, [piece center].y)];
 		if (piece.frame.origin.x < 0) {
 			[piece setFrame:CGRectMake(0, piece.frame.origin.y, piece.frame.size.width, piece.frame.size.height)];
+		}
+		if (piece.frame.origin.x > 320) {
+			[piece setFrame:CGRectMake(320, piece.frame.origin.y, piece.frame.size.width, piece.frame.size.height)];
 		}
         [gesture setTranslation:CGPointZero inView:[piece superview]];
     }
