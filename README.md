@@ -12,8 +12,17 @@ Screenshot
 --------------------
 ![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut1508.png)
 
-Setup
+Setup with Cocoapods
 --------------------
+* Add ```pod 'AMSlideOutController', '~> 0.0.1'``` to your Podfile
+* Run ```pod install```
+* Run ```open App.xcworkspace```
+* Import ```AMSlideOutNavigationController.h``` in your AppDelegate
+* Init ```AMSlideOutNavigationController```  using the data structure as follows.
+
+Setup without Cocoapods
+--------------------
+* Clone this repo
 * Add the ```AMSlideOut``` folder to your project
 * Link against ```QuartzCore``` framework
 * Import ```AMSlideOutNavigationController.h``` in your AppDelegate
