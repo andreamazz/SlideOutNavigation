@@ -10,11 +10,12 @@ Part of the code is based off [this blog post made by Nick Harris](http://nickha
 
 Screenshot
 --------------------
-![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut1508.png)
+![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut1508.png) ![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut130413.png)
+
 
 Setup with Cocoapods
 --------------------
-* Add ```pod 'AMSlideOutController', '~> 0.0.1'``` to your Podfile
+* Add ```pod 'AMSlideOutController'``` to your Podfile
 * Run ```pod install```
 * Run ```open App.xcworkspace```
 * Import ```AMSlideOutNavigationController.h``` in your AppDelegate
@@ -55,6 +56,71 @@ To create a new row:
 The main data structure is an array of sections. Each section item is a dictionary, containing the section title and an array describing the ViewControllers. Each item of this array is a dictionary containing the title, icon's file name, a numeric tag and the reference to the ViewController. 
 You can also pass the complete data structure to the init method, but it's not recommended. 
 Check out the sample to understand how these methods work.
+
+Options Dictionary
+--------------------
+As of version 1.0.0 AMSlideOutNavigationController's configuration can be handled by passing an NSDictionary to it. The default values can be found in  AMSlideOutNavigationController.m. Here's a brief description of the possible options:
+
+    AMOptionsEnableShadow           // @(BOOL), Enables the shadow under the content's view. Defaults to YES
+    AMOptionsSetButtonDone          // @(BOOL), Sets the Menu button's state to 'Done' when the tray is open. Defaults to NO
+    AMOptionsUseBorderedButton      // @(BOOL), Sets the Menu button to have a bordered style. Defaults to NO
+    AMOptionsButtonIcon             // UIImage, Icon displayed in the Menu button. Defaults to the embedded 'iconSlide.png'
+    AMOptionsTableBackground;       // UIImage, Background image displayed and tiled as the TableView's background. Defaults to nil (solid color)
+    AMOptionsUseDefaultTitles;      // @(BOOL), When enabled the content view's title is set as the manu item's text. Defaults to YES
+    AMOptionsSlideValue;            // @(float), The width of the menu. The content's view snaps to this value. Defaults to 270
+    AMOptionsBackground;            // UIColor, Menu's background color. Defaults to the one in the main screenshot of this page
+    AMOptionsSelectionBackground;   // UIColor, Menu background color for the selected item. Defaults to the one in the main screenshot of this page
+    AMOptionsHeaderFont;            // UIFont, Font used in the menu header. Defaults to Helvetica@13
+    AMOptionsHeaderFontColor;       // UIColor, Font color used in the menu header. Defaults to the one in the main screenshot of this page
+    AMOptionsHeaderShadowColor;     // UIColor, Shadow color used in the menu header. Defaults to the one in the main screenshot of this page
+    AMOptionsHeaderPadding;         // @(float), Padding used in the menu header. Defaults to 10
+    AMOptionsHeaderGradientUp;      // UIColor, Menu's gradient starting color. Defaults to the one in the main screenshot of this page
+    AMOptionsHeaderGradientDown;    // UIColor, Menu's gradient ending color. Defaults to the one in the main screenshot of this page
+    AMOptionsHeaderSeparatorUpper;  // UIColor, Color used in the menu header separator. Defaults to the one in the main screenshot of this page
+    AMOptionsHeaderSeparatorLower;  // UIColor, Color used in the menu header separator. Defaults to the one in the main screenshot of this page
+    AMOptionsCellFont;              // UIFont, Font used in the menu item. Defaults to Helvetica@14
+    AMOptionsCellFontColor;         // UIColor, Font color used in the menu item. Defaults to the one in the main screenshot of this page
+    AMOptionsCellBadgeFont;         // UIFont, Font used in the menu badge. Defaults to Helvetica@12
+    AMOptionsCellBackground;        // UIColor, Menu item background color. Defaults to the one in the main screenshot of this page
+    AMOptionsCellSeparatorUpper;    // UIColor, Color used in the menu separator. Defaults to the one in the main screenshot of this page
+    AMOptionsCellSeparatorLower;    // UIColor, Color used in the menu separator. Defaults to the one in the main screenshot of this page
+    AMOptionsCellShadowColor;       // UIColor, Shadow color used in the menu item. Defaults to the one in the main screenshot of this page
+    AMOptionsImagePadding;          // @(float), Padding used in the menu icon. Defaults to 50
+    AMOptionsTextPadding;           // @(float), Padding used in the menu item. Defaults to 20
+    AMOptionsBadgePosition;         // @(float), Badge's left offset. Defaults to 220
+
+sample usage:
+
+    self.slideoutController = [AMSlideOutNavigationController slideOutNavigation];
+
+    [self.slideoutController setSlideoutOptions:@{
+    						   AMOptionsEnableShadow : @(NO),
+    					       AMOptionsHeaderFont : [UIFont systemFontOfSize:14]
+     }];
+
+Further customization
+--------------------
+To customize the appearance of your navigation bar you can use the system's UIAppearance class, i.e.:
+
+    // Navbar customization
+    [[UINavigationBar appearance] setTintColor:[UIColor redColor]];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+        
+    // Navbar font customization
+    NSDictionary *attributes = @{UITextAttributeFont: [UIFont fontWithName:@"Copperplate" size:14]};
+    NSDictionary *titleAttributes = @{UITextAttributeFont: [UIFont fontWithName:@"Copperplate" size:20]};
+    [[UIBarButtonItem appearance] setTitleTextAttributes: attributes
+    											forState: UIControlStateNormal];
+    [[UINavigationBar appearance] setTitleTextAttributes: titleAttributes];
+
+    // Back button customization
+    UIImage *barButton = [[UIImage imageNamed:@"button.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(-2,5,0,6)];
+    [[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal
+    									  barMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:4 forBarMetrics:UIBarMetricsDefault];
+
+Using UIAppearance and the options' dictionary you can easily achieve a view similiar to the second screenshot in this page.
+
 
 Sample
 --------------------

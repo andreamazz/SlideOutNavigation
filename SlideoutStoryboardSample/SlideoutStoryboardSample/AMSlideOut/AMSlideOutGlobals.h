@@ -34,26 +34,35 @@
 #define kSOAfterBlock	@"after"
 #define kSOSectionTitle	@"title"
 
-// SlideOut Controller
-#define kSlideValue				260
-#define kBackground				[UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0]
-#define kSelectionBackground	[UIColor colorWithRed:0.10 green:0.13 blue:0.20 alpha:1.0]
+FOUNDATION_EXPORT NSString *const AMOptionsEnableShadow;
+FOUNDATION_EXPORT NSString *const AMOptionsSetButtonDone;
+FOUNDATION_EXPORT NSString *const AMOptionsUseBorderedButton;
+FOUNDATION_EXPORT NSString *const AMOptionsButtonIcon;
+FOUNDATION_EXPORT NSString *const AMOptionsTableBackground;
+FOUNDATION_EXPORT NSString *const AMOptionsUseDefaultTitles;
 
-// Table Cell
-#define kImagePadding		50
-#define kTextPadding		20
-#define kBadgePosition		220
-#define kCellBackground		[UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0].CGColor
-#define kUpperSeparator		[UIColor colorWithRed:0.24 green:0.27 blue:0.33 alpha:1.0].CGColor
-#define kLowerSeparator		[UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0].CGColor
-#define kCellFontColor		[UIColor colorWithRed:0.77 green:0.8 blue:0.85 alpha:1.0]
-#define kCellShadowColor	[UIColor colorWithRed:0.21 green:0.15 blue:0.19 alpha:1.0]
+FOUNDATION_EXPORT NSString *const AMOptionsSlideValue;
+FOUNDATION_EXPORT NSString *const AMOptionsBackground;
+FOUNDATION_EXPORT NSString *const AMOptionsSelectionBackground;
 
-// Header Cell
-#define	kTextHeaderPadding	10
-#define kGradientUp			[UIColor colorWithRed:0.26 green:0.29 blue:0.36 alpha:1]
-#define kGradientDown		[UIColor colorWithRed:0.22 green:0.25 blue:0.32 alpha:1]
-#define kUpperSeparator		[UIColor colorWithRed:0.24 green:0.27 blue:0.33 alpha:1.0].CGColor
-#define kLowerSeparator		[UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0].CGColor
-#define kFontColor			[UIColor colorWithRed:0.49 green:0.50 blue:0.57 alpha:1.0]
-#define kFontShadowColor	[UIColor colorWithRed:0.21 green:0.15 blue:0.19 alpha:1.0]
+FOUNDATION_EXPORT NSString *const AMOptionsHeaderFont;
+FOUNDATION_EXPORT NSString *const AMOptionsHeaderFontColor;
+FOUNDATION_EXPORT NSString *const AMOptionsHeaderShadowColor;
+FOUNDATION_EXPORT NSString *const AMOptionsHeaderPadding;
+FOUNDATION_EXPORT NSString *const AMOptionsHeaderGradientUp;
+FOUNDATION_EXPORT NSString *const AMOptionsHeaderGradientDown;
+FOUNDATION_EXPORT NSString *const AMOptionsHeaderSeparatorUpper;
+FOUNDATION_EXPORT NSString *const AMOptionsHeaderSeparatorLower;
+
+FOUNDATION_EXPORT NSString *const AMOptionsCellFont;
+FOUNDATION_EXPORT NSString *const AMOptionsCellFontColor;
+FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeFont;
+FOUNDATION_EXPORT NSString *const AMOptionsCellBackground;
+FOUNDATION_EXPORT NSString *const AMOptionsCellSeparatorUpper;
+FOUNDATION_EXPORT NSString *const AMOptionsCellSeparatorLower;
+FOUNDATION_EXPORT NSString *const AMOptionsCellShadowColor;
+
+FOUNDATION_EXPORT NSString *const AMOptionsImagePadding;
+FOUNDATION_EXPORT NSString *const AMOptionsTextPadding;
+FOUNDATION_EXPORT NSString *const AMOptionsBadgePosition;
+

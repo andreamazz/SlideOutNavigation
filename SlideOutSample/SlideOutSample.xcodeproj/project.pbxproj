@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6528106F1719760800BCED27 /* AMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6528106E1719760800BCED27 /* AMTableView.m */; };
 		65BC1D4117186BD500E0D513 /* AMSlideOutGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BC1D4017186BD500E0D513 /* AMSlideOutGlobals.m */; };
 		65C5704315DAD19500E920EC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C5704215DAD19500E920EC /* UIKit.framework */; };
 		65C5704515DAD19500E920EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C5704415DAD19500E920EC /* Foundation.framework */; };
@@ -29,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6528106D1719760800BCED27 /* AMTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTableView.h; sourceTree = "<group>"; };
+		6528106E1719760800BCED27 /* AMTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTableView.m; sourceTree = "<group>"; };
 		65BC1D4017186BD500E0D513 /* AMSlideOutGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideOutGlobals.m; sourceTree = "<group>"; };
 		65C5703E15DAD19500E920EC /* SlideOutSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideOutSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65C5704215DAD19500E920EC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -140,6 +143,8 @@
 				65C5705E15DAD1B200E920EC /* AMSlideTableCell.m */,
 				65C5705F15DAD1B200E920EC /* AMSlideTableHeader.h */,
 				65C5706015DAD1B200E920EC /* AMSlideTableHeader.m */,
+				6528106D1719760800BCED27 /* AMTableView.h */,
+				6528106E1719760800BCED27 /* AMTableView.m */,
 			);
 			path = AMSlideOut;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 				65C5706F15DAD48900E920EC /* FirstViewController.m in Sources */,
 				65C5707415DAD49B00E920EC /* SecondViewController.m in Sources */,
 				65BC1D4117186BD500E0D513 /* AMSlideOutGlobals.m in Sources */,
+				6528106F1719760800BCED27 /* AMTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

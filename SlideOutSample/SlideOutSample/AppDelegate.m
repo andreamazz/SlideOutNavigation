@@ -19,46 +19,17 @@
 	
 	UIViewController* controller;
 
+	[[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.37 green:0.41f blue:0.48f alpha:1.0f]];
+	
 	self.slideoutController = [AMSlideOutNavigationController slideOutNavigation];
 	
-	
-	
-	
-	
-	
-	
-	
-	// Navbar customization
-	NSDictionary *attributes = @{UITextAttributeFont: [UIFont fontWithName:@"Copperplate" size:14]};
-	NSDictionary *titleAttributes = @{UITextAttributeFont: [UIFont fontWithName:@"Copperplate" size:20]};
-	
-	[[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.37 green:0.41f blue:0.48f alpha:1.0f]];
-	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBarEmpty.png"] forBarMetrics:UIBarMetricsDefault];
-	
-	UIImage *barButton = [[UIImage imageNamed:@"bar-button.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(-2,5,0,6)];
-	
-    [[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal
-										  barMetrics:UIBarMetricsDefault];
-	[[UIBarButtonItem appearance] setTitleTextAttributes: attributes
-												forState: UIControlStateNormal];
-	[[UINavigationBar appearance] setTitleTextAttributes: titleAttributes];
-	[[UINavigationBar appearance] setTitleVerticalPositionAdjustment:4 forBarMetrics:UIBarMetricsDefault];
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	[self.slideoutController setSlideoutOptions:@{
+							AMOptionsEnableShadow : @(NO),
+						   AMOptionsHeaderFont : [UIFont systemFontOfSize:14]
+	 }];
 	
 	// Add a first section
-	[self.slideoutController addSectionWithTitle:@" "];
+	[self.slideoutController addSectionWithTitle:@"FIRST SECTION"];
 
 	controller = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
 	[self.slideoutController addViewControllerToLastSection:controller tagged:1 withTitle:@"First View" andIcon:@"icon1.png"];
@@ -67,7 +38,7 @@
 	[self.slideoutController addViewControllerToLastSection:controller tagged:2 withTitle:@"Second View" andIcon:@"icon2.png"];
 
 	// Add a second section
-	[self.slideoutController addSectionWithTitle:@"  "];
+	[self.slideoutController addSectionWithTitle:@"SECOND SECTION"];
 	
 	// Add two viewcontrollers to the second section	
 	controller = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];

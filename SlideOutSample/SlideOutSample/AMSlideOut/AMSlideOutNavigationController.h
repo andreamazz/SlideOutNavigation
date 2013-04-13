@@ -27,6 +27,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "AMSlideOutGlobals.h"
+#import "AMTableView.h"
 
 typedef void (^AMSlideOutBeforeHandler)(void);
 typedef void (^AMSlideOutCompletionHandler)(void);
@@ -42,7 +43,7 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 
 @property (strong, nonatomic)	NSMutableArray*			menuItems;
 @property (strong, nonatomic)	UINavigationController*	contentController;
-@property (strong, nonatomic)	UITableView*			tableView;
+@property (strong, nonatomic)	AMTableView*			tableView;
 
 + (id)slideOutNavigationWithMenuItems:(NSArray*)items;
 + (id)slideOutNavigation;

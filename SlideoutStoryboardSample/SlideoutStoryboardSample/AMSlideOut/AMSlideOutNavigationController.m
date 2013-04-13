@@ -12,14 +12,55 @@
 
 @interface AMSlideOutNavigationController ()
 
+@property (strong, nonatomic)	NSMutableDictionary*	options;
+
 @end
 
 @implementation AMSlideOutNavigationController
 
-@synthesize contentController = _contentController;
-@synthesize tableView = _tableView;
-@synthesize menuItems = _menuItems;
-@synthesize contentView = _contentView;
+@synthesize options = _options;
+
+- (void)setSlideoutOptions:(NSDictionary *)options
+{
+	[self.options addEntriesFromDictionary:options];
+}
+
+- (NSMutableDictionary*)options
+{
+	if (_options == nil) {
+		_options = [[NSMutableDictionary alloc]
+					initWithDictionary:
+					@{
+					AMOptionsEnableShadow : @(YES),
+					AMOptionsSetButtonDone : @(NO),
+					AMOptionsUseBorderedButton : @(NO),
+					AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlide.png"],					
+					AMOptionsUseDefaultTitles : @(YES),
+					AMOptionsSlideValue : @(270),
+					AMOptionsBackground : [UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0],
+					AMOptionsSelectionBackground : [UIColor colorWithRed:0.10 green:0.13 blue:0.20 alpha:1.0],
+					AMOptionsImagePadding : @(50),
+					AMOptionsTextPadding : @(20),
+					AMOptionsBadgePosition : @(220),
+					AMOptionsHeaderFont : [UIFont fontWithName:@"Helvetica" size:13],
+					AMOptionsHeaderFontColor : [UIColor colorWithRed:0.49 green:0.50 blue:0.57 alpha:1.0],
+					AMOptionsHeaderShadowColor : [UIColor colorWithRed:0.21 green:0.15 blue:0.19 alpha:1.0],
+					AMOptionsHeaderPadding : @(10),
+					AMOptionsHeaderGradientUp : [UIColor colorWithRed:0.26 green:0.29 blue:0.36 alpha:1],
+					AMOptionsHeaderGradientDown : [UIColor colorWithRed:0.22 green:0.25 blue:0.32 alpha:1],
+					AMOptionsHeaderSeparatorUpper : [UIColor colorWithRed:0.24 green:0.27 blue:0.33 alpha:1.0],
+					AMOptionsHeaderSeparatorLower : [UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0],
+					AMOptionsCellFont : [UIFont fontWithName:@"Helvetica" size:14],
+					AMOptionsCellBadgeFont : [UIFont fontWithName:@"Helvetica" size:12],
+					AMOptionsCellFontColor : [UIColor colorWithRed:0.77 green:0.8 blue:0.85 alpha:1.0],
+					AMOptionsCellBackground : [UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0],
+					AMOptionsCellSeparatorUpper : [UIColor colorWithRed:0.24 green:0.27 blue:0.33 alpha:1.0],
+					AMOptionsCellSeparatorLower : [UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0],
+					AMOptionsCellShadowColor : [UIColor colorWithRed:0.21 green:0.15 blue:0.19 alpha:1.0]
+					}];
+	}
+	return _options;
+}
 
 - (id)initWithMenuItems:(NSArray*)items
 {
@@ -54,8 +95,8 @@
 - (void)addSectionWithTitle:(NSString*)title
 {
 	NSMutableDictionary* section = [[NSMutableDictionary alloc] init];
-	[section setObject:title forKey:kSOSectionTitle];
-	[section setObject:[[NSMutableArray alloc] init] forKey:kSOSection];
+	section[kSOSectionTitle] = title;
+	section[kSOSection] = [[NSMutableArray alloc] init];
 	
 	[self.menuItems addObject:section];
 }
@@ -74,17 +115,17 @@
 {
 	if (section < [self.menuItems count]) {
 		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
-		[item setObject:controller forKey:kSOController];
-		[item setObject:title forKey:kSOViewTitle];
-		[item setObject:icon forKey:kSOViewIcon];
+		item[kSOController] = controller;
+		item[kSOViewTitle] = title;
+		item[kSOViewIcon] = icon;
 		if (before) {
-			[item setObject:[before copy] forKey:kSOBeforeBlock];
+			item[kSOBeforeBlock] = [before copy];
 		}
 		if (after) {
-			[item setObject:[after copy] forKey:kSOAfterBlock];
+			item[kSOAfterBlock] = [after copy];
 		}
-		[item setObject:[NSNumber numberWithInt:tag] forKey:kSOViewTag];
-		[[[self.menuItems objectAtIndex:section] objectForKey:kSOSection] addObject:item];
+		item[kSOViewTag] = @(tag);
+		[(self.menuItems)[section][kSOSection] addObject:item];
 	} else {
 		NSLog(@"AMSlideOutNavigation: section index out of bounds");
 	}
@@ -93,9 +134,9 @@
 - (void)setBadgeValue:(NSString*)value forTag:(int)tag
 {
 	for (NSDictionary* section in self.menuItems) {
-		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
-			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
-				[item setObject:value forKey:kSOViewBadge];
+		for (NSMutableDictionary* item in section[kSOSection]) {
+			if ([item[kSOViewTag] intValue] == tag) {
+				item[kSOViewBadge] = value;
 			}
 		}
 	}
@@ -118,30 +159,42 @@
 - (void)setContentViewController:(UIViewController *)controller
 {
 	// Sets the view controller as the new root view controller for the navigation controller
-	[self.contentController setViewControllers:[NSArray arrayWithObject:controller] animated:NO];
-	self.contentView = self.contentController.view;
-	[self.contentView removeFromSuperview];
-	[self.view addSubview:self.contentView];
+	[self.contentController setViewControllers:@[controller] animated:NO];
+	[self.contentController.view removeFromSuperview];
+	[self.view addSubview:self.contentController.view];
 	[self.contentController.topViewController.navigationItem setLeftBarButtonItem:_barButton];
 }
 
 - (void)loadView
 {
 	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
-	[view setBackgroundColor:kBackground];
+	[view setBackgroundColor:self.options[AMOptionsBackground]];
 	
 	// Table View setup
-	self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height - 20)];
+	self.tableView = [[AMTableView alloc] initWithFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height - 20)];
+	self.tableView.options = self.options;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-	self.tableView.backgroundColor = kBackground;
+	self.tableView.backgroundColor = self.options[AMOptionsBackground];
 	
 	// The content is displayed in a UINavigationController
 	self.contentController = [[UINavigationController alloc] init];
-	self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.contentView.layer.shadowOffset = CGSizeMake(-10, 0);
-    self.contentView.layer.shadowOpacity = 0.4;
-    self.contentView.layer.shadowRadius = 10.0;
-    self.contentView.clipsToBounds = NO;
+	
+	if ([self.options[AMOptionsEnableShadow] boolValue]) {
+		self.contentController.view.layer.shadowColor = [UIColor blackColor].CGColor;
+		self.contentController.view.layer.shadowOffset = CGSizeMake(-6, 0);
+		self.contentController.view.layer.shadowOpacity = 0.4;
+		self.contentController.view.layer.shadowRadius = 5.0;
+		self.contentController.view.layer.masksToBounds = NO;
+		self.contentController.view.clipsToBounds = NO;
+		// Note: the shadow requires rasterization in order to have smooth performances
+		if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+			([UIScreen mainScreen].scale == 2.0)) {
+			self.contentController.view.layer.rasterizationScale = 2;
+		} else {
+			self.contentController.view.layer.rasterizationScale = 1;
+		}
+		self.contentController.view.layer.shouldRasterize = YES;
+	}
 	
 	/* The transparent overlay view will catch all the user touches in the content area
 	 when the slide menu is visible */
@@ -161,10 +214,19 @@
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
 	
-	_barButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconSlide.png"]
-												  style:UIBarButtonItemStylePlain
-												 target:self
-												 action:@selector(toggleMenu)];
+	if ([self.options[AMOptionsUseBorderedButton] boolValue]) {
+		_barButton = [[UIBarButtonItem alloc] initWithImage:self.options[AMOptionsButtonIcon]
+													  style:UIBarButtonItemStylePlain
+													 target:self
+													 action:@selector(toggleMenu)];
+		
+	} else  {
+		UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+		[button setImage:self.options[AMOptionsButtonIcon] forState:UIControlStateNormal];
+		[button setFrame:CGRectMake(0, 0, 44, 22)];
+		[button addTarget:self action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
+		_barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+	}
 	
 	// Detect when the content recieves a single tap
 	_tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -199,32 +261,33 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [[[self.menuItems objectAtIndex:section] objectForKey:kSOSection] count];
+	return [(self.menuItems)[section][kSOSection] count];
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-	return [[self.menuItems objectAtIndex:section] objectForKey:kSOSectionTitle];
+	return (self.menuItems)[section][kSOSectionTitle];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	static NSString* cellID = @"AMSlideTableCell";
 	
-	NSDictionary* dict = [[[self.menuItems objectAtIndex:indexPath.section] objectForKey:kSOSection] objectAtIndex:indexPath.row];
+	NSDictionary* dict = (self.menuItems)[indexPath.section][kSOSection][indexPath.row];
 	UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellID];
 	if (cell == nil) {
 		cell = [[AMSlideTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellID"];
 	}
 	
-	cell.textLabel.text = [dict objectForKey:kSOViewTitle];
+	((AMSlideTableCell*)cell).options = self.options;
+	cell.textLabel.text = dict[kSOViewTitle];
 	UIView* selection = [[UIView alloc] initWithFrame:cell.frame];
-	[selection setBackgroundColor:kSelectionBackground];
+	[selection setBackgroundColor:self.options[AMOptionsSelectionBackground]];
 	cell.selectedBackgroundView = selection;
 
-	[(AMSlideTableCell*)cell setBadgeText:[dict objectForKey:kSOViewBadge]];
+	[(AMSlideTableCell*)cell setBadgeText:dict[kSOViewBadge]];
 	
-	NSString* image = [dict objectForKey:kSOViewIcon];
+	NSString* image = dict[kSOViewIcon];
 	if (image != nil && ![image isEqualToString:@""]) {
 		cell.imageView.image = [UIImage imageNamed:image];
 	} else {
@@ -237,6 +300,7 @@
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
 	AMSlideTableHeader *header = [[AMSlideTableHeader alloc] init];
+	header.options = self.options;
 	header.titleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     return header;
 }
@@ -257,15 +321,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSDictionary* dict = [[[self.menuItems objectAtIndex:indexPath.section] objectForKey:kSOSection] objectAtIndex:indexPath.row];
+	NSDictionary* dict = (self.menuItems)[indexPath.section][kSOSection][indexPath.row];
 	
-	AMSlideOutBeforeHandler before = [dict objectForKey:kSOBeforeBlock];
+	AMSlideOutBeforeHandler before = dict[kSOBeforeBlock];
 	if (before) {
 		before();
 	}
-	[self setContentViewController:[dict objectForKey:kSOController]];
+	[self setContentViewController:dict[kSOController]];
+	if ([self.options[AMOptionsUseDefaultTitles] boolValue]) {
+		[dict[kSOController] setTitle:dict[kSOViewTitle]];
+	}
     [self hideSideMenu];
-	AMSlideOutBeforeHandler after = [dict objectForKey:kSOAfterBlock];
+	AMSlideOutBeforeHandler after = dict[kSOAfterBlock];
 	if (after) {
 		after();
 	}
@@ -288,14 +355,16 @@
 					 animations:^{
 						 // Move the whole NavigationController view aside
 						 CGRect frame = self.contentController.view.frame;
-						 frame.origin.x = kSlideValue;
+						 frame.origin.x = [self.options[AMOptionsSlideValue] floatValue];
 						 self.contentController.view.frame = frame;
 					 }
                      completion:^(BOOL finished) {
 						 // Add the overlay that will receive the gestures
 						 [self.contentController.topViewController.view addSubview:_overlayView];
 						 _menuVisible = YES;
-						 [_barButton setStyle:UIBarButtonItemStyleDone];
+						 if ([self.options[AMOptionsSetButtonDone] boolValue]) {
+							 [_barButton setStyle:UIBarButtonItemStyleDone];
+						 }
 					 }];
 	
 }
@@ -353,9 +422,9 @@
 		// Hide the slide menu only if the view is released under a certain threshold, the threshold is lower when the menu is hidden
 		float threshold;
 		if (_menuVisible) {
-			threshold = kSlideValue;
+			threshold = [self.options[AMOptionsSlideValue] floatValue];
 		} else {
-			threshold = kSlideValue / 2;
+			threshold = [self.options[AMOptionsSlideValue] floatValue] / 2;
 		}
 			
 		if (self.contentController.view.frame.origin.x < threshold) {

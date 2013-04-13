@@ -11,12 +11,16 @@
 
 @implementation AMSlideTableHeader
 
+- (id)init {
+    if ((self = [super init])) {
+		self.titleLabel = [[UILabel alloc] init];
+		[self addSubview:_titleLabel];
+    }
+    return self;
+}
+
 - (void)layoutSubviews
 {
-	if (self.titleLabel == nil) {
-		self.titleLabel = [[UILabel alloc] init];
-		[self addSubview:self.titleLabel];
-	}
 	self.titleLabel.backgroundColor = [UIColor clearColor];
 	self.titleLabel.font = self.options[AMOptionsHeaderFont];
 	self.titleLabel.textColor = self.options[AMOptionsHeaderFontColor];
