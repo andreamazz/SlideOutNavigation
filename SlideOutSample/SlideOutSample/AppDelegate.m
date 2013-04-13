@@ -29,12 +29,8 @@
 	
 	
 	// Navbar customization
-	NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-								[UIFont fontWithName:@"Copperplate" size:14],
-								UITextAttributeFont, nil];
-	NSDictionary *titleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-									 [UIFont fontWithName:@"Copperplate" size:20],
-									 UITextAttributeFont, nil];
+	NSDictionary *attributes = @{UITextAttributeFont: [UIFont fontWithName:@"Copperplate" size:14]};
+	NSDictionary *titleAttributes = @{UITextAttributeFont: [UIFont fontWithName:@"Copperplate" size:20]};
 	
 	[[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.37 green:0.41f blue:0.48f alpha:1.0f]];
 	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBarEmpty.png"] forBarMetrics:UIBarMetricsDefault];
@@ -62,8 +58,8 @@
 	
 	
 	// Add a first section
-	[self.slideoutController addSectionWithTitle:@"FIRST SECTION"];
-	
+	[self.slideoutController addSectionWithTitle:@" "];
+
 	controller = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
 	[self.slideoutController addViewControllerToLastSection:controller tagged:1 withTitle:@"First View" andIcon:@"icon1.png"];
 
@@ -71,7 +67,7 @@
 	[self.slideoutController addViewControllerToLastSection:controller tagged:2 withTitle:@"Second View" andIcon:@"icon2.png"];
 
 	// Add a second section
-	[self.slideoutController addSectionWithTitle:@"SECOND SECTION"];
+	[self.slideoutController addSectionWithTitle:@"  "];
 	
 	// Add two viewcontrollers to the second section	
 	controller = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];

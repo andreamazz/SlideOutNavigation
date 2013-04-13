@@ -35,7 +35,7 @@
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat locations[] = { 0.0, 1.0 };
 	
-    NSArray *colors = [NSArray arrayWithObjects:(__bridge id)startColor.CGColor, (__bridge id)endColor.CGColor, nil];
+    NSArray *colors = @[(__bridge id)startColor.CGColor, (__bridge id)endColor.CGColor];
 	
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace,	(__bridge CFArrayRef)colors, locations);
 	

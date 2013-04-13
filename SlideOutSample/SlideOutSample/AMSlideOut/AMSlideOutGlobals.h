@@ -34,6 +34,8 @@
 #define kSOAfterBlock	@"after"
 #define kSOSectionTitle	@"title"
 
+FOUNDATION_EXPORT NSString *const AMOptionsEnableShadow;
+FOUNDATION_EXPORT NSString *const AMOptionsSetButtonDone;
 FOUNDATION_EXPORT NSString *const AMOptionsUseDefaultTitles;
 
 FOUNDATION_EXPORT NSString *const AMOptionsSlideValue;

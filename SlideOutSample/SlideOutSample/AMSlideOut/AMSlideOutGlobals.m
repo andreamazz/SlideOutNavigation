@@ -8,6 +8,8 @@
 
 #import "AMSlideOutGlobals.h"
 
+NSString *const AMOptionsEnableShadow = @"AMOptionsEnableShadow";
+NSString *const AMOptionsSetButtonDone = @"AMOptionsSetButtonDone";
 NSString *const AMOptionsUseDefaultTitles = @"AMOptionsUseDefaultTitles";
 NSString *const AMOptionsSlideValue = @"AMOptionsSlideValue";
 NSString *const AMOptionsBackground = @"AMOptionsBackground";
