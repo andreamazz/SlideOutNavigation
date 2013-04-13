@@ -3,7 +3,7 @@ AMSlideOutNavigationController
 
 SlideOut Navigation Controller for iOS.
 This controller replicates the behaviour of the 'slide-out' navigation of applications like Facebook or Steam.
-The project currently mimics FB's app styling, you can change all the table colors in the ```AMSlideOutGlobals.h```. 
+The project currently mimics FB's app styling, you can change all the table colors and options using the Options Dictionary (see documentation below). 
 ARC only.
 
 Part of the code is based off [this blog post made by Nick Harris](http://nickharris.wordpress.com/2012/02/05/ios-slide-out-navigation-code/)
