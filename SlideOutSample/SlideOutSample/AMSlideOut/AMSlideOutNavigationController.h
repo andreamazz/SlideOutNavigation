@@ -1,6 +1,6 @@
 //
 //  AMSlideOutNavigationController.h
-//  SlideOut
+//  AMSlideOutNavigationController
 //
 //  Created by Andrea on 12/08/12.
 //  Copyright (c) 2012 Andrea Mazzini. All rights reserved.
@@ -48,6 +48,8 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 + (id)slideOutNavigationWithMenuItems:(NSArray*)items;
 + (id)slideOutNavigation;
 - (id)initWithMenuItems:(NSArray*)items;
+
+- (void)setSlideoutOptions:(NSDictionary *)options;
 
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon;
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon beforeChange:(void(^)())before onCompletition:(void(^)())after;

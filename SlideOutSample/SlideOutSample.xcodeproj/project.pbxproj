@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65BC1D4117186BD500E0D513 /* AMSlideOutGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BC1D4017186BD500E0D513 /* AMSlideOutGlobals.m */; };
 		65C5704315DAD19500E920EC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C5704215DAD19500E920EC /* UIKit.framework */; };
 		65C5704515DAD19500E920EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C5704415DAD19500E920EC /* Foundation.framework */; };
 		65C5704715DAD19500E920EC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C5704615DAD19500E920EC /* CoreGraphics.framework */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		65BC1D4017186BD500E0D513 /* AMSlideOutGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideOutGlobals.m; sourceTree = "<group>"; };
 		65C5703E15DAD19500E920EC /* SlideOutSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideOutSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65C5704215DAD19500E920EC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		65C5704415DAD19500E920EC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -131,6 +133,7 @@
 				65C5708015DAE5FD00E920EC /* iconSlide.png */,
 				65C5708115DAE5FD00E920EC /* iconSlide@2x.png */,
 				65C5705A15DAD1B200E920EC /* AMSlideOutGlobals.h */,
+				65BC1D4017186BD500E0D513 /* AMSlideOutGlobals.m */,
 				65C5705B15DAD1B200E920EC /* AMSlideOutNavigationController.h */,
 				65C5705C15DAD1B200E920EC /* AMSlideOutNavigationController.m */,
 				65C5705D15DAD1B200E920EC /* AMSlideTableCell.h */,
@@ -238,6 +241,7 @@
 				65C5706315DAD1B200E920EC /* AMSlideTableHeader.m in Sources */,
 				65C5706F15DAD48900E920EC /* FirstViewController.m in Sources */,
 				65C5707415DAD49B00E920EC /* SecondViewController.m in Sources */,
+				65BC1D4117186BD500E0D513 /* AMSlideOutGlobals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +349,7 @@
 				65C5705815DAD19500E920EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
