@@ -32,6 +32,9 @@
 					initWithDictionary:
 					@{
 					AMOptionsEnableShadow : @(YES),
+					AMOptionsSetButtonDone : @(NO),
+					AMOptionsUseBorderedButton : @(NO),
+					AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlide.png"],					
 					AMOptionsUseDefaultTitles : @(YES),
 					AMOptionsSlideValue : @(270),
 					AMOptionsBackground : [UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0],
@@ -179,8 +182,8 @@
 		self.contentController.view.layer.shadowColor = [UIColor blackColor].CGColor;
 		self.contentController.view.layer.shadowOffset = CGSizeMake(-6, 0);
 		self.contentController.view.layer.shadowOpacity = 0.4;
-		self.contentController.view.layer.shadowRadius = 4.0;
-		self.contentController.view.layer.masksToBounds = YES;
+		self.contentController.view.layer.shadowRadius = 5.0;
+		self.contentController.view.layer.masksToBounds = NO;
 		self.contentController.view.clipsToBounds = NO;
 		// Note: the shadow requires rasterization in order to have smooth performances
 		if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
@@ -210,10 +213,19 @@
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
 	
-	_barButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconSlide.png"]
-												  style:UIBarButtonItemStylePlain
-												 target:self
-												 action:@selector(toggleMenu)];
+	if ([self.options[AMOptionsUseBorderedButton] boolValue]) {
+		_barButton = [[UIBarButtonItem alloc] initWithImage:self.options[AMOptionsButtonIcon]
+													  style:UIBarButtonItemStylePlain
+													 target:self
+													 action:@selector(toggleMenu)];
+		
+	} else  {
+		UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+		[button setImage:self.options[AMOptionsButtonIcon] forState:UIControlStateNormal];
+		[button setFrame:CGRectMake(0, 0, 44, 22)];
+		[button addTarget:self action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
+		_barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+	}
 	
 	// Detect when the content recieves a single tap
 	_tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];

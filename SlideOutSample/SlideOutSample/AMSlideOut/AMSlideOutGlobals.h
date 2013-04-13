@@ -36,6 +36,8 @@
 
 FOUNDATION_EXPORT NSString *const AMOptionsEnableShadow;
 FOUNDATION_EXPORT NSString *const AMOptionsSetButtonDone;
+FOUNDATION_EXPORT NSString *const AMOptionsUseBorderedButton;
+FOUNDATION_EXPORT NSString *const AMOptionsButtonIcon;
 FOUNDATION_EXPORT NSString *const AMOptionsUseDefaultTitles;
 
 FOUNDATION_EXPORT NSString *const AMOptionsSlideValue;
