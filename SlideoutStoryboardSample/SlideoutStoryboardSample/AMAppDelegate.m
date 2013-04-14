@@ -29,6 +29,18 @@
 	controller = [storyboard instantiateViewControllerWithIdentifier:@"SecondController"];
 	[self.slideoutController addViewControllerToLastSection:controller tagged:2 withTitle:@"Second View" andIcon:@""];
 	
+	[self.slideoutController addActionToLastSection:^{
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Some action"
+                                                         message:@"Some message."
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+		[alert show];
+	}
+											 tagged:3
+										  withTitle:@"Action"
+											andIcon:@""];
+	
     [self.window setRootViewController:self.slideoutController];
 	
     return YES;

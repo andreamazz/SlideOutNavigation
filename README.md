@@ -52,6 +52,17 @@ To create a new row:
 													 tagged:1				// Used to change the object's properties, i.e. the badge
 												  withTitle:@"First View"	
 													andIcon:@"icon1.png"];	// 44x44 icon held in the project's resources
+                                                    
+To create a new row that only calls an action:
+    
+    [self.slideoutController addActionToLastSection:^{
+    	// some action
+    }
+    										 tagged:3
+    									  withTitle:@"Action"
+    										andIcon:@""];
+    
+    
 
 The main data structure is an array of sections. Each section item is a dictionary, containing the section title and an array describing the ViewControllers. Each item of this array is a dictionary containing the title, icon's file name, a numeric tag and the reference to the ViewController. 
 You can also pass the complete data structure to the init method, but it's not recommended. 

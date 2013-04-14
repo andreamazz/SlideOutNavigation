@@ -55,6 +55,15 @@
 	controller = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
 	[self.slideoutController addViewControllerToLastSection:controller tagged:4 withTitle:@"Second View" andIcon:@"icon2.png"];
 	
+	[self.slideoutController addSectionWithTitle:@"THIRD SECTION"];
+	
+	[self.slideoutController addActionToLastSection:^{
+		// some action
+	}
+											 tagged:3
+										  withTitle:@"Action"
+											andIcon:@""];
+	
 	[self.window setRootViewController:self.slideoutController];
 
 	[self.slideoutController setBadgeValue:@"10" forTag:3];

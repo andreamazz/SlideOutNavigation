@@ -33,6 +33,7 @@
 #define kSOBeforeBlock	@"before"
 #define kSOAfterBlock	@"after"
 #define kSOSectionTitle	@"title"
+#define kSOItemIsAction	@"isAction"
 
 FOUNDATION_EXPORT NSString *const AMOptionsEnableShadow;
 FOUNDATION_EXPORT NSString *const AMOptionsSetButtonDone;
