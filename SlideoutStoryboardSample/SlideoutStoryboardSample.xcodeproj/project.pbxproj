@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		652BEED4171AA64B000CD540 /* AMSlideOutGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 652BEED3171AA64B000CD540 /* AMSlideOutGlobals.m */; };
+		652BEED7171AA66B000CD540 /* AMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 652BEED6171AA653000CD540 /* AMTableView.m */; };
 		654E34A916CE383F00FBB3DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654E34A816CE383F00FBB3DA /* UIKit.framework */; };
 		654E34AB16CE383F00FBB3DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654E34AA16CE383F00FBB3DA /* Foundation.framework */; };
 		654E34AD16CE383F00FBB3DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654E34AC16CE383F00FBB3DA /* CoreGraphics.framework */; };
@@ -26,6 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		652BEED3171AA64B000CD540 /* AMSlideOutGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideOutGlobals.m; sourceTree = "<group>"; };
+		652BEED5171AA653000CD540 /* AMTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMTableView.h; sourceTree = "<group>"; };
+		652BEED6171AA653000CD540 /* AMTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMTableView.m; sourceTree = "<group>"; };
 		654E34A516CE383F00FBB3DA /* SlideoutStoryboardSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideoutStoryboardSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		654E34A816CE383F00FBB3DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		654E34AA16CE383F00FBB3DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -126,12 +131,15 @@
 			isa = PBXGroup;
 			children = (
 				654E34CC16CE390900FBB3DA /* AMSlideOutGlobals.h */,
+				652BEED3171AA64B000CD540 /* AMSlideOutGlobals.m */,
 				654E34CD16CE390900FBB3DA /* AMSlideOutNavigationController.h */,
 				654E34CE16CE390900FBB3DA /* AMSlideOutNavigationController.m */,
 				654E34CF16CE390900FBB3DA /* AMSlideTableCell.h */,
 				654E34D016CE390900FBB3DA /* AMSlideTableCell.m */,
 				654E34D116CE390900FBB3DA /* AMSlideTableHeader.h */,
 				654E34D216CE390900FBB3DA /* AMSlideTableHeader.m */,
+				652BEED5171AA653000CD540 /* AMTableView.h */,
+				652BEED6171AA653000CD540 /* AMTableView.m */,
 				654E34D316CE390900FBB3DA /* iconSlide.png */,
 				654E34D416CE390900FBB3DA /* iconSlide@2x.png */,
 			);
@@ -213,6 +221,8 @@
 				654E34D516CE390900FBB3DA /* AMSlideOutNavigationController.m in Sources */,
 				654E34D616CE390900FBB3DA /* AMSlideTableCell.m in Sources */,
 				654E34D716CE390900FBB3DA /* AMSlideTableHeader.m in Sources */,
+				652BEED4171AA64B000CD540 /* AMSlideOutGlobals.m in Sources */,
+				652BEED7171AA66B000CD540 /* AMTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +345,7 @@
 				654E34CA16CE383F00FBB3DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
