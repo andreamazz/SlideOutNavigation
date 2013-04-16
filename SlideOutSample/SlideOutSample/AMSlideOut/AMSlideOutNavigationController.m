@@ -103,12 +103,13 @@
 
 - (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section
 {
-	[self addViewControllerToLastSection:controller
-								  tagged:tag
-							   withTitle:title
-								 andIcon:icon
-							beforeChange:nil
-						  onCompletition:nil];
+	[self addViewController:controller
+					 tagged:tag
+				  withTitle:title
+					andIcon:icon
+				  toSection:section
+			   beforeChange:nil
+			 onCompletition:nil];
 }
 
 - (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section  beforeChange:(void(^)())before onCompletition:(void(^)())after
