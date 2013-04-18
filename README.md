@@ -72,6 +72,7 @@ Options Dictionary
 --------------------
 As of version 1.0.0 AMSlideOutNavigationController's configuration can be handled by passing an NSDictionary to it. The default values can be found in  AMSlideOutNavigationController.m. Here's a brief description of the possible options:
 
+    AMOptionsEnableGesture          // @(BOOL), Enables the pan gesture. Defaults to YES
     AMOptionsEnableShadow           // @(BOOL), Enables the shadow under the content's view. Defaults to YES
     AMOptionsSetButtonDone          // @(BOOL), Sets the Menu button's state to 'Done' when the tray is open. Defaults to NO
     AMOptionsUseBorderedButton      // @(BOOL), Sets the Menu button to have a bordered style. Defaults to NO
