@@ -35,6 +35,7 @@
 #define kSOSectionTitle	@"title"
 #define kSOItemIsAction	@"isAction"
 
+FOUNDATION_EXPORT NSString *const AMOptionsEnableGesture;
 FOUNDATION_EXPORT NSString *const AMOptionsEnableShadow;
 FOUNDATION_EXPORT NSString *const AMOptionsSetButtonDone;
 FOUNDATION_EXPORT NSString *const AMOptionsUseBorderedButton;

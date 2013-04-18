@@ -8,6 +8,7 @@
 
 #import "AMSlideOutGlobals.h"
 
+NSString *const AMOptionsEnableGesture = @"AMOptionsEnableGesture";
 NSString *const AMOptionsEnableShadow = @"AMOptionsEnableShadow";
 NSString *const AMOptionsSetButtonDone = @"AMOptionsSetButtonDone";
 NSString *const AMOptionsUseBorderedButton = @"AMOptionsUseBorderedButton";

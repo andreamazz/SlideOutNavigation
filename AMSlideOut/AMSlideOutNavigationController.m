@@ -31,6 +31,7 @@
 		_options = [[NSMutableDictionary alloc]
 					initWithDictionary:
 					@{
+					AMOptionsEnableGesture : @(YES),
 					AMOptionsEnableShadow : @(YES),
 					AMOptionsSetButtonDone : @(NO),
 					AMOptionsUseBorderedButton : @(NO),
@@ -432,6 +433,10 @@
  */
 - (void)handlePan:(UIPanGestureRecognizer *)gesture;
 {
+	if (![self.options[AMOptionsEnableGesture] boolValue]) {
+		return;
+	}
+	
 	// The pan gesture moves horizontally the view
     UIView *piece = self.contentController.view;
     [self adjustAnchorPointForGestureRecognizer:gesture];
