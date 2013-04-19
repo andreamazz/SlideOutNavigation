@@ -63,7 +63,7 @@
 											 tagged:3
 										  withTitle:@"Action"
 											andIcon:@""];
-	
+		
 	[self.window setRootViewController:self.slideoutController];
 
 	[self.slideoutController setBadgeValue:@"10" forTag:3];

@@ -248,7 +248,10 @@
 		[button setImage:self.options[AMOptionsButtonIcon] forState:UIControlStateNormal];
 		[button setFrame:CGRectMake(0, 0, 44, 22)];
 		[button addTarget:self action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
-		_barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+		// Adding the button as subview to an UIView prevents the touch area to be too wide
+		UIView *buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 22)];
+		[buttonContainer addSubview:button];
+		_barButton = [[UIBarButtonItem alloc] initWithCustomView:buttonContainer];
 	}
 	
 	// Detect when the content recieves a single tap
