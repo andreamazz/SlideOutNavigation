@@ -8,14 +8,6 @@ ARC only.
 
 Part of the code is based off [this blog post made by Nick Harris](http://nickharris.wordpress.com/2012/02/05/ios-slide-out-navigation-code/)
 
-Changelog v1.2
-==================
-
-Added a method to programmatically switch controller and perform an action afterwards
-
-    - (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj
-
-
 Screenshot
 --------------------
 ![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut1508.png) ![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut130413.png)
@@ -216,6 +208,16 @@ Set the badge value (NSString) via the method ```setBadgeValue:forTag:```. This 
 Icons
 --------------------
 The icon must be 44x44. Blank icon name will result in a row with only text, with different indentation.
+
+Changelog 
+==================
+
+v1.2
+--------------------
+
+Added a method to programmatically switch controller and perform an action afterwards
+
+    - (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj
 
 
 MIT License
