@@ -372,6 +372,24 @@
 	}
 }
 
+- (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj
+{
+	for (NSDictionary* section in self.menuItems) {
+		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
+			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
+				[self setContentViewController:[item objectForKey:kSOController]];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+				if ([[item objectForKey:kSOController] respondsToSelector:selector]) {
+					[[item objectForKey:kSOController] performSelector:selector withObject:obj];
+				}
+#pragma clang diagnostic pop
+				return;
+			}
+		}
+	}
+}
+
 - (void)toggleMenu
 {
 	if (_menuVisible) {

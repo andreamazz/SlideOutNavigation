@@ -8,6 +8,14 @@ ARC only.
 
 Part of the code is based off [this blog post made by Nick Harris](http://nickharris.wordpress.com/2012/02/05/ios-slide-out-navigation-code/)
 
+Changelog v1.2
+==================
+
+Added a method to programmatically switch controller and perform an action afterwards
+
+    - (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj
+
+
 Screenshot
 --------------------
 ![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut1508.png) ![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut130413.png)
