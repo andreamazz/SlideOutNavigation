@@ -447,9 +447,9 @@
     [self hideSideMenu];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-	return YES;
+	return [self.options[AMOptionsEnableGesture] boolValue];
 }
 
 /* The following is from 
@@ -458,11 +458,7 @@
  http://nickharris.wordpress.com/2012/02/05/ios-slide-out-navigation-code/
  */
 - (void)handlePan:(UIPanGestureRecognizer *)gesture;
-{
-	if (![self.options[AMOptionsEnableGesture] boolValue]) {
-		return;
-	}
-	
+{	
 	// The pan gesture moves horizontally the view
     UIView *piece = self.contentController.view;
     [self adjustAnchorPointForGestureRecognizer:gesture];
