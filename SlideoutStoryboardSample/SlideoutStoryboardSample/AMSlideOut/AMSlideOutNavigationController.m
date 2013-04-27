@@ -203,20 +203,11 @@
 	self.contentController = [[UINavigationController alloc] init];
 	
 	if ([self.options[AMOptionsEnableShadow] boolValue]) {
+		self.contentController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.contentController.view.bounds].CGPath;
 		self.contentController.view.layer.shadowColor = [UIColor blackColor].CGColor;
 		self.contentController.view.layer.shadowOffset = CGSizeMake(-6, 0);
 		self.contentController.view.layer.shadowOpacity = 0.4;
-		self.contentController.view.layer.shadowRadius = 5.0;
-		self.contentController.view.layer.masksToBounds = NO;
 		self.contentController.view.clipsToBounds = NO;
-		// Note: the shadow requires rasterization in order to have smooth performances
-		if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
-			([UIScreen mainScreen].scale == 2.0)) {
-			self.contentController.view.layer.rasterizationScale = 2;
-		} else {
-			self.contentController.view.layer.rasterizationScale = 1;
-		}
-		self.contentController.view.layer.shouldRasterize = YES;
 	}
 	
 	/* The transparent overlay view will catch all the user touches in the content area
