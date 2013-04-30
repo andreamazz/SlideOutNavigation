@@ -391,6 +391,7 @@
 
 - (void)showSideMenu
 {
+	[self.navigationController.visibleViewController.view setUserInteractionEnabled:NO];
     [UIView animateWithDuration:0.15
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -413,7 +414,8 @@
 
 - (void)hideSideMenu
 {
-    // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
+	[self.navigationController.visibleViewController.view setUserInteractionEnabled:YES];
+    // this animates the view back to the left before telling the app delegate to swap out the MenuViewController
     // it tells the app delegate using the completion block of the animation
     [UIView animateWithDuration:0.15
 						  delay:0
