@@ -293,7 +293,7 @@
 	NSDictionary* dict = (self.menuItems)[indexPath.section][kSOSection][indexPath.row];
 	UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellID];
 	if (cell == nil) {
-		cell = [[AMSlideTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellID"];
+		cell = [[AMSlideTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
 	}
 	
 	((AMSlideTableCell*)cell).options = self.options;
