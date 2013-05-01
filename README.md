@@ -214,8 +214,13 @@ Changelog
 
 v1.2
 --------------------
+- Added rotation support
+- Minor bugfixes
 
-Added a method to programmatically switch controller and perform an action afterwards
+v1.2
+--------------------
+
+- Added a method to programmatically switch controller and perform an action afterwards
 
     - (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj
 
