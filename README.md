@@ -212,7 +212,7 @@ The icon must be 44x44. Blank icon name will result in a row with only text, wit
 Changelog 
 ==================
 
-v1.2
+v1.3
 --------------------
 - Added rotation support
 - Minor bugfixes
@@ -220,7 +220,7 @@ v1.2
 v1.2
 --------------------
 
-- Added a method to programmatically switch controller and perform an action afterwards
+Added a method to programmatically switch controller and perform an action afterwards
 
     - (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj
 
