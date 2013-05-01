@@ -13,12 +13,19 @@
 @interface AMSlideOutNavigationController ()
 
 @property (strong, nonatomic)	NSMutableDictionary*	options;
+@property (strong, nonatomic)	NSMutableArray*			menuItems;
+@property (strong, nonatomic)	UINavigationController*	contentController;
+@property (strong, nonatomic)	AMTableView*			tableView;
+@property BOOL											menuVisible;
+@property (strong, nonatomic)	UIView*					overlayView;
+@property (strong, nonatomic)	UIBarButtonItem*		barButton;
+@property (strong, nonatomic)	UITapGestureRecognizer*	tapGesture;
+@property (strong, nonatomic)	UIPanGestureRecognizer*	panGesture;
 
 @end
 
 @implementation AMSlideOutNavigationController
 
-@synthesize options = _options;
 
 - (void)setSlideoutOptions:(NSDictionary *)options
 {
@@ -67,8 +74,8 @@
 {
 	self = [super init];
 	if (self) {
-		_menuVisible = NO;
-		self.menuItems = [NSMutableArray arrayWithArray:items];
+		self.menuVisible = NO;
+		_menuItems = [NSMutableArray arrayWithArray:items];
 	}
 	return self;
 }
@@ -82,8 +89,8 @@
 {
 	self = [super init];
 	if (self) {
-		_menuVisible = NO;
-		self.menuItems = [[NSMutableArray alloc] init];
+		self.menuVisible = NO;
+		_menuItems = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -181,11 +188,22 @@
 
 - (void)setContentViewController:(UIViewController *)controller
 {
+	[self.currentViewController willMoveToParentViewController:nil];
+	[self.currentViewController.view removeFromSuperview];
+	[self.currentViewController removeFromParentViewController];
+
 	// Sets the view controller as the new root view controller for the navigation controller
 	[self.contentController setViewControllers:@[controller] animated:NO];
-	[self.contentController.view removeFromSuperview];
-	[self.view addSubview:self.contentController.view];
-	[self.contentController.topViewController.navigationItem setLeftBarButtonItem:_barButton];
+	[self.contentController.view addSubview:controller.view];	
+	[controller didMoveToParentViewController:self.contentController];
+	[controller.navigationItem setLeftBarButtonItem:self.barButton];
+	
+	self.currentViewController = controller;
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+	[self.currentViewController.navigationController.navigationBar sizeToFit];
 }
 
 - (void)loadView
@@ -194,7 +212,7 @@
 	[view setBackgroundColor:self.options[AMOptionsBackground]];
 	
 	// Table View setup
-	self.tableView = [[AMTableView alloc] initWithFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height - 20)];
+	self.tableView = [[AMTableView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 20)];
 	self.tableView.options = self.options;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.backgroundColor = self.options[AMOptionsBackground];
@@ -212,27 +230,31 @@
 	
 	/* The transparent overlay view will catch all the user touches in the content area
 	 when the slide menu is visible */
-	_overlayView = [[UIView alloc] initWithFrame:self.contentController.view.frame];
-	_overlayView.userInteractionEnabled = YES;
-	_overlayView.backgroundColor = [UIColor clearColor];
+	self.overlayView = [[UIView alloc] initWithFrame:self.contentController.view.frame];
+	self.overlayView.userInteractionEnabled = YES;
+	self.overlayView.backgroundColor = [UIColor clearColor];
 	
 	[view addSubview:self.tableView];
+	[view addSubview:self.contentController.view];
 	
 	self.view = view;
+
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	
+	self.currentViewController = nil;
+	
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
 	
 	if ([self.options[AMOptionsUseBorderedButton] boolValue]) {
-		_barButton = [[UIBarButtonItem alloc] initWithImage:self.options[AMOptionsButtonIcon]
-													  style:UIBarButtonItemStylePlain
-													 target:self
-													 action:@selector(toggleMenu)];
+		self.barButton = [[UIBarButtonItem alloc] initWithImage:self.options[AMOptionsButtonIcon]
+														  style:UIBarButtonItemStylePlain
+														 target:self
+														 action:@selector(toggleMenu)];
 		
 	} else  {
 		UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -242,20 +264,20 @@
 		// Adding the button as subview to an UIView prevents the touch area to be too wide
 		UIView *buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 22)];
 		[buttonContainer addSubview:button];
-		_barButton = [[UIBarButtonItem alloc] initWithCustomView:buttonContainer];
+		self.barButton = [[UIBarButtonItem alloc] initWithCustomView:buttonContainer];
 	}
 	
 	// Detect when the content recieves a single tap
-	_tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-	[_overlayView addGestureRecognizer:_tapGesture];
+	self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+	[self.overlayView addGestureRecognizer:self.tapGesture];
 	
 	// Detect when the content is touched and dragged
-	_panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-	[_panGesture setMaximumNumberOfTouches:2];
-	[_panGesture setDelegate:self];
-	[_overlayView addGestureRecognizer:_panGesture];
+	self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+	[self.panGesture setMaximumNumberOfTouches:2];
+	[self.panGesture setDelegate:self];
+	[self.overlayView addGestureRecognizer:self.panGesture];
 
-	[_contentController.view addGestureRecognizer:_panGesture];
+	[self.contentController.view addGestureRecognizer:self.panGesture];
 	
 	// Select the first view controller
 	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
@@ -382,7 +404,7 @@
 
 - (void)toggleMenu
 {
-	if (_menuVisible) {
+	if (self.menuVisible) {
 		[self hideSideMenu];
 	} else {
 		[self showSideMenu];
@@ -402,10 +424,10 @@
 					 }
                      completion:^(BOOL finished) {
 						 // Add the overlay that will receive the gestures
-						 [self.contentController.topViewController.view addSubview:_overlayView];
-						 _menuVisible = YES;
+						 [self.contentController.view addSubview:self.overlayView];
+						 self.menuVisible = YES;
 						 if ([self.options[AMOptionsSetButtonDone] boolValue]) {
-							 [_barButton setStyle:UIBarButtonItemStyleDone];
+							 [self.barButton setStyle:UIBarButtonItemStyleDone];
 						 }
 					 }];
 	
@@ -413,7 +435,7 @@
 
 - (void)hideSideMenu
 {
-    // this animates the screenshot back to the left before telling the app delegate to swap out the MenuViewController
+    // this animates the view back to the left before telling the app delegate to swap out the MenuViewController
     // it tells the app delegate using the completion block of the animation
     [UIView animateWithDuration:0.15
 						  delay:0
@@ -425,9 +447,9 @@
 						 self.contentController.view.frame = frame;
 					 }
                      completion:^(BOOL finished) {
-						 [_overlayView removeFromSuperview];
-						 _menuVisible = NO;
-						 [_barButton setStyle:UIBarButtonItemStylePlain];
+						 [self.overlayView removeFromSuperview];
+						 self.menuVisible = NO;
+						 [self.barButton setStyle:UIBarButtonItemStylePlain];
 					 }];
 }
 
@@ -468,7 +490,7 @@
     else if ([gesture state] == UIGestureRecognizerStateEnded) {
 		// Hide the slide menu only if the view is released under a certain threshold, the threshold is lower when the menu is hidden
 		float threshold;
-		if (_menuVisible) {
+		if (self.menuVisible) {
 			threshold = [self.options[AMOptionsSlideValue] floatValue];
 		} else {
 			threshold = [self.options[AMOptionsSlideValue] floatValue] / 2;
@@ -499,17 +521,12 @@
     [super viewDidUnload];
 	[self setTableView:nil];
 	[self setContentController:nil];
-	[_overlayView removeGestureRecognizer:_tapGesture];
-    [_overlayView removeGestureRecognizer:_panGesture];
-	_tapGesture = nil;
-	_panGesture = nil;
-	_overlayView = nil;
-	_barButton = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	[self.overlayView removeGestureRecognizer:self.tapGesture];
+    [self.overlayView removeGestureRecognizer:self.panGesture];
+	self.tapGesture = nil;
+	self.panGesture = nil;
+	self.overlayView = nil;
+	self.barButton = nil;
 }
 
 @end

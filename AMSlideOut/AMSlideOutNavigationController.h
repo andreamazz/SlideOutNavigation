@@ -33,17 +33,8 @@ typedef void (^AMSlideOutBeforeHandler)(void);
 typedef void (^AMSlideOutCompletionHandler)(void);
 
 @interface AMSlideOutNavigationController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
-{
-	BOOL									_menuVisible;
-	__strong UIView*						_overlayView;
-	__strong UIBarButtonItem*				_barButton;
-	__strong UITapGestureRecognizer*		_tapGesture;
-	__strong UIPanGestureRecognizer*		_panGesture;
-}
 
-@property (strong, nonatomic)	NSMutableArray*			menuItems;
-@property (strong, nonatomic)	UINavigationController*	contentController;
-@property (strong, nonatomic)	AMTableView*			tableView;
+@property (weak, nonatomic)		UIViewController*		currentViewController;
 
 + (id)slideOutNavigationWithMenuItems:(NSArray*)items;
 + (id)slideOutNavigation;
