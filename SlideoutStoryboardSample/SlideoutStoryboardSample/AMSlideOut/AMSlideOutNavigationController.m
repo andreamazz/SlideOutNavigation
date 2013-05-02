@@ -13,7 +13,6 @@
 @interface AMSlideOutNavigationController ()
 
 @property (strong, nonatomic)	NSMutableDictionary*	options;
-@property (strong, nonatomic)	NSMutableArray*			menuItems;
 @property (strong, nonatomic)	UINavigationController*	contentController;
 @property (strong, nonatomic)	AMTableView*			tableView;
 @property BOOL											menuVisible;

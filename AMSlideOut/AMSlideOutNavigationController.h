@@ -35,6 +35,7 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 @interface AMSlideOutNavigationController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic)		UIViewController*		currentViewController;
+@property (strong, nonatomic)	NSMutableArray*			menuItems;
 
 + (id)slideOutNavigationWithMenuItems:(NSArray*)items;
 + (id)slideOutNavigation;
