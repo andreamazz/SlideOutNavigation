@@ -60,15 +60,13 @@
 	[self.slideoutController addActionToLastSection:^{
 		// some action
 	}
-											 tagged:3
+											 tagged:5
 										  withTitle:@"Action"
 											andIcon:@""];
 		
 	[self.window setRootViewController:self.slideoutController];
-
-	[self.slideoutController setBadgeValue:@"10" forTag:3];
-	
     [self.window makeKeyAndVisible];
+	
     return YES;
 }
 

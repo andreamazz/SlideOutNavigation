@@ -287,7 +287,11 @@
 {
 	// Makes sure to refresh the table data when new items are set
 	_menuItems = [NSMutableArray arrayWithArray:menuItems];
+	NSIndexPath *ipath = [self.tableView indexPathForSelectedRow];
 	[self.tableView reloadData];
+	if (ipath) {
+		[self.tableView selectRowAtIndexPath:ipath animated:NO scrollPosition:UITableViewScrollPositionNone];
+	}
 }
 
 #pragma mark Table View delegates
@@ -323,7 +327,7 @@
 	((AMSlideTableCell*)cell).options = self.options;
 	cell.textLabel.text = dict[kSOViewTitle];
 	[(AMSlideTableCell*)cell setBadgeText:dict[kSOViewBadge]];
-	
+
 	NSString* image = dict[kSOViewIcon];
 	if (image != nil && ![image isEqualToString:@""]) {
 		cell.imageView.image = [UIImage imageNamed:image];

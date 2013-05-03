@@ -34,8 +34,7 @@
 
 - (IBAction)badge4:(id)sender
 {
-	FirstViewController* viewController = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
-	[self.navigationController pushViewController:viewController animated:YES];
+	[((AppDelegate*)[[UIApplication sharedApplication] delegate]) setBadgeValue:@"!!!" forTag:4];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
