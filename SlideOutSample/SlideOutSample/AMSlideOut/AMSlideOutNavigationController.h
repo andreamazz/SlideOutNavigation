@@ -36,6 +36,7 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 
 @property (weak, nonatomic)		UIViewController*		currentViewController;
 @property (strong, nonatomic)	NSMutableArray*			menuItems;
+@property (strong, nonatomic)	UINavigationController*	contentController;
 
 + (id)slideOutNavigationWithMenuItems:(NSArray*)items;
 + (id)slideOutNavigation;
