@@ -388,14 +388,22 @@
 
 - (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj
 {
+	[self switchToControllerTagged:tag andPerformSelector:selector withObject:obj afterDelay:0];
+}
+
+- (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj afterDelay:(NSTimeInterval)delay
+{
 	for (NSDictionary* section in self.menuItems) {
 		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
 			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
-				[self setContentViewController:[item objectForKey:kSOController]];
+				int sectionIndex = [self.menuItems indexOfObject:section];
+				int rowIndex = [[section objectForKey:kSOSection] indexOfObject:item];
+				[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForItem:rowIndex inSection:sectionIndex] animated:YES scrollPosition:UITableViewScrollPositionNone];
+				[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForItem:rowIndex inSection:sectionIndex]];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 				if ([[item objectForKey:kSOController] respondsToSelector:selector]) {
-					[[item objectForKey:kSOController] performSelector:selector withObject:obj];
+					[[item objectForKey:kSOController] performSelector:selector withObject:obj afterDelay:delay];
 				}
 #pragma clang diagnostic pop
 				return;

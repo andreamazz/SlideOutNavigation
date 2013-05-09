@@ -53,6 +53,7 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 - (void)addAction:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section;
 
 - (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj;
+- (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj afterDelay:(NSTimeInterval)delay;
 
 - (void)addSectionWithTitle:(NSString*)title;
 - (void)setBadgeValue:(NSString*)value forTag:(int)tag;
