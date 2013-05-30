@@ -186,17 +186,9 @@
 
 - (void)setContentViewController:(UIViewController *)controller
 {
-	[self.currentViewController willMoveToParentViewController:nil];
-	[self.currentViewController.view removeFromSuperview];
-	[self.currentViewController removeFromParentViewController];
-
-	// Sets the view controller as the new root view controller for the navigation controller
-	[self.contentController setViewControllers:@[controller] animated:NO];
-	[self.contentController.view addSubview:controller.view];	
-	[controller didMoveToParentViewController:self.contentController];
-	[controller.navigationItem setLeftBarButtonItem:self.barButton];
-	
-	self.currentViewController = controller;
+	[self.contentController setViewControllers:@[controller]];
+    [controller.navigationItem setLeftBarButtonItem:self.barButton];
+    self.currentViewController = controller;
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
