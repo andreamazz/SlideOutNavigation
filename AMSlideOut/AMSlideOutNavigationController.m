@@ -206,6 +206,7 @@
 	self.tableView.options = self.options;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.backgroundColor = self.options[AMOptionsBackground];
+	[self.tableView setScrollsToTop:NO];
 	
 	// The content is displayed in a UINavigationController
 	self.contentController = [[UINavigationController alloc] init];
@@ -226,7 +227,7 @@
 	
 	[view addSubview:self.tableView];
 	[view addSubview:self.contentController.view];
-	
+
 	self.view = view;
 
 }
@@ -426,6 +427,7 @@
 					 }
                      completion:^(BOOL finished) {
 						 // Add the overlay that will receive the gestures
+						 [self.tableView setScrollsToTop:YES];
 						 [self.contentController.view addSubview:self.overlayView];
 						 self.menuVisible = YES;
 						 if ([self.options[AMOptionsSetButtonDone] boolValue]) {
@@ -451,6 +453,7 @@
                      completion:^(BOOL finished) {
 						 [self.overlayView removeFromSuperview];
 						 self.menuVisible = NO;
+						 [self.tableView setScrollsToTop:NO];
 						 [self.barButton setStyle:UIBarButtonItemStylePlain];
 					 }];
 }
