@@ -45,7 +45,7 @@
 	[self.slideoutController addViewControllerToLastSection:controller
 													 tagged:3
 												  withTitle:@"First View"
-													andIcon:@"icon1.png"
+													andIcon:[UIImage imageNamed:@"icon1.png"]
 											   beforeChange:^{
 												   NSLog(@"Changing viewController");
 											   } onCompletition:^{

@@ -107,7 +107,7 @@
 	[self.menuItems addObject:section];
 }
 
-- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section
+- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section
 {
 	[self addViewController:controller
 					 tagged:tag
@@ -118,7 +118,7 @@
 			 onCompletition:nil];
 }
 
-- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section  beforeChange:(void(^)())before onCompletition:(void(^)())after
+- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section  beforeChange:(void(^)())before onCompletition:(void(^)())after
 {
 	if (section < [self.menuItems count]) {
 		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
@@ -138,7 +138,7 @@
 	}
 }
 
-- (void)addAction:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon toSection:(NSInteger)section
+- (void)addAction:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section
 {
 	if (section < [self.menuItems count]) {
 		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
@@ -169,17 +169,17 @@
 	[self.tableView selectRowAtIndexPath:ipath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
-- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon
+- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon
 {
 	[self addViewController:controller tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
 }
 
-- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon beforeChange:(void(^)())before onCompletition:(void(^)())after
+- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after
 {
 	[self addViewController:controller tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1) beforeChange:before onCompletition:after];
 }
 
-- (void)addActionToLastSection:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(NSString*)icon
+- (void)addActionToLastSection:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon
 {
 	[self addAction:action tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
 }
@@ -320,13 +320,20 @@
 	cell.textLabel.text = dict[kSOViewTitle];
 	[(AMSlideTableCell*)cell setBadgeText:dict[kSOViewBadge]];
 
-	NSString* image = dict[kSOViewIcon];
-	if (image != nil && ![image isEqualToString:@""]) {
-		cell.imageView.image = [UIImage imageNamed:image];
+	id imageData = dict[kSOViewIcon];
+	
+	if (imageData != nil) {
+		if ([imageData isKindOfClass:[NSString class]] && ![imageData isEqualToString:@""]) {
+			cell.imageView.image = [UIImage imageNamed:imageData];
+		} else if ([imageData isKindOfClass:[UIImage class]]) {
+			cell.imageView.image = imageData;
+		} else {
+			cell.imageView.image = nil;			
+		}
 	} else {
 		cell.imageView.image = nil;
 	}
-
+	
 	return cell;
 }
 
