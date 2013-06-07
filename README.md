@@ -212,6 +212,10 @@ The icon must be 44x44. Blank icon name will result in a row with only text, wit
 Changelog 
 ==================
 
+v1.4
+--------------------
+- Added the ability to use either a string with the image name or the UIImage itself for the controller's icon.
+
 v1.3
 --------------------
 - Added rotation support
