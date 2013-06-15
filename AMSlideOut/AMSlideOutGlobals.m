@@ -35,5 +35,7 @@ NSString *const AMOptionsCellSeparatorUpper = @"AMOptionsCellSeparatorUpper";
 NSString *const AMOptionsCellSeparatorLower = @"AMOptionsCellSeparatorLower";
 NSString *const AMOptionsCellShadowColor = @"AMOptionsCellShadowColor";
 NSString *const AMOptionsImagePadding = @"AMOptionsImagePadding";
+NSString *const AMOptionsImageHeight = @"AMOptionsImageHeight";
+NSString *const AMOptionsImageOffsetByY = @"AMOptionsImageOffsetByY";
 NSString *const AMOptionsTextPadding = @"AMOptionsTextPadding";
 NSString *const AMOptionsBadgePosition = @"AMOptionsBadgePosition";
