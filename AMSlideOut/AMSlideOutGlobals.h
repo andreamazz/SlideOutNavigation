@@ -66,6 +66,8 @@ FOUNDATION_EXPORT NSString *const AMOptionsCellSeparatorLower;
 FOUNDATION_EXPORT NSString *const AMOptionsCellShadowColor;
 
 FOUNDATION_EXPORT NSString *const AMOptionsImagePadding;
+FOUNDATION_EXPORT NSString *const AMOptionsImageHeight;
+FOUNDATION_EXPORT NSString *const AMOptionsImageOffsetByY;
 FOUNDATION_EXPORT NSString *const AMOptionsTextPadding;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgePosition;
 
