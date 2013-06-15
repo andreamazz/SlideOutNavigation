@@ -40,7 +40,7 @@
 					AMOptionsEnableShadow : @(YES),
 					AMOptionsSetButtonDone : @(NO),
 					AMOptionsUseBorderedButton : @(NO),
-					AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlide.png"],					
+					AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlide.png"],
 					AMOptionsUseDefaultTitles : @(YES),
 					AMOptionsSlideValue : @(270),
 					AMOptionsBackground : [UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0],
@@ -48,6 +48,7 @@
 					AMOptionsImagePadding : @(50),
 					AMOptionsTextPadding : @(20),
 					AMOptionsBadgePosition : @(220),
+                    AMOptionsHeaderHeight : @(22),
 					AMOptionsHeaderFont : [UIFont fontWithName:@"Helvetica" size:13],
 					AMOptionsHeaderFontColor : [UIColor colorWithRed:0.49 green:0.50 blue:0.57 alpha:1.0],
 					AMOptionsHeaderShadowColor : [UIColor colorWithRed:0.21 green:0.15 blue:0.19 alpha:1.0],
@@ -89,6 +90,7 @@
 	if (self) {
 		self.menuVisible = NO;
 		_menuItems = [[NSMutableArray alloc] init];
+        self.navigationControllerClass = [UINavigationController class];
 	}
 	return self;
 }
@@ -209,7 +211,7 @@
 	[self.tableView setScrollsToTop:NO];
 	
 	// The content is displayed in a UINavigationController
-	self.contentController = [[UINavigationController alloc] init];
+	self.contentController = [[self.navigationControllerClass alloc] init];
 	
 	if ([self.options[AMOptionsEnableShadow] boolValue]) {
 		self.contentController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.contentController.view.bounds].CGPath;
@@ -227,9 +229,9 @@
 	
 	[view addSubview:self.tableView];
 	[view addSubview:self.contentController.view];
-
+    
 	self.view = view;
-
+    
 }
 
 - (void)viewDidLoad
@@ -267,7 +269,7 @@
 	[self.panGesture setMaximumNumberOfTouches:2];
 	[self.panGesture setDelegate:self];
 	[self.overlayView addGestureRecognizer:self.panGesture];
-
+    
 	[self.contentController.view addGestureRecognizer:self.panGesture];
 	
 	// Select the first view controller
@@ -319,7 +321,7 @@
 	((AMSlideTableCell*)cell).options = self.options;
 	cell.textLabel.text = dict[kSOViewTitle];
 	[(AMSlideTableCell*)cell setBadgeText:dict[kSOViewBadge]];
-
+    
 	id imageData = dict[kSOViewIcon];
 	
 	if (imageData != nil) {
@@ -328,7 +330,7 @@
 		} else if ([imageData isKindOfClass:[UIImage class]]) {
 			cell.imageView.image = imageData;
 		} else {
-			cell.imageView.image = nil;			
+			cell.imageView.image = nil;
 		}
 	} else {
 		cell.imageView.image = nil;
@@ -351,7 +353,7 @@
 	if (title == nil || [title isEqualToString:@""]) {
 		return 0;
 	}
-    return 22;
+    return [self.options[AMOptionsHeaderHeight] floatValue];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -476,13 +478,13 @@
 	return [self.options[AMOptionsEnableGesture] boolValue];
 }
 
-/* The following is from 
- http://blog.shoguniphicus.com/2011/06/15/working-with-uigesturerecognizers-uipangesturerecognizer-uipinchgesturerecognizer/ 
+/* The following is from
+ http://blog.shoguniphicus.com/2011/06/15/working-with-uigesturerecognizers-uipangesturerecognizer-uipinchgesturerecognizer/
  as mentioned by Nick Harris, in his approach to slide-out navigation:
  http://nickharris.wordpress.com/2012/02/05/ios-slide-out-navigation-code/
  */
 - (void)handlePan:(UIPanGestureRecognizer *)gesture;
-{	
+{
 	// The pan gesture moves horizontally the view
     UIView *piece = self.contentController.view;
     [self adjustAnchorPointForGestureRecognizer:gesture];
@@ -507,7 +509,7 @@
 		} else {
 			threshold = [self.options[AMOptionsSlideValue] floatValue] / 2;
 		}
-			
+        
 		if (self.contentController.view.frame.origin.x < threshold) {
 			[self hideSideMenu];
 		} else {
