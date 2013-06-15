@@ -18,6 +18,7 @@ NSString *const AMOptionsUseDefaultTitles = @"AMOptionsUseDefaultTitles";
 NSString *const AMOptionsSlideValue = @"AMOptionsSlideValue";
 NSString *const AMOptionsBackground = @"AMOptionsBackground";
 NSString *const AMOptionsSelectionBackground = @"AMOptionsSelectionBackground";
+NSString *const AMOptionsHeaderHeight = @"AMOptionsHeaderHeight";
 NSString *const AMOptionsHeaderFont = @"AMOptionsHeaderFont";
 NSString *const AMOptionsHeaderFontColor = @"AMOptionsHeaderFontColor";
 NSString *const AMOptionsHeaderShadowColor = @"AMOptionsHeaderShadowColor";
