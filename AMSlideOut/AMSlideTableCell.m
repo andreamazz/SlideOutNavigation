@@ -9,6 +9,8 @@
 #import "AMSlideTableCell.h"
 #import "AMSlideOutGlobals.h"
 
+#define kMaxImageHeight 44.f
+
 
 @interface AMSlideTableCell()
 
@@ -29,11 +31,20 @@
 	self.textLabel.font = self.options[AMOptionsCellFont];
 	
 	if (self.imageView.image) {
-		self.imageView.frame = CGRectMake(0, 0, 44, 44);
-		self.textLabel.frame = CGRectMake([self.options[AMOptionsImagePadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsImagePadding] floatValue], 44);
+        CGFloat imageOffsetByY = [self.options[AMOptionsImageOffsetByY] floatValue];
+        CGFloat imageHeight = [self.options[AMOptionsImageHeight] floatValue];
+        
+        if (imageHeight > kMaxImageHeight) {
+            imageHeight = kMaxImageHeight;
+        }
+        
+		self.imageView.frame = CGRectMake(0, imageOffsetByY, 44, imageHeight);
+		self.textLabel.frame = CGRectMake([self.options[AMOptionsImagePadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsImagePadding] floatValue], imageHeight);
 	} else {
 		self.textLabel.frame = CGRectMake([self.options[AMOptionsTextPadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsTextPadding] floatValue], 44);
 	}
+    
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 	
 	// Set badge properties
 	if (self.badge == nil) {
@@ -83,7 +94,7 @@
     CGContextMoveToPoint(context, 0, 0);
     CGContextAddLineToPoint(context, self.bounds.size.width, 0);
     CGContextStrokePath(context);
-
+    
 	CGContextSetStrokeColorWithColor(context, ((UIColor*)self.options[AMOptionsCellSeparatorLower]).CGColor);
     CGContextBeginPath(context);
 	CGContextSetLineWidth(context, 2.0);
