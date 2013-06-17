@@ -47,6 +47,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsSlideValue;
 FOUNDATION_EXPORT NSString *const AMOptionsBackground;
 FOUNDATION_EXPORT NSString *const AMOptionsSelectionBackground;
 
+FOUNDATION_EXPORT NSString *const AMOptionsHeaderHeight;
 FOUNDATION_EXPORT NSString *const AMOptionsHeaderFont;
 FOUNDATION_EXPORT NSString *const AMOptionsHeaderFontColor;
 FOUNDATION_EXPORT NSString *const AMOptionsHeaderShadowColor;
@@ -65,6 +66,8 @@ FOUNDATION_EXPORT NSString *const AMOptionsCellSeparatorLower;
 FOUNDATION_EXPORT NSString *const AMOptionsCellShadowColor;
 
 FOUNDATION_EXPORT NSString *const AMOptionsImagePadding;
+FOUNDATION_EXPORT NSString *const AMOptionsImageHeight;
+FOUNDATION_EXPORT NSString *const AMOptionsImageOffsetByY;
 FOUNDATION_EXPORT NSString *const AMOptionsTextPadding;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgePosition;
 
