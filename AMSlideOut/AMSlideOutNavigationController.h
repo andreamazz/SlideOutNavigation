@@ -59,5 +59,6 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 
 - (void)addSectionWithTitle:(NSString*)title;
 - (void)setBadgeValue:(NSString*)value forTag:(int)tag;
+- (void)showSideMenu;
 
 @end
