@@ -100,6 +100,9 @@ As of version 1.0.0 AMSlideOutNavigationController's configuration can be handle
     AMOptionsImagePadding;          // @(float), Padding used in the menu icon. Defaults to 50
     AMOptionsTextPadding;           // @(float), Padding used in the menu item. Defaults to 20
     AMOptionsBadgePosition;         // @(float), Badge's left offset. Defaults to 220
+    AMOptionsHeaderHeight;          // @(float), Menu header's height. Defaults to 22
+    AMOptionsImageHeight;           // @(float), Menu icon's height. Max value is currently 44 pixels. Defaults to 44
+    AMOptionsImageOffsetByY;        // @(float), Menu icon's offset from the top. Defaults to 0
 
 sample usage:
 
