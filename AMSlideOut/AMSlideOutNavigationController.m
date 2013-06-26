@@ -213,7 +213,7 @@
 	[self.tableView setScrollsToTop:NO];
 	
 	// The content is displayed in a UINavigationController
-	self.contentController = [[self.navigationControllerClass alloc] init];
+	self.contentController = [[self.navigationControllerClass alloc] initWithNavigationBarClass:self.navigationBarClass toolbarClass:self.navigationToolbarClass];
 	
 	if ([self.options[AMOptionsEnableShadow] boolValue]) {
 		self.contentController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.contentController.view.bounds].CGPath;
