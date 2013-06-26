@@ -39,6 +39,8 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 @property (strong, nonatomic)	UINavigationController*	contentController;
 
 @property (nonatomic, assign) Class navigationControllerClass;
+@property (nonatomic, assign) Class navigationBarClass;
+@property (nonatomic, assign) Class navigationToolbarClass;
 
 + (id)slideOutNavigationWithMenuItems:(NSArray*)items;
 + (id)slideOutNavigation;
