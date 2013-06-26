@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		652BEED4171AA64B000CD540 /* AMSlideOutGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 652BEED3171AA64B000CD540 /* AMSlideOutGlobals.m */; };
-		652BEED7171AA66B000CD540 /* AMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 652BEED6171AA653000CD540 /* AMTableView.m */; };
+		651A5A7D177AE2D8003DBF3B /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 651A5A7B177AE2D8003DBF3B /* icon1.png */; };
+		651A5A7E177AE2D8003DBF3B /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 651A5A7C177AE2D8003DBF3B /* icon2.png */; };
 		654E34A916CE383F00FBB3DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654E34A816CE383F00FBB3DA /* UIKit.framework */; };
 		654E34AB16CE383F00FBB3DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654E34AA16CE383F00FBB3DA /* Foundation.framework */; };
 		654E34AD16CE383F00FBB3DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 654E34AC16CE383F00FBB3DA /* CoreGraphics.framework */; };
@@ -20,17 +20,20 @@
 		654E34BF16CE383F00FBB3DA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 654E34BE16CE383F00FBB3DA /* Default-568h@2x.png */; };
 		654E34C216CE383F00FBB3DA /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 654E34C016CE383F00FBB3DA /* MainStoryboard.storyboard */; };
 		654E34C516CE383F00FBB3DA /* AMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E34C416CE383F00FBB3DA /* AMViewController.m */; };
-		654E34D516CE390900FBB3DA /* AMSlideOutNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E34CE16CE390900FBB3DA /* AMSlideOutNavigationController.m */; };
-		654E34D616CE390900FBB3DA /* AMSlideTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E34D016CE390900FBB3DA /* AMSlideTableCell.m */; };
-		654E34D716CE390900FBB3DA /* AMSlideTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 654E34D216CE390900FBB3DA /* AMSlideTableHeader.m */; };
-		654E34D816CE390900FBB3DA /* iconSlide.png in Resources */ = {isa = PBXBuildFile; fileRef = 654E34D316CE390900FBB3DA /* iconSlide.png */; };
-		654E34D916CE390900FBB3DA /* iconSlide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 654E34D416CE390900FBB3DA /* iconSlide@2x.png */; };
+		65E3FA03177AE52500F43B37 /* AMSlideOutGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E3F9F8177AE52500F43B37 /* AMSlideOutGlobals.m */; };
+		65E3FA04177AE52500F43B37 /* AMSlideOutNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E3F9FA177AE52500F43B37 /* AMSlideOutNavigationController.m */; };
+		65E3FA05177AE52500F43B37 /* AMSlideTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E3F9FC177AE52500F43B37 /* AMSlideTableCell.m */; };
+		65E3FA06177AE52500F43B37 /* AMSlideTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E3F9FE177AE52500F43B37 /* AMSlideTableHeader.m */; };
+		65E3FA07177AE52500F43B37 /* AMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E3FA00177AE52500F43B37 /* AMTableView.m */; };
+		65E3FA08177AE52500F43B37 /* iconSlide.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E3FA01177AE52500F43B37 /* iconSlide.png */; };
+		65E3FA09177AE52500F43B37 /* iconSlide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E3FA02177AE52500F43B37 /* iconSlide@2x.png */; };
+		65E3FA15177AEB0C00F43B37 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E3FA14177AEB0C00F43B37 /* Icon.png */; };
+		65E3FA17177AEB0F00F43B37 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E3FA16177AEB0F00F43B37 /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		652BEED3171AA64B000CD540 /* AMSlideOutGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideOutGlobals.m; sourceTree = "<group>"; };
-		652BEED5171AA653000CD540 /* AMTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMTableView.h; sourceTree = "<group>"; };
-		652BEED6171AA653000CD540 /* AMTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMTableView.m; sourceTree = "<group>"; };
+		651A5A7B177AE2D8003DBF3B /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
+		651A5A7C177AE2D8003DBF3B /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
 		654E34A516CE383F00FBB3DA /* SlideoutStoryboardSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideoutStoryboardSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		654E34A816CE383F00FBB3DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		654E34AA16CE383F00FBB3DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -47,15 +50,20 @@
 		654E34C116CE383F00FBB3DA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		654E34C316CE383F00FBB3DA /* AMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMViewController.h; sourceTree = "<group>"; };
 		654E34C416CE383F00FBB3DA /* AMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMViewController.m; sourceTree = "<group>"; };
-		654E34CC16CE390900FBB3DA /* AMSlideOutGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideOutGlobals.h; sourceTree = "<group>"; };
-		654E34CD16CE390900FBB3DA /* AMSlideOutNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideOutNavigationController.h; sourceTree = "<group>"; };
-		654E34CE16CE390900FBB3DA /* AMSlideOutNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideOutNavigationController.m; sourceTree = "<group>"; };
-		654E34CF16CE390900FBB3DA /* AMSlideTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideTableCell.h; sourceTree = "<group>"; };
-		654E34D016CE390900FBB3DA /* AMSlideTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideTableCell.m; sourceTree = "<group>"; };
-		654E34D116CE390900FBB3DA /* AMSlideTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideTableHeader.h; sourceTree = "<group>"; };
-		654E34D216CE390900FBB3DA /* AMSlideTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideTableHeader.m; sourceTree = "<group>"; };
-		654E34D316CE390900FBB3DA /* iconSlide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconSlide.png; sourceTree = "<group>"; };
-		654E34D416CE390900FBB3DA /* iconSlide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconSlide@2x.png"; sourceTree = "<group>"; };
+		65E3F9F7177AE52500F43B37 /* AMSlideOutGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideOutGlobals.h; sourceTree = "<group>"; };
+		65E3F9F8177AE52500F43B37 /* AMSlideOutGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideOutGlobals.m; sourceTree = "<group>"; };
+		65E3F9F9177AE52500F43B37 /* AMSlideOutNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideOutNavigationController.h; sourceTree = "<group>"; };
+		65E3F9FA177AE52500F43B37 /* AMSlideOutNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideOutNavigationController.m; sourceTree = "<group>"; };
+		65E3F9FB177AE52500F43B37 /* AMSlideTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideTableCell.h; sourceTree = "<group>"; };
+		65E3F9FC177AE52500F43B37 /* AMSlideTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideTableCell.m; sourceTree = "<group>"; };
+		65E3F9FD177AE52500F43B37 /* AMSlideTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideTableHeader.h; sourceTree = "<group>"; };
+		65E3F9FE177AE52500F43B37 /* AMSlideTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideTableHeader.m; sourceTree = "<group>"; };
+		65E3F9FF177AE52500F43B37 /* AMTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMTableView.h; sourceTree = "<group>"; };
+		65E3FA00177AE52500F43B37 /* AMTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMTableView.m; sourceTree = "<group>"; };
+		65E3FA01177AE52500F43B37 /* iconSlide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconSlide.png; sourceTree = "<group>"; };
+		65E3FA02177AE52500F43B37 /* iconSlide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconSlide@2x.png"; sourceTree = "<group>"; };
+		65E3FA14177AEB0C00F43B37 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		65E3FA16177AEB0F00F43B37 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		651A5A7A177AE2D8003DBF3B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				651A5A7B177AE2D8003DBF3B /* icon1.png */,
+				651A5A7C177AE2D8003DBF3B /* icon2.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		654E349C16CE383F00FBB3DA = {
 			isa = PBXGroup;
 			children = (
@@ -102,7 +119,8 @@
 		654E34AE16CE383F00FBB3DA /* SlideoutStoryboardSample */ = {
 			isa = PBXGroup;
 			children = (
-				654E34CB16CE390900FBB3DA /* AMSlideOut */,
+				65E3F9F6177AE52500F43B37 /* AMSlideOut */,
+				651A5A7A177AE2D8003DBF3B /* Resources */,
 				654E34B716CE383F00FBB3DA /* AMAppDelegate.h */,
 				654E34B816CE383F00FBB3DA /* AMAppDelegate.m */,
 				654E34C016CE383F00FBB3DA /* MainStoryboard.storyboard */,
@@ -116,6 +134,8 @@
 		654E34AF16CE383F00FBB3DA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				65E3FA16177AEB0F00F43B37 /* Icon@2x.png */,
+				65E3FA14177AEB0C00F43B37 /* Icon.png */,
 				654E34B016CE383F00FBB3DA /* SlideoutStoryboardSample-Info.plist */,
 				654E34B116CE383F00FBB3DA /* InfoPlist.strings */,
 				654E34B416CE383F00FBB3DA /* main.m */,
@@ -127,23 +147,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		654E34CB16CE390900FBB3DA /* AMSlideOut */ = {
+		65E3F9F6177AE52500F43B37 /* AMSlideOut */ = {
 			isa = PBXGroup;
 			children = (
-				654E34CC16CE390900FBB3DA /* AMSlideOutGlobals.h */,
-				652BEED3171AA64B000CD540 /* AMSlideOutGlobals.m */,
-				654E34CD16CE390900FBB3DA /* AMSlideOutNavigationController.h */,
-				654E34CE16CE390900FBB3DA /* AMSlideOutNavigationController.m */,
-				654E34CF16CE390900FBB3DA /* AMSlideTableCell.h */,
-				654E34D016CE390900FBB3DA /* AMSlideTableCell.m */,
-				654E34D116CE390900FBB3DA /* AMSlideTableHeader.h */,
-				654E34D216CE390900FBB3DA /* AMSlideTableHeader.m */,
-				652BEED5171AA653000CD540 /* AMTableView.h */,
-				652BEED6171AA653000CD540 /* AMTableView.m */,
-				654E34D316CE390900FBB3DA /* iconSlide.png */,
-				654E34D416CE390900FBB3DA /* iconSlide@2x.png */,
+				65E3F9F7177AE52500F43B37 /* AMSlideOutGlobals.h */,
+				65E3F9F8177AE52500F43B37 /* AMSlideOutGlobals.m */,
+				65E3F9F9177AE52500F43B37 /* AMSlideOutNavigationController.h */,
+				65E3F9FA177AE52500F43B37 /* AMSlideOutNavigationController.m */,
+				65E3F9FB177AE52500F43B37 /* AMSlideTableCell.h */,
+				65E3F9FC177AE52500F43B37 /* AMSlideTableCell.m */,
+				65E3F9FD177AE52500F43B37 /* AMSlideTableHeader.h */,
+				65E3F9FE177AE52500F43B37 /* AMSlideTableHeader.m */,
+				65E3F9FF177AE52500F43B37 /* AMTableView.h */,
+				65E3FA00177AE52500F43B37 /* AMTableView.m */,
+				65E3FA01177AE52500F43B37 /* iconSlide.png */,
+				65E3FA02177AE52500F43B37 /* iconSlide@2x.png */,
 			);
-			path = AMSlideOut;
+			name = AMSlideOut;
+			path = ../../AMSlideOut;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,8 +224,12 @@
 				654E34BD16CE383F00FBB3DA /* Default@2x.png in Resources */,
 				654E34BF16CE383F00FBB3DA /* Default-568h@2x.png in Resources */,
 				654E34C216CE383F00FBB3DA /* MainStoryboard.storyboard in Resources */,
-				654E34D816CE390900FBB3DA /* iconSlide.png in Resources */,
-				654E34D916CE390900FBB3DA /* iconSlide@2x.png in Resources */,
+				651A5A7D177AE2D8003DBF3B /* icon1.png in Resources */,
+				651A5A7E177AE2D8003DBF3B /* icon2.png in Resources */,
+				65E3FA08177AE52500F43B37 /* iconSlide.png in Resources */,
+				65E3FA09177AE52500F43B37 /* iconSlide@2x.png in Resources */,
+				65E3FA15177AEB0C00F43B37 /* Icon.png in Resources */,
+				65E3FA17177AEB0F00F43B37 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,11 +243,11 @@
 				654E34B516CE383F00FBB3DA /* main.m in Sources */,
 				654E34B916CE383F00FBB3DA /* AMAppDelegate.m in Sources */,
 				654E34C516CE383F00FBB3DA /* AMViewController.m in Sources */,
-				654E34D516CE390900FBB3DA /* AMSlideOutNavigationController.m in Sources */,
-				654E34D616CE390900FBB3DA /* AMSlideTableCell.m in Sources */,
-				654E34D716CE390900FBB3DA /* AMSlideTableHeader.m in Sources */,
-				652BEED4171AA64B000CD540 /* AMSlideOutGlobals.m in Sources */,
-				652BEED7171AA66B000CD540 /* AMTableView.m in Sources */,
+				65E3FA03177AE52500F43B37 /* AMSlideOutGlobals.m in Sources */,
+				65E3FA04177AE52500F43B37 /* AMSlideOutNavigationController.m in Sources */,
+				65E3FA05177AE52500F43B37 /* AMSlideTableCell.m in Sources */,
+				65E3FA06177AE52500F43B37 /* AMSlideTableHeader.m in Sources */,
+				65E3FA07177AE52500F43B37 /* AMTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

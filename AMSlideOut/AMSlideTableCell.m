@@ -11,6 +11,11 @@
 
 #define kMaxImageHeight 44.f
 
+#ifdef __IPHONE_6_0
+# define ALIGN_CENTER NSTextAlignmentCenter
+#else
+# define ALIGN_CENTER UITextAlignmentCenter
+#endif
 
 @interface AMSlideTableCell()
 
@@ -54,7 +59,7 @@
 	self.badge.font = self.options[AMOptionsCellBadgeFont];
 	self.badge.textColor = self.options[AMOptionsCellFontColor];
 	self.badge.adjustsFontSizeToFitWidth = YES;
-	self.badge.textAlignment = UITextAlignmentCenter;
+	self.badge.textAlignment = ALIGN_CENTER;
 	self.badge.opaque = YES;
 	self.badge.backgroundColor = [UIColor clearColor];
 	self.badge.shadowOffset = CGSizeMake(0, 1);

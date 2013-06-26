@@ -24,7 +24,7 @@
 	[self.slideoutController addSectionWithTitle:@""];
 	
 	controller = [storyboard instantiateViewControllerWithIdentifier:@"FirstController"];
-	[self.slideoutController addViewControllerToLastSection:controller tagged:1 withTitle:@"First View" andIcon:@""];
+	[self.slideoutController addViewControllerToLastSection:controller tagged:1 withTitle:@"First View" andIcon:@"icon1.png"];
 	
 	controller = [storyboard instantiateViewControllerWithIdentifier:@"SecondController"];
 	[self.slideoutController addViewControllerToLastSection:controller tagged:2 withTitle:@"Second View" andIcon:@""];
