@@ -545,4 +545,9 @@
 	self.barButton = nil;
 }
 
+- (void)reloadTableView{
+    [self.tableView reloadData];
+}
+
+
 @end

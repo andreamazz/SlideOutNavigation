@@ -63,5 +63,6 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 - (void)setBadgeValue:(NSString*)value forTag:(int)tag;
 - (void)showSideMenu;
 - (void)hideSideMenu;
+- (void)reloadTableView;
 
 @end
