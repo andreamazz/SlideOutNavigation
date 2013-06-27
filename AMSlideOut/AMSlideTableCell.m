@@ -44,7 +44,7 @@
         }
         
 		self.imageView.frame = CGRectMake(0, imageOffsetByY, 44, imageHeight);
-		self.textLabel.frame = CGRectMake([self.options[AMOptionsImagePadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsImagePadding] floatValue], imageHeight);
+		self.textLabel.frame = CGRectMake([self.options[AMOptionsImagePadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsImagePadding] floatValue], 44);
 	} else {
 		self.textLabel.frame = CGRectMake([self.options[AMOptionsTextPadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsTextPadding] floatValue], 44);
 	}
