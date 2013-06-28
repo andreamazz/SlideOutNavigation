@@ -390,6 +390,11 @@
 	}
 }
 
+- (void)reloadTableView
+{
+    [self.tableView reloadData];
+}
+
 - (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj
 {
 	[self switchToControllerTagged:tag andPerformSelector:selector withObject:obj afterDelay:0];
@@ -544,10 +549,5 @@
 	self.overlayView = nil;
 	self.barButton = nil;
 }
-
-- (void)reloadTableView{
-    [self.tableView reloadData];
-}
-
 
 @end
