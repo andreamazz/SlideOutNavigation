@@ -43,8 +43,10 @@ You can use the following helper methods to setup your views:
 
 To create a new section:
 
-	// Note: Leave the title blank to hide the section header
-	[self.slideoutController addSectionWithTitle:@"Section"];
+```objc
+// Note: Leave the title blank to hide the section header
+[self.slideoutController addSectionWithTitle:@"Section"];
+```
 
 To create a new row:
 
