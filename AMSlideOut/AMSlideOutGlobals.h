@@ -35,12 +35,17 @@
 #define kSOSectionTitle	@"title"
 #define kSOItemIsAction	@"isAction"
 
+#ifndef SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#endif
+
 FOUNDATION_EXPORT NSString *const AMOptionsEnableGesture;
 FOUNDATION_EXPORT NSString *const AMOptionsEnableShadow;
 FOUNDATION_EXPORT NSString *const AMOptionsSetButtonDone;
 FOUNDATION_EXPORT NSString *const AMOptionsUseBorderedButton;
 FOUNDATION_EXPORT NSString *const AMOptionsButtonIcon;
 FOUNDATION_EXPORT NSString *const AMOptionsTableBackground;
+FOUNDATION_EXPORT NSString *const AMOptionsTableOffestY;
 FOUNDATION_EXPORT NSString *const AMOptionsUseDefaultTitles;
 
 FOUNDATION_EXPORT NSString *const AMOptionsSlideValue;

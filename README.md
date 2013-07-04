@@ -84,6 +84,7 @@ AMOptionsSetButtonDone          // @(BOOL), Sets the Menu button's state to 'Don
 AMOptionsUseBorderedButton      // @(BOOL), Sets the Menu button to have a bordered style. Defaults to NO
 AMOptionsButtonIcon             // UIImage, Icon displayed in the Menu button. Defaults to the embedded 'iconSlide.png'
 AMOptionsTableBackground;       // UIImage, Background image displayed and tiled as the TableView's background. Defaults to nil (solid color)
+AMOptionsTableOffestY;          // @(float), Y offset for the menu table. Defaults to 20.0f in iOS7, 0.0f in previous versions.
 AMOptionsUseDefaultTitles;      // @(BOOL), When enabled the content view's title is set as the manu item's text. Defaults to YES
 AMOptionsSlideValue;            // @(float), The width of the menu. The content's view snaps to this value. Defaults to 270
 AMOptionsBackground;            // UIColor, Menu's background color. Defaults to the one in the main screenshot of this page

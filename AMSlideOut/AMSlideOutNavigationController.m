@@ -33,9 +33,11 @@
 - (NSMutableDictionary*)options
 {
 	if (_options == nil) {
+		CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
 		_options = [[NSMutableDictionary alloc]
 					initWithDictionary:
 					@{
+					AMOptionsTableOffestY : @(offsetY),
 					AMOptionsEnableGesture : @(YES),
 					AMOptionsEnableShadow : @(YES),
 					AMOptionsSetButtonDone : @(NO),
@@ -206,7 +208,7 @@
 	[view setBackgroundColor:self.options[AMOptionsBackground]];
 	
 	// Table View setup
-	self.tableView = [[AMTableView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 20)];
+	self.tableView = [[AMTableView alloc] initWithFrame:CGRectMake(0, [self.options[AMOptionsTableOffestY] floatValue], [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 20)];
 	self.tableView.options = self.options;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.backgroundColor = self.options[AMOptionsBackground];

@@ -14,6 +14,7 @@ NSString *const AMOptionsSetButtonDone = @"AMOptionsSetButtonDone";
 NSString *const AMOptionsUseBorderedButton = @"AMOptionsUseBorderedButton";
 NSString *const AMOptionsButtonIcon = @"AMOptionsButtonIcon";
 NSString *const AMOptionsTableBackground = @"AMOptionsTableBackground";
+NSString *const AMOptionsTableOffestY = @"AMOptionsTableOffestY";
 NSString *const AMOptionsUseDefaultTitles = @"AMOptionsUseDefaultTitles";
 NSString *const AMOptionsSlideValue = @"AMOptionsSlideValue";
 NSString *const AMOptionsBackground = @"AMOptionsBackground";
