@@ -254,7 +254,7 @@ Using this library?
 Please let me know! I'll be glad to link your project here.
 
 MIT License
---------------------
+==================
 	Copyright (c) 2012 Andrea Mazzini. All rights reserved.
 
 	Permission is hereby granted, free of charge, to any person obtaining a
