@@ -249,6 +249,9 @@ Added a method to programmatically switch controller and perform an action after
 
     - (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj
 
+Using this library?
+==================
+Please let me know! I'll be glad to link your project here.
 
 MIT License
 --------------------
