@@ -80,6 +80,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsBadgePosition;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationShrink;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationShrinkValue;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationDarken;
+FOUNDATION_EXPORT NSString *const AMOptionsAnimationDarkenValue;
 
 
 @interface AMSlideOutGlobals : NSObject

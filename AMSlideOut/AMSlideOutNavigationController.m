@@ -16,6 +16,7 @@
 @property (strong, nonatomic)	AMTableView*			tableView;
 @property BOOL											menuVisible;
 @property (strong, nonatomic)	UIView*					overlayView;
+@property (strong, nonatomic)	UIView*					darkView;
 @property (strong, nonatomic)	UIBarButtonItem*		barButton;
 @property (strong, nonatomic)	UITapGestureRecognizer*	tapGesture;
 @property (strong, nonatomic)	UIPanGestureRecognizer*	panGesture;
@@ -178,6 +179,13 @@
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.backgroundColor = self.options[AMOptionsBackground];
 	[self.tableView setScrollsToTop:NO];
+
+	// Dark view
+	self.darkView = [[UIView alloc] initWithFrame:
+					 CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 20)
+					 ];
+	[self.darkView setBackgroundColor:[UIColor blackColor]];
+	[self.darkView setAlpha:0];
 	
 	// The content is displayed in a UINavigationController
 	self.contentController = [[self.navigationControllerClass alloc] initWithNavigationBarClass:self.navigationBarClass toolbarClass:self.navigationToolbarClass];
@@ -197,8 +205,9 @@
 	self.overlayView.backgroundColor = [UIColor clearColor];
 	
 	[view addSubview:self.tableView];
+    [view addSubview:self.darkView];	
 	[view addSubview:self.contentController.view];
-    
+	
 	self.view = view;
     
 }
@@ -409,6 +418,11 @@
 							 [self.tableView setTransform:CGAffineTransformMakeScale(1, 1)];
 						 }
 						 
+						 // Table fadeout animation
+						 if ([self.options[AMOptionsAnimationDarken] boolValue]) {
+							 [self.darkView setAlpha:0];
+						 }
+						 
 						 // Move the whole NavigationController view aside
 						 CGRect frame = self.contentController.view.frame;
 						 frame.origin.x = [self.options[AMOptionsSlideValue] floatValue];
@@ -439,6 +453,12 @@
 						 if ([self.options[AMOptionsAnimationShrink] boolValue]) {
 							 CGFloat value = [self.options[AMOptionsAnimationShrinkValue] floatValue];
 							 [self.tableView setTransform:CGAffineTransformMakeScale(1-value, 1-value)];
+						 }
+						 
+						 // Table fadeout animation
+						 if ([self.options[AMOptionsAnimationDarken] boolValue]) {
+							 CGFloat value = [self.options[AMOptionsAnimationDarkenValue] floatValue];
+							 [self.darkView setAlpha:value];
 						 }
 						 
 						 // Move back the NavigationController
@@ -488,12 +508,22 @@
 		}
         [gesture setTranslation:CGPointZero inView:[piece superview]];
 		
+		// Shrink the table
 		if ([self.options[AMOptionsAnimationShrink] boolValue]) {
 			CGFloat value = [self.options[AMOptionsAnimationShrinkValue] floatValue];
 			CGFloat scale = piece.frame.origin.x / [self.options[AMOptionsSlideValue] floatValue];
 			scale = scale > 1 ? 1 : scale;
 			scale = (1 - value) + value * scale;
 			[self.tableView setTransform:CGAffineTransformMakeScale(scale, scale)];
+		}
+		
+		// Table fadeout animation
+		if ([self.options[AMOptionsAnimationDarken] boolValue]) {
+			CGFloat value = [self.options[AMOptionsAnimationDarkenValue] floatValue];
+			CGFloat scale = piece.frame.origin.x / [self.options[AMOptionsSlideValue] floatValue];
+			scale = scale > value ? value : scale;
+			scale = value - scale;
+			[self.darkView setAlpha:scale];
 		}
     }
     else if ([gesture state] == UIGestureRecognizerStateEnded) {

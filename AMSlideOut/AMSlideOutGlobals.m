@@ -43,6 +43,7 @@ NSString *const AMOptionsBadgePosition = @"AMOptionsBadgePosition";
 NSString *const AMOptionsAnimationShrink = @"AMOptionsAnimationShrink";
 NSString *const AMOptionsAnimationShrinkValue = @"AMOptionsAnimationShrinkValue";
 NSString *const AMOptionsAnimationDarken = @"AMOptionsAnimationDarken";
+NSString *const AMOptionsAnimationDarkenValue = @"AMOptionsAnimationDarkenValue";
 
 @implementation AMSlideOutGlobals
 
@@ -83,7 +84,8 @@ NSString *const AMOptionsAnimationDarken = @"AMOptionsAnimationDarken";
 	AMOptionsImageOffsetByY : @(0),
 	AMOptionsAnimationShrink : @YES,
 	AMOptionsAnimationShrinkValue : @0.3,
-	AMOptionsAnimationDarken : @YES
+	AMOptionsAnimationDarken : @YES,
+	AMOptionsAnimationDarkenValue : @0.7
 	};
 }
 

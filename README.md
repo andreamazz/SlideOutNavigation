@@ -110,6 +110,10 @@ AMOptionsBadgePosition;         // @(float), Badge's left offset. Defaults to 22
 AMOptionsHeaderHeight;          // @(float), Menu header's height. Defaults to 22
 AMOptionsImageHeight;           // @(float), Menu icon's height. Max value is currently 44 pixels. Defaults to 44
 AMOptionsImageOffsetByY;        // @(float), Menu icon's offset from the top. Defaults to 0
+AMOptionsAnimationShrink        // @(BOOL), Enables the Shrink animation. Defaults to @YES
+AMOptionsAnimationShrinkValue   // @(float), The amount of scaling for the shrink animation. Defauults to @0.3
+AMOptionsAnimationDarken        // @(BOOL), Enables the fadout animation. Defaults to @YES
+AMOptionsAnimationDarkenValue   // @(float), The darker alpha value of the dark overlay. Defaults to @0.7
 ```
 
 sample usage:
@@ -233,6 +237,10 @@ The icon must be 44x44. Blank icon name will result in a row with only text, wit
 Changelog 
 ==================
 
+v1.5
+--------------------
+- Added shrink and fadeout animations to the menu drawer.
+
 v1.4
 --------------------
 - Added the ability to use either a string with the image name or the UIImage itself for the controller's icon.
@@ -255,7 +263,7 @@ Please let me know! I'll be glad to link your project here.
 
 MIT License
 ==================
-	Copyright (c) 2012 Andrea Mazzini. All rights reserved.
+	Copyright (c) 2013 Andrea Mazzini. All rights reserved.
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
