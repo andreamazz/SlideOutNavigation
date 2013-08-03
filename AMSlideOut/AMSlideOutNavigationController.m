@@ -33,42 +33,7 @@
 - (NSMutableDictionary*)options
 {
 	if (_options == nil) {
-		CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
-		_options = [[NSMutableDictionary alloc]
-					initWithDictionary:
-					@{
-					AMOptionsTableOffestY : @(offsetY),
-					AMOptionsEnableGesture : @(YES),
-					AMOptionsEnableShadow : @(YES),
-					AMOptionsSetButtonDone : @(NO),
-					AMOptionsUseBorderedButton : @(NO),
-					AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlide.png"],
-					AMOptionsUseDefaultTitles : @(YES),
-					AMOptionsSlideValue : @(270),
-					AMOptionsBackground : [UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0],
-					AMOptionsSelectionBackground : [UIColor colorWithRed:0.10 green:0.13 blue:0.20 alpha:1.0],
-					AMOptionsImagePadding : @(50),
-					AMOptionsTextPadding : @(20),
-					AMOptionsBadgePosition : @(220),
-                    AMOptionsHeaderHeight : @(22),
-					AMOptionsHeaderFont : [UIFont fontWithName:@"Helvetica" size:13],
-					AMOptionsHeaderFontColor : [UIColor colorWithRed:0.49 green:0.50 blue:0.57 alpha:1.0],
-					AMOptionsHeaderShadowColor : [UIColor colorWithRed:0.21 green:0.15 blue:0.19 alpha:1.0],
-					AMOptionsHeaderPadding : @(10),
-					AMOptionsHeaderGradientUp : [UIColor colorWithRed:0.26 green:0.29 blue:0.36 alpha:1],
-					AMOptionsHeaderGradientDown : [UIColor colorWithRed:0.22 green:0.25 blue:0.32 alpha:1],
-					AMOptionsHeaderSeparatorUpper : [UIColor colorWithRed:0.24 green:0.27 blue:0.33 alpha:1.0],
-					AMOptionsHeaderSeparatorLower : [UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0],
-					AMOptionsCellFont : [UIFont fontWithName:@"Helvetica" size:14],
-					AMOptionsCellBadgeFont : [UIFont fontWithName:@"Helvetica" size:12],
-					AMOptionsCellFontColor : [UIColor colorWithRed:0.77 green:0.8 blue:0.85 alpha:1.0],
-					AMOptionsCellBackground : [UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0],
-					AMOptionsCellSeparatorUpper : [UIColor colorWithRed:0.24 green:0.27 blue:0.33 alpha:1.0],
-					AMOptionsCellSeparatorLower : [UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0],
-					AMOptionsCellShadowColor : [UIColor colorWithRed:0.21 green:0.15 blue:0.19 alpha:1.0],
-                    AMOptionsImageHeight : @(44),
-                    AMOptionsImageOffsetByY : @(0)
-					}];
+		_options = [[AMSlideOutGlobals defaultOptions] mutableCopy];
 	}
 	return _options;
 }
@@ -438,6 +403,12 @@
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^{
+
+						 // Expand the tableview
+						 if ([self.options[AMOptionsAnimationShrink] boolValue]) {
+							 [self.tableView setTransform:CGAffineTransformMakeScale(1, 1)];
+						 }
+						 
 						 // Move the whole NavigationController view aside
 						 CGRect frame = self.contentController.view.frame;
 						 frame.origin.x = [self.options[AMOptionsSlideValue] floatValue];
@@ -463,6 +434,13 @@
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^{
+						 
+						 // Shrink the table
+						 if ([self.options[AMOptionsAnimationShrink] boolValue]) {
+							 CGFloat value = [self.options[AMOptionsAnimationShrinkValue] floatValue];
+							 [self.tableView setTransform:CGAffineTransformMakeScale(1-value, 1-value)];
+						 }
+						 
 						 // Move back the NavigationController
 						 CGRect frame = self.contentController.view.frame;
 						 frame.origin.x = 0;
@@ -509,6 +487,14 @@
 			[piece setFrame:CGRectMake(320, piece.frame.origin.y, piece.frame.size.width, piece.frame.size.height)];
 		}
         [gesture setTranslation:CGPointZero inView:[piece superview]];
+		
+		if ([self.options[AMOptionsAnimationShrink] boolValue]) {
+			CGFloat value = [self.options[AMOptionsAnimationShrinkValue] floatValue];
+			CGFloat scale = piece.frame.origin.x / [self.options[AMOptionsSlideValue] floatValue];
+			scale = scale > 1 ? 1 : scale;
+			scale = (1 - value) + value * scale;
+			[self.tableView setTransform:CGAffineTransformMakeScale(scale, scale)];
+		}
     }
     else if ([gesture state] == UIGestureRecognizerStateEnded) {
 		// Hide the slide menu only if the view is released under a certain threshold, the threshold is lower when the menu is hidden

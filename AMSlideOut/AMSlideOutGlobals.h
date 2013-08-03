@@ -76,3 +76,14 @@ FOUNDATION_EXPORT NSString *const AMOptionsImageOffsetByY;
 FOUNDATION_EXPORT NSString *const AMOptionsTextPadding;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgePosition;
 
+// Animations
+FOUNDATION_EXPORT NSString *const AMOptionsAnimationShrink;
+FOUNDATION_EXPORT NSString *const AMOptionsAnimationShrinkValue;
+FOUNDATION_EXPORT NSString *const AMOptionsAnimationDarken;
+
+
+@interface AMSlideOutGlobals : NSObject
+
++ (NSDictionary*)defaultOptions;
+
+@end
