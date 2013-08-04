@@ -114,6 +114,7 @@ AMOptionsAnimationShrink        // @(BOOL), Enables the Shrink animation. Defaul
 AMOptionsAnimationShrinkValue   // @(float), The amount of scaling for the shrink animation. Defauults to @0.3
 AMOptionsAnimationDarken        // @(BOOL), Enables the fadout animation. Defaults to @YES
 AMOptionsAnimationDarkenValue   // @(float), The darker alpha value of the dark overlay. Defaults to @0.7
+AMOptionsAnimationDarkenColor   // UIColor, The base color of the fadout animation. Defaults to [UIColor blackColor]
 ```
 
 sample usage:

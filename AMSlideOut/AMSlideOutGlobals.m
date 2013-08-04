@@ -44,6 +44,7 @@ NSString *const AMOptionsAnimationShrink = @"AMOptionsAnimationShrink";
 NSString *const AMOptionsAnimationShrinkValue = @"AMOptionsAnimationShrinkValue";
 NSString *const AMOptionsAnimationDarken = @"AMOptionsAnimationDarken";
 NSString *const AMOptionsAnimationDarkenValue = @"AMOptionsAnimationDarkenValue";
+NSString *const AMOptionsAnimationDarkenColor = @"AMOptionsAnimationDarkenColor";
 
 @implementation AMSlideOutGlobals
 
@@ -85,7 +86,8 @@ NSString *const AMOptionsAnimationDarkenValue = @"AMOptionsAnimationDarkenValue"
 	AMOptionsAnimationShrink : @YES,
 	AMOptionsAnimationShrinkValue : @0.3,
 	AMOptionsAnimationDarken : @YES,
-	AMOptionsAnimationDarkenValue : @0.7
+	AMOptionsAnimationDarkenValue : @0.7,
+	AMOptionsAnimationDarkenColor : [UIColor blackColor]
 	};
 }
 

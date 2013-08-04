@@ -184,7 +184,7 @@
 	self.darkView = [[UIView alloc] initWithFrame:
 					 CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 20)
 					 ];
-	[self.darkView setBackgroundColor:[UIColor blackColor]];
+	[self.darkView setBackgroundColor:self.options[AMOptionsAnimationDarkenColor]];
 	[self.darkView setAlpha:0];
 	
 	// The content is displayed in a UINavigationController
