@@ -21,6 +21,8 @@
 @property (strong, nonatomic)	UITapGestureRecognizer*	tapGesture;
 @property (strong, nonatomic)	UIPanGestureRecognizer*	panGesture;
 
+- (void)_commonInitialization;
+
 @end
 
 @implementation AMSlideOutNavigationController
@@ -45,6 +47,7 @@
 	if (self) {
 		self.menuVisible = NO;
 		_menuItems = [NSMutableArray arrayWithArray:items];
+        [self _commonInitialization];
 	}
 	return self;
 }
@@ -61,6 +64,7 @@
 		self.menuVisible = NO;
 		_menuItems = [[NSMutableArray alloc] init];
         self.navigationControllerClass = [UINavigationController class];
+        [self _commonInitialization];
 	}
 	return self;
 }
@@ -68,6 +72,11 @@
 + (id)slideOutNavigation
 {
 	return [[AMSlideOutNavigationController alloc] init];
+}
+
+- (void)_commonInitialization
+{
+    _accessibilityDelegate = nil;
 }
 
 - (void)addSectionWithTitle:(NSString*)title
@@ -313,6 +322,14 @@
 	} else {
 		cell.imageView.image = nil;
 	}
+    
+    if (self.accessibilityDelegate)
+    {
+        if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToSlideOutCell:withTag:fromSection:)])
+        {
+            [self.accessibilityDelegate applyAccessibilityPropertiesToSlideOutCell: cell withTag: [dict[kSOViewTag] intValue] fromSection: indexPath.section];
+        }
+    }
 	
 	return cell;
 }
@@ -322,6 +339,15 @@
 	AMSlideTableHeader *header = [[AMSlideTableHeader alloc] init];
 	header.options = self.options;
 	header.titleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
+    
+    if (self.accessibilityDelegate)
+    {
+        if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToHeaderView:fromSection:)])
+        {
+            [self.accessibilityDelegate applyAccessibilityPropertiesToHeaderView: header fromSection: section];
+        }
+    }
+    
     return header;
 }
 
