@@ -182,7 +182,7 @@
 
 	// Dark view
 	self.darkView = [[UIView alloc] initWithFrame:
-					 CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 20)
+					 CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)
 					 ];
 	[self.darkView setBackgroundColor:self.options[AMOptionsAnimationDarkenColor]];
 	[self.darkView setAlpha:0];
@@ -423,6 +423,13 @@
 							 [self.darkView setAlpha:0];
 						 }
 						 
+						 // Slide the table
+						 if ([self.options[AMOptionsAnimationSlide] boolValue]) {
+							 CGRect tableFrame = self.tableView.frame;
+							 tableFrame.origin.x = 0;
+							 [self.tableView setFrame:tableFrame];
+						 }
+						 
 						 // Move the whole NavigationController view aside
 						 CGRect frame = self.contentController.view.frame;
 						 frame.origin.x = [self.options[AMOptionsSlideValue] floatValue];
@@ -459,6 +466,14 @@
 						 if ([self.options[AMOptionsAnimationDarken] boolValue]) {
 							 CGFloat value = [self.options[AMOptionsAnimationDarkenValue] floatValue];
 							 [self.darkView setAlpha:value];
+						 }
+						 
+						 // Slide the table
+						 if ([self.options[AMOptionsAnimationSlide] boolValue]) {
+							 CGRect tableFrame = self.tableView.frame;
+							 tableFrame.origin.x = -[self.options[AMOptionsSlideValue] floatValue];
+							 tableFrame.origin.x = tableFrame.origin.x * [self.options[AMOptionsAnimationSlidePercentage] floatValue];
+							 [self.tableView setFrame:tableFrame];
 						 }
 						 
 						 // Move back the NavigationController
@@ -524,6 +539,18 @@
 			scale = scale > value ? value : scale;
 			scale = value - scale;
 			[self.darkView setAlpha:scale];
+		}
+		
+		// Move the table if needed
+		if ([self.options[AMOptionsAnimationSlide] boolValue]) {
+			CGFloat maxValue = piece.frame.origin.x;
+			if (maxValue > [self.options[AMOptionsSlideValue] floatValue]) {
+				maxValue = [self.options[AMOptionsSlideValue] floatValue];
+			}
+			CGRect frame = self.tableView.frame;
+			frame.origin.x = maxValue - [self.options[AMOptionsSlideValue] floatValue];
+			frame.origin.x = frame.origin.x * [self.options[AMOptionsAnimationSlidePercentage] floatValue];
+			[self.tableView setFrame:frame];
 		}
     }
     else if ([gesture state] == UIGestureRecognizerStateEnded) {

@@ -83,6 +83,10 @@ FOUNDATION_EXPORT NSString *const AMOptionsAnimationDarken;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationDarkenValue;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationDarkenColor;
 
+FOUNDATION_EXPORT NSString *const AMOptionsAnimationSlide;
+FOUNDATION_EXPORT NSString *const AMOptionsAnimationSlidePercentage;
+
+
 @interface AMSlideOutGlobals : NSObject
 
 + (NSDictionary*)defaultOptions;

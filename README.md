@@ -115,6 +115,8 @@ AMOptionsAnimationShrinkValue   // @(float), The amount of scaling for the shrin
 AMOptionsAnimationDarken        // @(BOOL), Enables the fadout animation. Defaults to @YES
 AMOptionsAnimationDarkenValue   // @(float), The darker alpha value of the dark overlay. Defaults to @0.7
 AMOptionsAnimationDarkenColor   // UIColor, The base color of the fadout animation. Defaults to [UIColor blackColor]
+AMOptionsAnimationSlide         // @(BOOL), Enables the slide animation of the menu to the side. Defaults to @NO
+AMOptionsAnimationSlidePercentage // @(float), Value from 0 to 1. Determines how much the table should slide aside.
 ```
 
 sample usage:

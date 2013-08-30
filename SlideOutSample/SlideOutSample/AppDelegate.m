@@ -24,7 +24,11 @@
 	self.slideoutController = [AMSlideOutNavigationController slideOutNavigation];
 	
 	[self.slideoutController setSlideoutOptions:@{
-							AMOptionsEnableShadow : @(YES),
+					   AMOptionsAnimationShrink: @NO,
+					   AMOptionsAnimationDarken: @NO,
+						AMOptionsAnimationSlide: @YES,
+			  AMOptionsAnimationSlidePercentage: @0.7f,
+						 AMOptionsEnableShadow : @YES,
 						   AMOptionsHeaderFont : [UIFont systemFontOfSize:14]
 	 }];
 	
