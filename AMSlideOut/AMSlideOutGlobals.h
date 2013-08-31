@@ -24,16 +24,18 @@
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#define kSOViewTitle	@"title"
-#define kSOController	@"controller"
-#define kSOViewIcon		@"icon"
-#define kSOViewTag		@"tag"
-#define kSOViewBadge	@"badge"
-#define kSOSection		@"section"
-#define kSOBeforeBlock	@"before"
-#define kSOAfterBlock	@"after"
-#define kSOSectionTitle	@"title"
-#define kSOItemIsAction	@"isAction"
+#define kSOViewTitle		@"title"
+#define kSOController		@"controller"
+#define kSOViewIcon			@"icon"
+#define kSOViewTag			@"tag"
+#define kSOViewBadge		@"badge"
+#define kSOSection			@"section"
+#define kSOBeforeBlock		@"before"
+#define kSOAfterBlock		@"after"
+#define kSOSectionTitle		@"title"
+#define kSOSectionClass		@"headerClass"
+#define kSOSectionHeight	@"headerHeight"
+#define kSOItemIsAction		@"isAction"
 
 #ifndef SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -82,9 +84,9 @@ FOUNDATION_EXPORT NSString *const AMOptionsAnimationShrinkValue;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationDarken;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationDarkenValue;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationDarkenColor;
-
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationSlide;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationSlidePercentage;
+FOUNDATION_EXPORT NSString *const AMOptionsTableHeaderClass;
 
 
 @interface AMSlideOutGlobals : NSObject

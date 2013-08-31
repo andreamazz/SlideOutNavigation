@@ -72,8 +72,19 @@
 
 - (void)addSectionWithTitle:(NSString*)title
 {
+	[self addSectionWithTitle:title andHeaderClassName:nil withHeight:[self.options[AMOptionsHeaderHeight] floatValue]];
+}
+
+- (void)addSectionWithTitle:(NSString*)title andHeaderClassName:(NSString*)klass withHeight:(CGFloat)height
+{
 	NSMutableDictionary* section = [[NSMutableDictionary alloc] init];
-	section[kSOSectionTitle] = title;
+	if (title) {
+		section[kSOSectionTitle] = title;
+	}
+	if (klass) {
+		section[kSOSectionClass] = klass;
+	}
+	section[kSOSectionHeight] = @(height);
 	section[kSOSection] = [[NSMutableArray alloc] init];
 	
 	[self.menuItems addObject:section];
@@ -275,12 +286,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [(self.menuItems)[section][kSOSection] count];
+	return [self.menuItems[section][kSOSection] count];
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-	return (self.menuItems)[section][kSOSectionTitle];
+	return self.menuItems[section][kSOSectionTitle];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -319,7 +330,15 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-	AMSlideTableHeader *header = [[AMSlideTableHeader alloc] init];
+	// If the custom class is nil, use the one in the options
+	NSString* klass = self.menuItems[section][kSOSectionClass];
+	if (!klass) {
+		klass = self.options[AMOptionsTableHeaderClass];
+	}
+	if (!klass) {
+		klass = [AMSlideOutGlobals defaultOptions][AMOptionsTableHeaderClass];
+	}
+	AMSlideTableHeader *header = [[NSClassFromString(klass) alloc] init];
 	header.options = self.options;
 	header.titleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     return header;
@@ -328,8 +347,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 	NSString* title = [self tableView:tableView titleForHeaderInSection:section];
-	if (title == nil || [title isEqualToString:@""]) {
+	if (title == nil) {
 		return 0;
+	}
+	// If the header has a specific height use that
+	NSNumber* height = self.menuItems[section][kSOSectionHeight];
+	if (height) {
+		return [height floatValue];
 	}
     return [self.options[AMOptionsHeaderHeight] floatValue];
 }
@@ -580,6 +604,15 @@
         piece.layer.anchorPoint = CGPointMake(locationInView.x / piece.bounds.size.width, locationInView.y / piece.bounds.size.height);
         piece.center = locationInSuperview;
     }
+}
+
+- (void)setMenuScrollingEnabled:(BOOL)enabled
+{
+	// Please note: call this method AFTER the view loaded, to make sure that the tableView was created
+	if (self.tableView.contentSize.height < self.tableView.frame.size.height) {
+		[self.tableView setScrollEnabled:enabled];
+		[self.tableView setAlwaysBounceHorizontal:enabled];
+	}
 }
 
 - (void)viewDidUnload
