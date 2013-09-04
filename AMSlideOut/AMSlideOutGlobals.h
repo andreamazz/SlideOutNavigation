@@ -78,6 +78,8 @@ FOUNDATION_EXPORT NSString *const AMOptionsImageOffsetByY;
 FOUNDATION_EXPORT NSString *const AMOptionsTextPadding;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgePosition;
 
+FOUNDATION_EXPORT NSString *const AMOptionsDisableMenuScroll;
+
 // Animations
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationShrink;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationShrinkValue;

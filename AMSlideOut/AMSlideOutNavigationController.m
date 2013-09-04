@@ -281,6 +281,11 @@
 	}
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [self setMenuScrollingEnabled:![self.options[AMOptionsDisableMenuScroll] boolValue]];
+}
+
 - (void)setMenuItems:(NSArray *)menuItems
 {
 	// Makes sure to refresh the table data when new items are set

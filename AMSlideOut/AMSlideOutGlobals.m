@@ -40,6 +40,7 @@ NSString *const AMOptionsImageHeight = @"AMOptionsImageHeight";
 NSString *const AMOptionsImageOffsetByY = @"AMOptionsImageOffsetByY";
 NSString *const AMOptionsTextPadding = @"AMOptionsTextPadding";
 NSString *const AMOptionsBadgePosition = @"AMOptionsBadgePosition";
+NSString *const AMOptionsDisableMenuScroll = @"AMOptionsDisableMenuScroll";
 NSString *const AMOptionsAnimationShrink = @"AMOptionsAnimationShrink";
 NSString *const AMOptionsAnimationShrinkValue = @"AMOptionsAnimationShrinkValue";
 NSString *const AMOptionsAnimationDarken = @"AMOptionsAnimationDarken";
@@ -86,6 +87,7 @@ NSString *const AMOptionsTableHeaderClass = @"AMOptionsTableHeaderClass";
 	AMOptionsCellShadowColor : [UIColor colorWithRed:0.21 green:0.15 blue:0.19 alpha:1.0],
 	AMOptionsImageHeight : @(44),
 	AMOptionsImageOffsetByY : @(0),
+	AMOptionsDisableMenuScroll: @NO,
 	AMOptionsAnimationShrink : @YES,
 	AMOptionsAnimationShrinkValue : @0.3,
 	AMOptionsAnimationDarken : @YES,
