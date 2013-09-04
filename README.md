@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/andreamazz/SlideOutNavigation.png?label=ready)](https://waffle.io/andreamazz/SlideOutNavigation)  
 AMSlideOutNavigationController
 ==================
 
