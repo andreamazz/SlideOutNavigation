@@ -25,10 +25,10 @@
 	
 	controller = [storyboard instantiateViewControllerWithIdentifier:@"FirstController"];
 	[self.slideoutController addViewControllerToLastSection:controller tagged:1 withTitle:@"First View" andIcon:@"icon1.png"];
-	
+	[self.slideoutController setBadgeValue:@"Hello" forTag:1];
 	controller = [storyboard instantiateViewControllerWithIdentifier:@"SecondController"];
 	[self.slideoutController addViewControllerToLastSection:controller tagged:2 withTitle:@"Second View" andIcon:@""];
-	
+
 	[self.slideoutController addActionToLastSection:^{
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Some action"
                                                          message:@"Some message."
@@ -42,7 +42,8 @@
 											andIcon:@""];
 	
     [self.window setRootViewController:self.slideoutController];
-	
+
+
     return YES;
 }
 							

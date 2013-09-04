@@ -7,6 +7,8 @@
 //
 
 #import "AMViewController.h"
+#import "AMAppDelegate.h"
+#import "AMSlideOutNavigationController.h"
 
 @interface AMViewController ()
 
@@ -14,16 +16,11 @@
 
 @implementation AMViewController
 
-- (void)viewDidLoad
+- (IBAction)actionBadge:(id)sender
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	AMAppDelegate* delegate = [UIApplication sharedApplication].delegate;
+	[delegate.slideoutController setBadgeValue:@":)" forTag:1];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
