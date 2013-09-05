@@ -631,7 +631,7 @@
 	// Please note: call this method AFTER the view loaded, to make sure that the tableView was created
 	if (self.tableView.contentSize.height < self.tableView.frame.size.height) {
 		[self.tableView setScrollEnabled:enabled];
-		[self.tableView setAlwaysBounceHorizontal:enabled];
+		[self.tableView setAlwaysBounceVertical:enabled];
 	}
 }
 
