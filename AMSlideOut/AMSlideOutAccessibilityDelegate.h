@@ -15,5 +15,6 @@
 @optional
 - (void)applyAccessibilityPropertiesToHeaderView: (AMSlideTableHeader*)headerView fromSection: (NSInteger)section;
 - (void)applyAccessibilityPropertiesToSlideOutCell: (UITableViewCell*)slideOutCell withTag: (int)tag fromSection: (NSInteger)section;
+- (void)applyAccessibilityPropertiesToSlideOutButton: (NSObject*)accessibleButton;
 
 @end
