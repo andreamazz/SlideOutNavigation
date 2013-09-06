@@ -28,6 +28,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AMSlideOutGlobals.h"
 #import "AMTableView.h"
+#import "AMSlideOutAccessibilityDelegate.h"
 
 typedef void (^AMSlideOutBeforeHandler)(void);
 typedef void (^AMSlideOutCompletionHandler)(void);
@@ -43,6 +44,8 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 @property (nonatomic, assign) Class navigationControllerClass;
 @property (nonatomic, assign) Class navigationBarClass;
 @property (nonatomic, assign) Class navigationToolbarClass;
+
+@property (weak, nonatomic) id<AMSlideOutAccessibilityDelegate>  accessibilityDelegate;
 
 + (id)slideOutNavigationWithMenuItems:(NSArray*)items;
 + (id)slideOutNavigation;

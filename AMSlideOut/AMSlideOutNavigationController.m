@@ -21,6 +21,10 @@
 @property (strong, nonatomic)	UITapGestureRecognizer*	tapGesture;
 @property (strong, nonatomic)	UIPanGestureRecognizer*	panGesture;
 
+@property (assign, nonatomic)   BOOL                    viewHasBeenShownOnce;
+
+- (void)_commonInitialization;
+
 @end
 
 @implementation AMSlideOutNavigationController
@@ -45,6 +49,7 @@
 	if (self) {
 		self.menuVisible = NO;
 		_menuItems = [NSMutableArray arrayWithArray:items];
+        [self _commonInitialization];
 	}
 	return self;
 }
@@ -61,7 +66,8 @@
 		self.menuVisible = NO;
 		_menuItems = [[NSMutableArray alloc] init];
         self.navigationControllerClass = [UINavigationController class];
-		self.strtingControllerTag = -1;
+        [self _commonInitialization];
+	self.strtingControllerTag = -1;
 	}
 	return self;
 }
@@ -69,6 +75,12 @@
 + (id)slideOutNavigation
 {
 	return [[AMSlideOutNavigationController alloc] init];
+}
+
+- (void)_commonInitialization
+{
+    _accessibilityDelegate = nil;
+    _viewHasBeenShownOnce = NO;
 }
 
 - (void)setLeftBarButton:(UIBarButtonItem*)barButton
@@ -201,7 +213,7 @@
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.backgroundColor = self.options[AMOptionsBackground];
 	[self.tableView setScrollsToTop:NO];
-
+    
 	// Dark view
 	self.darkView = [[UIView alloc] initWithFrame:
 					 CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)
@@ -227,7 +239,7 @@
 	self.overlayView.backgroundColor = [UIColor clearColor];
 	
 	[view addSubview:self.tableView];
-    [view addSubview:self.darkView];	
+    [view addSubview:self.darkView];
 	[view addSubview:self.contentController.view];
 	
 	self.view = view;
@@ -243,12 +255,16 @@
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
 	
+    id accessibilityObject = nil;
+    
 	if ([self.options[AMOptionsUseBorderedButton] boolValue]) {
 		self.barButton = [[UIBarButtonItem alloc] initWithImage:self.options[AMOptionsButtonIcon]
 														  style:UIBarButtonItemStylePlain
 														 target:self
 														 action:@selector(toggleMenu)];
 		
+        accessibilityObject = self.barButton;
+        
 	} else  {
 		UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
 		[button setImage:self.options[AMOptionsButtonIcon] forState:UIControlStateNormal];
@@ -258,8 +274,18 @@
 		UIView *buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 22)];
 		[buttonContainer addSubview:button];
 		self.barButton = [[UIBarButtonItem alloc] initWithCustomView:buttonContainer];
+        
+        accessibilityObject = button;
 	}
-	
+    
+    if (self.accessibilityDelegate)
+    {
+        if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToSlideOutButton:)])
+        {
+            [self.accessibilityDelegate applyAccessibilityPropertiesToSlideOutButton: accessibilityObject];
+        }
+    }
+    
 	// Detect when the content recieves a single tap
 	self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
 	[self.overlayView addGestureRecognizer:self.tapGesture];
@@ -344,6 +370,14 @@
 	} else {
 		cell.imageView.image = nil;
 	}
+    
+    if (self.accessibilityDelegate)
+    {
+        if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToSlideOutCell:withTag:fromSection:)])
+        {
+            [self.accessibilityDelegate applyAccessibilityPropertiesToSlideOutCell: cell withTag: [dict[kSOViewTag] intValue] fromSection: indexPath.section];
+        }
+    }
 	
 	return cell;
 }
@@ -361,6 +395,15 @@
 	AMSlideTableHeader *header = [[NSClassFromString(klass) alloc] init];
 	header.options = self.options;
 	header.titleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
+    
+    if (self.accessibilityDelegate)
+    {
+        if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToHeaderView:fromSection:)])
+        {
+            [self.accessibilityDelegate applyAccessibilityPropertiesToHeaderView: header fromSection: section];
+        }
+    }
+    
     return header;
 }
 
@@ -456,7 +499,7 @@
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^{
-
+                         
 						 // Expand the tableview
 						 if ([self.options[AMOptionsAnimationShrink] boolValue]) {
 							 [self.tableView setTransform:CGAffineTransformMakeScale(1, 1)];
