@@ -39,6 +39,8 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 @property (strong, nonatomic)	NSMutableArray*			menuItems;
 @property (strong, nonatomic)	UINavigationController*	contentController;
 
+@property (assign, nonatomic) NSInteger					strtingControllerTag;
+
 @property (nonatomic, assign) Class navigationControllerClass;
 @property (nonatomic, assign) Class navigationBarClass;
 @property (nonatomic, assign) Class navigationToolbarClass;
@@ -70,5 +72,7 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 - (void)reloadTableView;
 
 - (void)setMenuScrollingEnabled:(BOOL)enabled;
+
+- (void)setLeftBarButton:(UIBarButtonItem*)barButton;
 
 @end

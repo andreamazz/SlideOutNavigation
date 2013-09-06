@@ -1,5 +1,6 @@
 AMSlideOutNavigationController
 ==================
+[![Stories in Ready](https://badge.waffle.io/andreamazz/SlideOutNavigation.png?label=ready)](https://waffle.io/andreamazz/SlideOutNavigation)  
 
 SlideOut Navigation Controller for iOS.
 This controller replicates the behaviour of the 'slide-out' navigation of applications like Facebook or Steam.
@@ -118,6 +119,7 @@ AMOptionsAnimationDarkenColor     // UIColor, The base color of the fadout anima
 AMOptionsAnimationSlide           // @(BOOL), Enables the slide animation of the menu to the side. Defaults to @NO
 AMOptionsAnimationSlidePercentage // @(float), Value from 0 to 1. Determines how much the table should slide aside.
 AMOptionsTableHeaderClass         // NSString, The class name of your custom header. Defaults to AMSlideTableHeader.
+AMOptionsDisableMenuScroll        // @(BOOL), Prevents the menu scrolling if its content's height is less than the view's height. Defaults to @NO
 ```
 
 sample usage:

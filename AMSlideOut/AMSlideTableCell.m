@@ -52,10 +52,6 @@
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 	
 	// Set badge properties
-	if (self.badge == nil) {
-		self.badge = [[UILabel alloc] init];
-		[self addSubview:self.badge];
-	}
 	self.badge.font = self.options[AMOptionsCellBadgeFont];
 	self.badge.textColor = self.options[AMOptionsCellFontColor];
 	self.badge.adjustsFontSizeToFitWidth = YES;
@@ -66,6 +62,15 @@
 	self.badge.shadowColor = self.options[AMOptionsCellShadowColor];
 	self.badge.layer.cornerRadius = 8;
 	self.badge.layer.backgroundColor = [[UIColor blackColor] CGColor];
+}
+
+- (UILabel*)badge
+{
+	if (_badgeValue == nil) {
+		_badgeValue = [[UILabel alloc] init];
+		[self addSubview:_badgeValue];
+	}
+	return _badgeValue;
 }
 
 - (void)setBadgeText:(NSString*)text

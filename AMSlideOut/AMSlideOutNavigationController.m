@@ -67,6 +67,7 @@
 		_menuItems = [[NSMutableArray alloc] init];
         self.navigationControllerClass = [UINavigationController class];
         [self _commonInitialization];
+	self.strtingControllerTag = -1;
 	}
 	return self;
 }
@@ -80,6 +81,16 @@
 {
     _accessibilityDelegate = nil;
     _viewHasBeenShownOnce = NO;
+}
+
+- (void)setLeftBarButton:(UIBarButtonItem*)barButton
+{
+	self.barButton = barButton;
+	if (self.barButton.target == nil || self.barButton.action == nil) {
+		self.barButton.target = self;
+		self.barButton.action = @selector(toggleMenu);
+	}
+    [self.currentViewController.navigationItem setLeftBarButtonItem:self.barButton];
 }
 
 - (void)addSectionWithTitle:(NSString*)title
@@ -288,8 +299,17 @@
 	[self.contentController.view addGestureRecognizer:self.panGesture];
 	
 	// Select the first view controller
-	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-	[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+	if (self.strtingControllerTag < 0) {
+		[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+		[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+	} else {
+		[self switchToControllerTagged:self.strtingControllerTag andPerformSelector:nil withObject:nil];
+	}
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [self setMenuScrollingEnabled:![self.options[AMOptionsDisableMenuScroll] boolValue]];
 }
 
 - (void)setMenuItems:(NSArray *)menuItems
@@ -654,7 +674,7 @@
 	// Please note: call this method AFTER the view loaded, to make sure that the tableView was created
 	if (self.tableView.contentSize.height < self.tableView.frame.size.height) {
 		[self.tableView setScrollEnabled:enabled];
-		[self.tableView setAlwaysBounceHorizontal:enabled];
+		[self.tableView setAlwaysBounceVertical:enabled];
 	}
 }
 
