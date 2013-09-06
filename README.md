@@ -1,5 +1,6 @@
 AMSlideOutNavigationController
 ==================
+[![Stories in Ready](https://badge.waffle.io/andreamazz/SlideOutNavigation.png?label=ready)](https://waffle.io/andreamazz/SlideOutNavigation)  
 
 SlideOut Navigation Controller for iOS.
 This controller replicates the behaviour of the 'slide-out' navigation of applications like Facebook or Steam.
@@ -78,42 +79,47 @@ Options Dictionary
 As of version 1.0.0 AMSlideOutNavigationController's configuration can be handled by passing an NSDictionary to it. The default values can be found in  AMSlideOutNavigationController.m. Here's a brief description of the possible options:
 
 ```objc
-AMOptionsEnableGesture          // @(BOOL), Enables the pan gesture. Defaults to YES
-AMOptionsEnableShadow           // @(BOOL), Enables the shadow under the content's view. Defaults to YES
-AMOptionsSetButtonDone          // @(BOOL), Sets the Menu button's state to 'Done' when the tray is open. Defaults to NO
-AMOptionsUseBorderedButton      // @(BOOL), Sets the Menu button to have a bordered style. Defaults to NO
-AMOptionsButtonIcon             // UIImage, Icon displayed in the Menu button. Defaults to the embedded 'iconSlide.png'
-AMOptionsTableBackground;       // UIImage, Background image displayed and tiled as the TableView's background. Defaults to nil (solid color)
-AMOptionsTableOffestY;          // @(float), Y offset for the menu table. Defaults to 20.0f in iOS7, 0.0f in previous versions.
-AMOptionsUseDefaultTitles;      // @(BOOL), When enabled the content view's title is set as the manu item's text. Defaults to YES
-AMOptionsSlideValue;            // @(float), The width of the menu. The content's view snaps to this value. Defaults to 270
-AMOptionsBackground;            // UIColor, Menu's background color. Defaults to the one in the main screenshot of this page
-AMOptionsSelectionBackground;   // UIColor, Menu background color for the selected item. Defaults to the one in the main screenshot of this page
-AMOptionsHeaderFont;            // UIFont, Font used in the menu header. Defaults to Helvetica@13
-AMOptionsHeaderFontColor;       // UIColor, Font color used in the menu header. Defaults to the one in the main screenshot of this page
-AMOptionsHeaderShadowColor;     // UIColor, Shadow color used in the menu header. Defaults to the one in the main screenshot of this page
-AMOptionsHeaderPadding;         // @(float), Padding used in the menu header. Defaults to 10
-AMOptionsHeaderGradientUp;      // UIColor, Menu's gradient starting color. Defaults to the one in the main screenshot of this page
-AMOptionsHeaderGradientDown;    // UIColor, Menu's gradient ending color. Defaults to the one in the main screenshot of this page
-AMOptionsHeaderSeparatorUpper;  // UIColor, Color used in the menu header separator. Defaults to the one in the main screenshot of this page
-AMOptionsHeaderSeparatorLower;  // UIColor, Color used in the menu header separator. Defaults to the one in the main screenshot of this page
-AMOptionsCellFont;              // UIFont, Font used in the menu item. Defaults to Helvetica@14
-AMOptionsCellFontColor;         // UIColor, Font color used in the menu item. Defaults to the one in the main screenshot of this page
-AMOptionsCellBadgeFont;         // UIFont, Font used in the menu badge. Defaults to Helvetica@12
-AMOptionsCellBackground;        // UIColor, Menu item background color. Defaults to the one in the main screenshot of this page
-AMOptionsCellSeparatorUpper;    // UIColor, Color used in the menu separator. Defaults to the one in the main screenshot of this page
-AMOptionsCellSeparatorLower;    // UIColor, Color used in the menu separator. Defaults to the one in the main screenshot of this page
-AMOptionsCellShadowColor;       // UIColor, Shadow color used in the menu item. Defaults to the one in the main screenshot of this page
-AMOptionsImagePadding;          // @(float), Padding used in the menu icon. Defaults to 50
-AMOptionsTextPadding;           // @(float), Padding used in the menu item. Defaults to 20
-AMOptionsBadgePosition;         // @(float), Badge's left offset. Defaults to 220
-AMOptionsHeaderHeight;          // @(float), Menu header's height. Defaults to 22
-AMOptionsImageHeight;           // @(float), Menu icon's height. Max value is currently 44 pixels. Defaults to 44
-AMOptionsImageOffsetByY;        // @(float), Menu icon's offset from the top. Defaults to 0
-AMOptionsAnimationShrink        // @(BOOL), Enables the Shrink animation. Defaults to @YES
-AMOptionsAnimationShrinkValue   // @(float), The amount of scaling for the shrink animation. Defauults to @0.3
-AMOptionsAnimationDarken        // @(BOOL), Enables the fadout animation. Defaults to @YES
-AMOptionsAnimationDarkenValue   // @(float), The darker alpha value of the dark overlay. Defaults to @0.7
+AMOptionsEnableGesture            // @(BOOL), Enables the pan gesture. Defaults to YES
+AMOptionsEnableShadow             // @(BOOL), Enables the shadow under the content's view. Defaults to YES
+AMOptionsSetButtonDone            // @(BOOL), Sets the Menu button's state to 'Done' when the tray is open. Defaults to NO
+AMOptionsUseBorderedButton        // @(BOOL), Sets the Menu button to have a bordered style. Defaults to NO
+AMOptionsButtonIcon               // UIImage, Icon displayed in the Menu button. Defaults to the embedded 'iconSlide.png'
+AMOptionsTableBackground          // UIImage, Background image displayed and tiled as the TableView's background. Defaults to nil (solid color)
+AMOptionsTableOffestY             // @(float), Y offset for the menu table. Defaults to 20.0f in iOS7, 0.0f in previous versions.
+AMOptionsUseDefaultTitles         // @(BOOL), When enabled the content view's title is set as the manu item's text. Defaults to YES
+AMOptionsSlideValue               // @(float), The width of the menu. The content's view snaps to this value. Defaults to 270
+AMOptionsBackground               // UIColor, Menu's background color. Defaults to the one in the main screenshot of this page
+AMOptionsSelectionBackground      // UIColor, Menu background color for the selected item. Defaults to the one in the main screenshot of this page
+AMOptionsHeaderFont               // UIFont, Font used in the menu header. Defaults to Helvetica@13
+AMOptionsHeaderFontColor          // UIColor, Font color used in the menu header. Defaults to the one in the main screenshot of this page
+AMOptionsHeaderShadowColor        // UIColor, Shadow color used in the menu header. Defaults to the one in the main screenshot of this page
+AMOptionsHeaderPadding            // @(float), Padding used in the menu header. Defaults to 10
+AMOptionsHeaderGradientUp         // UIColor, Menu's gradient starting color. Defaults to the one in the main screenshot of this page
+AMOptionsHeaderGradientDown       // UIColor, Menu's gradient ending color. Defaults to the one in the main screenshot of this page
+AMOptionsHeaderSeparatorUpper     // UIColor, Color used in the menu header separator. Defaults to the one in the main screenshot of this page
+AMOptionsHeaderSeparatorLower     // UIColor, Color used in the menu header separator. Defaults to the one in the main screenshot of this page
+AMOptionsCellFont                 // UIFont, Font used in the menu item. Defaults to Helvetica@14
+AMOptionsCellFontColor            // UIColor, Font color used in the menu item. Defaults to the one in the main screenshot of this page
+AMOptionsCellBadgeFont            // UIFont, Font used in the menu badge. Defaults to Helvetica@12
+AMOptionsCellBackground           // UIColor, Menu item background color. Defaults to the one in the main screenshot of this page
+AMOptionsCellSeparatorUpper       // UIColor, Color used in the menu separator. Defaults to the one in the main screenshot of this page
+AMOptionsCellSeparatorLower       // UIColor, Color used in the menu separator. Defaults to the one in the main screenshot of this page
+AMOptionsCellShadowColor          // UIColor, Shadow color used in the menu item. Defaults to the one in the main screenshot of this page
+AMOptionsImagePadding             // @(float), Padding used in the menu icon. Defaults to 50
+AMOptionsTextPadding              // @(float), Padding used in the menu item. Defaults to 20
+AMOptionsBadgePosition            // @(float), Badge's left offset. Defaults to 220
+AMOptionsHeaderHeight             // @(float), Menu header's height. Defaults to 22
+AMOptionsImageHeight              // @(float), Menu icon's height. Max value is currently 44 pixels. Defaults to 44
+AMOptionsImageOffsetByY           // @(float), Menu icon's offset from the top. Defaults to 0
+AMOptionsAnimationShrink          // @(BOOL), Enables the Shrink animation. Defaults to @YES
+AMOptionsAnimationShrinkValue     // @(float), The amount of scaling for the shrink animation. Defauults to @0.3
+AMOptionsAnimationDarken          // @(BOOL), Enables the fadout animation. Defaults to @YES
+AMOptionsAnimationDarkenValue     // @(float), The darker alpha value of the dark overlay. Defaults to @0.7
+AMOptionsAnimationDarkenColor     // UIColor, The base color of the fadout animation. Defaults to [UIColor blackColor]
+AMOptionsAnimationSlide           // @(BOOL), Enables the slide animation of the menu to the side. Defaults to @NO
+AMOptionsAnimationSlidePercentage // @(float), Value from 0 to 1. Determines how much the table should slide aside.
+AMOptionsTableHeaderClass         // NSString, The class name of your custom header. Defaults to AMSlideTableHeader.
+AMOptionsDisableMenuScroll        // @(BOOL), Prevents the menu scrolling if its content's height is less than the view's height. Defaults to @NO
 ```
 
 sample usage:
@@ -220,7 +226,13 @@ controller = [storyboard instantiateViewControllerWithIdentifier:@"SecondControl
 
 Sections
 --------------------
+1.6+:
+Pass a nil value as the section name if you don't want the section header visible.
+You can specify a custom header class and height for each section, this will give you the opportunity to add a separator that looks different from an header. 
+You can also define a global custom header class. Your custom class must be a subclass of ```AMSlideTableHeader```.
+Pre 1.6:
 Leave the section name blank if you don't want the section header visible.
+
 
 Badges
 --------------------
@@ -236,6 +248,14 @@ The icon must be 44x44. Blank icon name will result in a row with only text, wit
 
 Changelog 
 ==================
+
+v1.6
+--------------------
+- Added slide animation to the menu.
+- Changed header configuration.
+- Added option to use a custom default header view.
+- Added option to use a custom headers view for each section header.
+- Added ```setMenuScrollingEnabled``` methos
 
 v1.5
 --------------------

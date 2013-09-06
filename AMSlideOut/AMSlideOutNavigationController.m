@@ -61,6 +61,7 @@
 		self.menuVisible = NO;
 		_menuItems = [[NSMutableArray alloc] init];
         self.navigationControllerClass = [UINavigationController class];
+		self.strtingControllerTag = -1;
 	}
 	return self;
 }
@@ -70,10 +71,31 @@
 	return [[AMSlideOutNavigationController alloc] init];
 }
 
+- (void)setLeftBarButton:(UIBarButtonItem*)barButton
+{
+	self.barButton = barButton;
+	if (self.barButton.target == nil || self.barButton.action == nil) {
+		self.barButton.target = self;
+		self.barButton.action = @selector(toggleMenu);
+	}
+    [self.currentViewController.navigationItem setLeftBarButtonItem:self.barButton];
+}
+
 - (void)addSectionWithTitle:(NSString*)title
 {
+	[self addSectionWithTitle:title andHeaderClassName:nil withHeight:[self.options[AMOptionsHeaderHeight] floatValue]];
+}
+
+- (void)addSectionWithTitle:(NSString*)title andHeaderClassName:(NSString*)klass withHeight:(CGFloat)height
+{
 	NSMutableDictionary* section = [[NSMutableDictionary alloc] init];
-	section[kSOSectionTitle] = title;
+	if (title) {
+		section[kSOSectionTitle] = title;
+	}
+	if (klass) {
+		section[kSOSectionClass] = klass;
+	}
+	section[kSOSectionHeight] = @(height);
 	section[kSOSection] = [[NSMutableArray alloc] init];
 	
 	[self.menuItems addObject:section];
@@ -182,9 +204,9 @@
 
 	// Dark view
 	self.darkView = [[UIView alloc] initWithFrame:
-					 CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 20)
+					 CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)
 					 ];
-	[self.darkView setBackgroundColor:[UIColor blackColor]];
+	[self.darkView setBackgroundColor:self.options[AMOptionsAnimationDarkenColor]];
 	[self.darkView setAlpha:0];
 	
 	// The content is displayed in a UINavigationController
@@ -251,8 +273,17 @@
 	[self.contentController.view addGestureRecognizer:self.panGesture];
 	
 	// Select the first view controller
-	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-	[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+	if (self.strtingControllerTag < 0) {
+		[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+		[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+	} else {
+		[self switchToControllerTagged:self.strtingControllerTag andPerformSelector:nil withObject:nil];
+	}
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [self setMenuScrollingEnabled:![self.options[AMOptionsDisableMenuScroll] boolValue]];
 }
 
 - (void)setMenuItems:(NSArray *)menuItems
@@ -275,12 +306,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [(self.menuItems)[section][kSOSection] count];
+	return [self.menuItems[section][kSOSection] count];
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-	return (self.menuItems)[section][kSOSectionTitle];
+	return self.menuItems[section][kSOSectionTitle];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -319,7 +350,15 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-	AMSlideTableHeader *header = [[AMSlideTableHeader alloc] init];
+	// If the custom class is nil, use the one in the options
+	NSString* klass = self.menuItems[section][kSOSectionClass];
+	if (!klass) {
+		klass = self.options[AMOptionsTableHeaderClass];
+	}
+	if (!klass) {
+		klass = [AMSlideOutGlobals defaultOptions][AMOptionsTableHeaderClass];
+	}
+	AMSlideTableHeader *header = [[NSClassFromString(klass) alloc] init];
 	header.options = self.options;
 	header.titleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     return header;
@@ -328,8 +367,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 	NSString* title = [self tableView:tableView titleForHeaderInSection:section];
-	if (title == nil || [title isEqualToString:@""]) {
+	if (title == nil) {
 		return 0;
+	}
+	// If the header has a specific height use that
+	NSNumber* height = self.menuItems[section][kSOSectionHeight];
+	if (height) {
+		return [height floatValue];
 	}
     return [self.options[AMOptionsHeaderHeight] floatValue];
 }
@@ -423,6 +467,13 @@
 							 [self.darkView setAlpha:0];
 						 }
 						 
+						 // Slide the table
+						 if ([self.options[AMOptionsAnimationSlide] boolValue]) {
+							 CGRect tableFrame = self.tableView.frame;
+							 tableFrame.origin.x = 0;
+							 [self.tableView setFrame:tableFrame];
+						 }
+						 
 						 // Move the whole NavigationController view aside
 						 CGRect frame = self.contentController.view.frame;
 						 frame.origin.x = [self.options[AMOptionsSlideValue] floatValue];
@@ -459,6 +510,14 @@
 						 if ([self.options[AMOptionsAnimationDarken] boolValue]) {
 							 CGFloat value = [self.options[AMOptionsAnimationDarkenValue] floatValue];
 							 [self.darkView setAlpha:value];
+						 }
+						 
+						 // Slide the table
+						 if ([self.options[AMOptionsAnimationSlide] boolValue]) {
+							 CGRect tableFrame = self.tableView.frame;
+							 tableFrame.origin.x = -[self.options[AMOptionsSlideValue] floatValue];
+							 tableFrame.origin.x = tableFrame.origin.x * [self.options[AMOptionsAnimationSlidePercentage] floatValue];
+							 [self.tableView setFrame:tableFrame];
 						 }
 						 
 						 // Move back the NavigationController
@@ -525,6 +584,18 @@
 			scale = value - scale;
 			[self.darkView setAlpha:scale];
 		}
+		
+		// Move the table if needed
+		if ([self.options[AMOptionsAnimationSlide] boolValue]) {
+			CGFloat maxValue = piece.frame.origin.x;
+			if (maxValue > [self.options[AMOptionsSlideValue] floatValue]) {
+				maxValue = [self.options[AMOptionsSlideValue] floatValue];
+			}
+			CGRect frame = self.tableView.frame;
+			frame.origin.x = maxValue - [self.options[AMOptionsSlideValue] floatValue];
+			frame.origin.x = frame.origin.x * [self.options[AMOptionsAnimationSlidePercentage] floatValue];
+			[self.tableView setFrame:frame];
+		}
     }
     else if ([gesture state] == UIGestureRecognizerStateEnded) {
 		// Hide the slide menu only if the view is released under a certain threshold, the threshold is lower when the menu is hidden
@@ -553,6 +624,15 @@
         piece.layer.anchorPoint = CGPointMake(locationInView.x / piece.bounds.size.width, locationInView.y / piece.bounds.size.height);
         piece.center = locationInSuperview;
     }
+}
+
+- (void)setMenuScrollingEnabled:(BOOL)enabled
+{
+	// Please note: call this method AFTER the view loaded, to make sure that the tableView was created
+	if (self.tableView.contentSize.height < self.tableView.frame.size.height) {
+		[self.tableView setScrollEnabled:enabled];
+		[self.tableView setAlwaysBounceVertical:enabled];
+	}
 }
 
 - (void)viewDidUnload

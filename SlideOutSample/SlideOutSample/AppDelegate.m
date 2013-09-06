@@ -24,7 +24,11 @@
 	self.slideoutController = [AMSlideOutNavigationController slideOutNavigation];
 	
 	[self.slideoutController setSlideoutOptions:@{
-							AMOptionsEnableShadow : @(YES),
+					   AMOptionsAnimationShrink: @NO,
+					   AMOptionsAnimationDarken: @NO,
+						AMOptionsAnimationSlide: @YES,
+			  AMOptionsAnimationSlidePercentage: @0.7f,
+						 AMOptionsEnableShadow : @YES,
 						   AMOptionsHeaderFont : [UIFont systemFontOfSize:14]
 	 }];
 	
@@ -55,8 +59,7 @@
 	controller = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
 	[self.slideoutController addViewControllerToLastSection:controller tagged:4 withTitle:@"Second View" andIcon:@"icon2.png"];
 	
-	[self.slideoutController addSectionWithTitle:@"THIRD SECTION"];
-	
+	[self.slideoutController addSectionWithTitle:@"" andHeaderClassName:@"CustomHeader" withHeight:5];
 	[self.slideoutController addActionToLastSection:^{
 		// some action
 	}
@@ -66,7 +69,7 @@
 		
 	[self.window setRootViewController:self.slideoutController];
     [self.window makeKeyAndVisible];
-	
+
     return YES;
 }
 

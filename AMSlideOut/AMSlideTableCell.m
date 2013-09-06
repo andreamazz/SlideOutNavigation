@@ -52,10 +52,6 @@
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 	
 	// Set badge properties
-	if (self.badge == nil) {
-		self.badge = [[UILabel alloc] init];
-		[self addSubview:self.badge];
-	}
 	self.badge.font = self.options[AMOptionsCellBadgeFont];
 	self.badge.textColor = self.options[AMOptionsCellFontColor];
 	self.badge.adjustsFontSizeToFitWidth = YES;
@@ -68,12 +64,25 @@
 	self.badge.layer.backgroundColor = [[UIColor blackColor] CGColor];
 }
 
+- (UILabel*)badge
+{
+	if (_badgeValue == nil) {
+		_badgeValue = [[UILabel alloc] init];
+		[self addSubview:_badgeValue];
+	}
+	return _badgeValue;
+}
+
 - (void)setBadgeText:(NSString*)text
 {
 	if (text == nil || [text isEqualToString:@""]) {
 		[self.badge setAlpha:0];
 	} else {
+#ifdef __IPHONE_7_0
+        CGSize fontSize = [text sizeWithAttributes: @{NSFontAttributeName: self.options[AMOptionsCellBadgeFont]}];
+#else
 		CGSize fontSize = [text sizeWithFont:self.options[AMOptionsCellBadgeFont]];
+#endif
 		CGRect badgeFrame = CGRectMake([self.options[AMOptionsBadgePosition] floatValue] - (fontSize.width + 15.0) / 2.0, 12, fontSize.width + 15.0, 20);
 		self.badge.frame = badgeFrame;
 		self.badge.text = text;

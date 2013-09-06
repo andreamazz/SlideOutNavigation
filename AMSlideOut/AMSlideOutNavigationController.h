@@ -38,6 +38,8 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 @property (strong, nonatomic)	NSMutableArray*			menuItems;
 @property (strong, nonatomic)	UINavigationController*	contentController;
 
+@property (assign, nonatomic) NSInteger					strtingControllerTag;
+
 @property (nonatomic, assign) Class navigationControllerClass;
 @property (nonatomic, assign) Class navigationBarClass;
 @property (nonatomic, assign) Class navigationToolbarClass;
@@ -60,9 +62,14 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 - (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj afterDelay:(NSTimeInterval)delay;
 
 - (void)addSectionWithTitle:(NSString*)title;
+- (void)addSectionWithTitle:(NSString*)title andHeaderClassName:(NSString*)klass withHeight:(CGFloat)height;
 - (void)setBadgeValue:(NSString*)value forTag:(int)tag;
 - (void)showSideMenu;
 - (void)hideSideMenu;
 - (void)reloadTableView;
+
+- (void)setMenuScrollingEnabled:(BOOL)enabled;
+
+- (void)setLeftBarButton:(UIBarButtonItem*)barButton;
 
 @end
