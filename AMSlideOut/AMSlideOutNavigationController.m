@@ -20,10 +20,7 @@
 @property (strong, nonatomic)	UIBarButtonItem*		barButton;
 @property (strong, nonatomic)	UITapGestureRecognizer*	tapGesture;
 @property (strong, nonatomic)	UIPanGestureRecognizer*	panGesture;
-
 @property (assign, nonatomic)   BOOL                    viewHasBeenShownOnce;
-
-- (void)_commonInitialization;
 
 @end
 
@@ -47,9 +44,8 @@
 {
 	self = [super init];
 	if (self) {
-		self.menuVisible = NO;
+		[self commonInitialization];
 		_menuItems = [NSMutableArray arrayWithArray:items];
-        [self _commonInitialization];
 	}
 	return self;
 }
@@ -63,11 +59,8 @@
 {
 	self = [super init];
 	if (self) {
-		self.menuVisible = NO;
+		[self commonInitialization];		
 		_menuItems = [[NSMutableArray alloc] init];
-        self.navigationControllerClass = [UINavigationController class];
-        [self _commonInitialization];
-	self.strtingControllerTag = -1;
 	}
 	return self;
 }
@@ -77,10 +70,13 @@
 	return [[AMSlideOutNavigationController alloc] init];
 }
 
-- (void)_commonInitialization
+- (void)commonInitialization
 {
-    _accessibilityDelegate = nil;
-    _viewHasBeenShownOnce = NO;
+	_menuVisible = NO;
+	_accessibilityDelegate = nil;
+	_viewHasBeenShownOnce = NO;
+	_startingControllerTag = -1;
+	_navigationControllerClass = [UINavigationController class];
 }
 
 - (void)setLeftBarButton:(UIBarButtonItem*)barButton
@@ -278,10 +274,8 @@
         accessibilityObject = button;
 	}
     
-    if (self.accessibilityDelegate)
-    {
-        if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToSlideOutButton:)])
-        {
+    if (self.accessibilityDelegate) {
+        if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToSlideOutButton:)]) {
             [self.accessibilityDelegate applyAccessibilityPropertiesToSlideOutButton: accessibilityObject];
         }
     }
@@ -299,11 +293,11 @@
 	[self.contentController.view addGestureRecognizer:self.panGesture];
 	
 	// Select the first view controller
-	if (self.strtingControllerTag < 0) {
+	if (self.startingControllerTag < 0) {
 		[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
 		[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 	} else {
-		[self switchToControllerTagged:self.strtingControllerTag andPerformSelector:nil withObject:nil];
+		[self switchToControllerTagged:self.startingControllerTag andPerformSelector:nil withObject:nil];
 	}
 }
 
@@ -371,10 +365,8 @@
 		cell.imageView.image = nil;
 	}
     
-    if (self.accessibilityDelegate)
-    {
-        if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToSlideOutCell:withTag:fromSection:)])
-        {
+    if (self.accessibilityDelegate) {
+        if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToSlideOutCell:withTag:fromSection:)]) {
             [self.accessibilityDelegate applyAccessibilityPropertiesToSlideOutCell: cell withTag: [dict[kSOViewTag] intValue] fromSection: indexPath.section];
         }
     }
@@ -396,10 +388,8 @@
 	header.options = self.options;
 	header.titleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     
-    if (self.accessibilityDelegate)
-    {
-        if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToHeaderView:fromSection:)])
-        {
+    if (self.accessibilityDelegate) {
+        if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToHeaderView:fromSection:)]) {
             [self.accessibilityDelegate applyAccessibilityPropertiesToHeaderView: header fromSection: section];
         }
     }

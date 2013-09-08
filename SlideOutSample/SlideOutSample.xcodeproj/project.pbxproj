@@ -74,7 +74,6 @@
 		65E3FA0E177AE64900F43B37 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		65E3FA10177AEA9C00F43B37 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		65E3FA12177AEA9F00F43B37 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
-		65E8C6D417CD4C68008EAE8A /* AMSlideOutAccessibilityDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideOutAccessibilityDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +104,6 @@
 				6506A7F8177AE429001141BE /* AMSlideTableHeader.m */,
 				6506A7F9177AE429001141BE /* AMTableView.h */,
 				6506A7FA177AE429001141BE /* AMTableView.m */,
-				65E8C6D417CD4C68008EAE8A /* AMSlideOutAccessibilityDelegate.h */,
 				6506A7FB177AE429001141BE /* iconSlide.png */,
 				6506A7FC177AE429001141BE /* iconSlide@2x.png */,
 			);
