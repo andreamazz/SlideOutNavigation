@@ -88,7 +88,11 @@ FOUNDATION_EXPORT NSString *const AMOptionsAnimationDarkenValue;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationDarkenColor;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationSlide;
 FOUNDATION_EXPORT NSString *const AMOptionsAnimationSlidePercentage;
+
+// Custom classes
 FOUNDATION_EXPORT NSString *const AMOptionsTableHeaderClass;
+FOUNDATION_EXPORT NSString *const AMOptionsTableCellClass;
+
 
 @class AMSlideTableHeader;
 

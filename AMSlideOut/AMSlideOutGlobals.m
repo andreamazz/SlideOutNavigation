@@ -49,6 +49,7 @@ NSString *const AMOptionsAnimationDarkenColor = @"AMOptionsAnimationDarkenColor"
 NSString *const AMOptionsAnimationSlide = @"AMOptionsAnimationSlide";
 NSString *const AMOptionsAnimationSlidePercentage = @"AMOptionsAnimationSlidePercentage";
 NSString *const AMOptionsTableHeaderClass = @"AMOptionsTableHeaderClass";
+NSString *const AMOptionsTableCellClass = @"AMOptionsTableCellClass";
 
 @implementation AMSlideOutGlobals
 
@@ -95,7 +96,8 @@ NSString *const AMOptionsTableHeaderClass = @"AMOptionsTableHeaderClass";
 	AMOptionsAnimationDarkenColor : [UIColor blackColor],
 	AMOptionsAnimationSlide : @NO,
 	AMOptionsAnimationSlidePercentage : @0.3f,
-	AMOptionsTableHeaderClass: @"AMSlideTableHeader"
+	AMOptionsTableHeaderClass: @"AMSlideTableHeader",
+	AMOptionsTableCellClass: @"AMSlideTableCell"
 	};
 }
 

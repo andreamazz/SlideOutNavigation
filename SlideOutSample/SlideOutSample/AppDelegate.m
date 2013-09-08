@@ -29,6 +29,8 @@
 						AMOptionsAnimationSlide: @YES,
 			  AMOptionsAnimationSlidePercentage: @0.7f,
 						 AMOptionsEnableShadow : @YES,
+	 // Want a custom cell? uncomment and use your own class that inherits from AMSlideTableCell
+						//AMOptionsTableCellClass: @"CustomCell",
 						   AMOptionsHeaderFont : [UIFont systemFontOfSize:14]
 	 }];
 	

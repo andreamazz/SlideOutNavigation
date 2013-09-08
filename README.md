@@ -117,9 +117,10 @@ AMOptionsAnimationDarken          // @(BOOL), Enables the fadout animation. Defa
 AMOptionsAnimationDarkenValue     // @(float), The darker alpha value of the dark overlay. Defaults to @0.7
 AMOptionsAnimationDarkenColor     // UIColor, The base color of the fadout animation. Defaults to [UIColor blackColor]
 AMOptionsAnimationSlide           // @(BOOL), Enables the slide animation of the menu to the side. Defaults to @NO
-AMOptionsAnimationSlidePercentage // @(float), Value from 0 to 1. Determines how much the table should slide aside.
-AMOptionsTableHeaderClass         // NSString, The class name of your custom header. Defaults to AMSlideTableHeader.
+AMOptionsAnimationSlidePercentage // @(float), Value from 0 to 1. Determines how much the table should slide aside
+AMOptionsTableHeaderClass         // NSString, The class name of your custom header. Defaults to AMSlideTableHeader
 AMOptionsDisableMenuScroll        // @(BOOL), Prevents the menu scrolling if its content's height is less than the view's height. Defaults to @NO
+AMOptionsTableCellClass           // NSString, The class name of your custom cell. It must inherit from AMSlideTableCell. Defaults to AMSlideTableCell
 ```
 
 sample usage:
@@ -248,6 +249,11 @@ The icon must be 44x44. Blank icon name will result in a row with only text, wit
 
 Changelog 
 ==================
+
+v1.7
+--------------------
+- Added accessibility support. (Thanks to [Michael James](https://github.com/umjames))
+- Added ability to use custom cells for the menu items.
 
 v1.6
 --------------------

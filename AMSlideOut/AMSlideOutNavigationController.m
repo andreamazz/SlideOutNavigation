@@ -336,12 +336,12 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	static NSString* cellID = @"AMSlideTableCell";
+	NSString* cellID = self.options[AMOptionsTableCellClass];
 	
 	NSDictionary* dict = (self.menuItems)[indexPath.section][kSOSection][indexPath.row];
 	UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:cellID];
 	if (cell == nil) {
-		cell = [[AMSlideTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+		cell = [[NSClassFromString(self.options[AMOptionsTableCellClass]) alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
 		UIView* selection = [[UIView alloc] initWithFrame:cell.frame];
 		[selection setBackgroundColor:self.options[AMOptionsSelectionBackground]];
 		cell.selectedBackgroundView = selection;
