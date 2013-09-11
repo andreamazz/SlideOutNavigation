@@ -97,6 +97,8 @@
 
 - (void)drawRect:(CGRect)aRect
 {
+	[self setBackgroundColor: self.options[AMOptionsCellBackground]];
+
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
 	CGContextSetFillColorWithColor(context, ((UIColor*)self.options[AMOptionsCellBackground]).CGColor);
