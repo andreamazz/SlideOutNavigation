@@ -121,6 +121,10 @@ AMOptionsAnimationSlidePercentage // @(float), Value from 0 to 1. Determines how
 AMOptionsTableHeaderClass         // NSString, The class name of your custom header. Defaults to AMSlideTableHeader
 AMOptionsDisableMenuScroll        // @(BOOL), Prevents the menu scrolling if its content's height is less than the view's height. Defaults to @NO
 AMOptionsTableCellClass           // NSString, The class name of your custom cell. It must inherit from AMSlideTableCell. Defaults to AMSlideTableCell
+AMOptionsTableCellHeight          // @(float), The default cell's height. Defaults to @44
+AMOptionsTableIconMaxSize         // @(float), the default menu item's icon. Defaults to @44
+AMOptionsSlideoutTime             // @(float), The default duration of the open/close animation. Defaults to @0.15
+AMOptionsTableBadgeHeight         // @(float), The table badge height. Defaults to @20 
 ```
 
 sample usage:

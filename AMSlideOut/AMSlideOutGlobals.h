@@ -93,6 +93,11 @@ FOUNDATION_EXPORT NSString *const AMOptionsAnimationSlidePercentage;
 FOUNDATION_EXPORT NSString *const AMOptionsTableHeaderClass;
 FOUNDATION_EXPORT NSString *const AMOptionsTableCellClass;
 
+FOUNDATION_EXPORT NSString *const AMOptionsTableCellHeight;
+FOUNDATION_EXPORT NSString *const AMOptionsTableIconMaxSize;
+FOUNDATION_EXPORT NSString *const AMOptionsSlideoutTime;
+FOUNDATION_EXPORT NSString *const AMOptionsTableBadgeHeight;
+
 
 @class AMSlideTableHeader;
 

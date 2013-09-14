@@ -301,6 +301,11 @@
 	}
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+}
+
 - (void)viewDidLayoutSubviews
 {
     [self setMenuScrollingEnabled:![self.options[AMOptionsDisableMenuScroll] boolValue]];
@@ -343,6 +348,9 @@
 	if (cell == nil) {
 		cell = [[NSClassFromString(self.options[AMOptionsTableCellClass]) alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
 		UIView* selection = [[UIView alloc] initWithFrame:cell.frame];
+		CGRect selFrame = selection.frame;
+		selFrame.size.height =[self.options[AMOptionsTableCellHeight] floatValue];
+		selection.frame = selFrame;
 		[selection setBackgroundColor:self.options[AMOptionsSelectionBackground]];
 		cell.selectedBackgroundView = selection;
 	}
@@ -413,7 +421,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 44;
+	return [self.options[AMOptionsTableCellHeight] floatValue];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -460,8 +468,8 @@
 			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
 				int sectionIndex = [self.menuItems indexOfObject:section];
 				int rowIndex = [[section objectForKey:kSOSection] indexOfObject:item];
-				[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForItem:rowIndex inSection:sectionIndex] animated:YES scrollPosition:UITableViewScrollPositionNone];
-				[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForItem:rowIndex inSection:sectionIndex]];
+				[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex] animated:YES scrollPosition:UITableViewScrollPositionNone];
+				[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex]];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 				if ([[item objectForKey:kSOController] respondsToSelector:selector]) {
@@ -485,7 +493,7 @@
 
 - (void)showSideMenu
 {
-    [UIView animateWithDuration:0.15
+    [UIView animateWithDuration:[self.options[AMOptionsSlideoutTime] floatValue]
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^{
@@ -528,7 +536,7 @@
 {
     // this animates the view back to the left before telling the app delegate to swap out the MenuViewController
     // it tells the app delegate using the completion block of the animation
-    [UIView animateWithDuration:0.15
+    [UIView animateWithDuration:[self.options[AMOptionsSlideoutTime] floatValue]
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^{
@@ -666,6 +674,16 @@
 		[self.tableView setScrollEnabled:enabled];
 		[self.tableView setAlwaysBounceVertical:enabled];
 	}
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	[self setMenuScrollingEnabled:![self.options[AMOptionsDisableMenuScroll] boolValue]];
 }
 
 - (void)viewDidUnload

@@ -9,14 +9,6 @@
 #import "AMSlideTableCell.h"
 #import "AMSlideOutGlobals.h"
 
-#define kMaxImageHeight 44.f
-
-#ifdef __IPHONE_6_0
-# define ALIGN_CENTER NSTextAlignmentCenter
-#else
-# define ALIGN_CENTER UITextAlignmentCenter
-#endif
-
 @interface AMSlideTableCell()
 
 @property (nonatomic, strong) UILabel*	badge;
@@ -39,14 +31,14 @@
         CGFloat imageOffsetByY = [self.options[AMOptionsImageOffsetByY] floatValue];
         CGFloat imageHeight = [self.options[AMOptionsImageHeight] floatValue];
         
-        if (imageHeight > kMaxImageHeight) {
-            imageHeight = kMaxImageHeight;
+        if (imageHeight > [self.options[AMOptionsTableIconMaxSize] floatValue]) {
+            imageHeight = [self.options[AMOptionsTableIconMaxSize] floatValue];
         }
         
-		self.imageView.frame = CGRectMake(0, imageOffsetByY, 44, imageHeight);
-		self.textLabel.frame = CGRectMake([self.options[AMOptionsImagePadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsImagePadding] floatValue], 44);
+		self.imageView.frame = CGRectMake(0, imageOffsetByY, [self.options[AMOptionsTableIconMaxSize] floatValue], imageHeight);
+		self.textLabel.frame = CGRectMake([self.options[AMOptionsImagePadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsImagePadding] floatValue], [self.options[AMOptionsTableCellHeight] floatValue]);
 	} else {
-		self.textLabel.frame = CGRectMake([self.options[AMOptionsTextPadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsTextPadding] floatValue], 44);
+		self.textLabel.frame = CGRectMake([self.options[AMOptionsTextPadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsTextPadding] floatValue], [self.options[AMOptionsTableCellHeight] floatValue]);
 	}
     
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -55,7 +47,14 @@
 	self.badge.font = self.options[AMOptionsCellBadgeFont];
 	self.badge.textColor = self.options[AMOptionsCellFontColor];
 	self.badge.adjustsFontSizeToFitWidth = YES;
-	self.badge.textAlignment = ALIGN_CENTER;
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
+		self.badge.textAlignment = NSTextAlignmentCenter;
+	} else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+		self.badge.textAlignment = UITextAlignmentCenter;
+#pragma clang diagnostic pop
+	}
 	self.badge.opaque = YES;
 	self.badge.backgroundColor = [UIColor clearColor];
 	self.badge.shadowOffset = CGSizeMake(0, 1);
@@ -78,12 +77,20 @@
 	if (text == nil || [text isEqualToString:@""]) {
 		[self.badge setAlpha:0];
 	} else {
-#ifdef __IPHONE_7_0
-        CGSize fontSize = [text sizeWithAttributes: @{NSFontAttributeName: self.options[AMOptionsCellBadgeFont]}];
-#else
-		CGSize fontSize = [text sizeWithFont:self.options[AMOptionsCellBadgeFont]];
-#endif
-		CGRect badgeFrame = CGRectMake([self.options[AMOptionsBadgePosition] floatValue] - (fontSize.width + 15.0) / 2.0, 12, fontSize.width + 15.0, 20);
+		CGSize fontSize;
+		if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+			fontSize = [text sizeWithAttributes: @{NSFontAttributeName: self.options[AMOptionsCellBadgeFont]}];
+		} else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+			fontSize = [text sizeWithFont:self.options[AMOptionsCellBadgeFont]];
+#pragma clang diagnostic pop
+		}
+		float y = [self.options[AMOptionsTableCellHeight] floatValue] / 2 - [self.options[AMOptionsTableBadgeHeight] floatValue] / 2;
+		CGRect badgeFrame = CGRectMake([self.options[AMOptionsBadgePosition] floatValue] - (fontSize.width + 15.0) / 2.0,
+									   y,
+									   fontSize.width + 15.0,
+									   [self.options[AMOptionsTableBadgeHeight] floatValue]);
 		self.badge.frame = badgeFrame;
 		self.badge.text = text;
 		[self.badge setAlpha:1];
@@ -97,7 +104,7 @@
 
 - (void)drawRect:(CGRect)aRect
 {
-	[self setBackgroundColor: self.options[AMOptionsCellBackground]];
+	[self setBackgroundColor: [UIColor clearColor]];
 
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
