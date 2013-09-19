@@ -78,6 +78,7 @@
 		[self.badge setAlpha:0];
 	} else {
 		CGSize fontSize;
+#ifdef __IPHONE_7
 		if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
 			fontSize = [text sizeWithAttributes: @{NSFontAttributeName: self.options[AMOptionsCellBadgeFont]}];
 		} else {
@@ -86,6 +87,9 @@
 			fontSize = [text sizeWithFont:self.options[AMOptionsCellBadgeFont]];
 #pragma clang diagnostic pop
 		}
+#else
+		fontSize = [text sizeWithFont:self.options[AMOptionsCellBadgeFont]];
+#endif
 		float y = [self.options[AMOptionsTableCellHeight] floatValue] / 2 - [self.options[AMOptionsTableBadgeHeight] floatValue] / 2;
 		CGRect badgeFrame = CGRectMake([self.options[AMOptionsBadgePosition] floatValue] - (fontSize.width + 15.0) / 2.0,
 									   y,
