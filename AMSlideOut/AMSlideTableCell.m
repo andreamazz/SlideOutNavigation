@@ -35,7 +35,7 @@
             imageHeight = [self.options[AMOptionsTableIconMaxSize] floatValue];
         }
         
-		self.imageView.frame = CGRectMake(0, imageOffsetByY, [self.options[AMOptionsTableIconMaxSize] floatValue], imageHeight);
+		self.imageView.frame = CGRectMake([self.options[AMOptionsImageLeftPadding] floatValue], imageOffsetByY, [self.options[AMOptionsTableIconMaxSize] floatValue], imageHeight);
 		self.textLabel.frame = CGRectMake([self.options[AMOptionsImagePadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsImagePadding] floatValue], [self.options[AMOptionsTableCellHeight] floatValue]);
 	} else {
 		self.textLabel.frame = CGRectMake([self.options[AMOptionsTextPadding] floatValue], 0, [self.options[AMOptionsSlideValue] floatValue] - [self.options[AMOptionsTextPadding] floatValue], [self.options[AMOptionsTableCellHeight] floatValue]);
