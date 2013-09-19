@@ -26,7 +26,7 @@
 	self.textLabel.shadowOffset = CGSizeMake(0, 1);
 	self.textLabel.shadowColor = self.options[AMOptionsCellShadowColor];
 	self.textLabel.font = self.options[AMOptionsCellFont];
-	
+	[self setBackgroundColor:self.options[AMOptionsCellBackground]];
 	if (self.imageView.image) {
         CGFloat imageOffsetByY = [self.options[AMOptionsImageOffsetByY] floatValue];
         CGFloat imageHeight = [self.options[AMOptionsImageHeight] floatValue];
@@ -104,8 +104,8 @@
 
 - (void)drawRect:(CGRect)aRect
 {
-	[self setBackgroundColor: [UIColor clearColor]];
-
+	[self setBackgroundColor:self.options[AMOptionsCellBackground]];
+	
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
 	CGContextSetFillColorWithColor(context, ((UIColor*)self.options[AMOptionsCellBackground]).CGColor);

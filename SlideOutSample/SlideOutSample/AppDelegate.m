@@ -27,6 +27,7 @@
 					   AMOptionsAnimationShrink: @NO,
 					   AMOptionsAnimationDarken: @NO,
 						AMOptionsAnimationSlide: @YES,
+					   AMOptionsCellBackground: [UIColor clearColor],
 			  AMOptionsAnimationSlidePercentage: @0.7f,
 						 AMOptionsEnableShadow : @YES,
 	 // Want a custom cell? uncomment and use your own class that inherits from AMSlideTableCell
