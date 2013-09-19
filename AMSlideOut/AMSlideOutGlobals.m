@@ -36,6 +36,7 @@ NSString *const AMOptionsCellSeparatorUpper = @"AMOptionsCellSeparatorUpper";
 NSString *const AMOptionsCellSeparatorLower = @"AMOptionsCellSeparatorLower";
 NSString *const AMOptionsCellShadowColor = @"AMOptionsCellShadowColor";
 NSString *const AMOptionsImagePadding = @"AMOptionsImagePadding";
+NSString *const AMOptionsImageLeftPadding = @"AMOptionsLeftImagePadding";
 NSString *const AMOptionsImageHeight = @"AMOptionsImageHeight";
 NSString *const AMOptionsImageOffsetByY = @"AMOptionsImageOffsetByY";
 NSString *const AMOptionsTextPadding = @"AMOptionsTextPadding";
@@ -73,6 +74,7 @@ NSString *const AMOptionsTableBadgeHeight = @"AMOptionsTableBadgeHeight";
 			 AMOptionsBackground : [UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0],
 			 AMOptionsSelectionBackground : [UIColor colorWithRed:0.10 green:0.13 blue:0.20 alpha:1.0],
 			 AMOptionsImagePadding : @(50),
+			 AMOptionsImageLeftPadding : @(0),
 			 AMOptionsTextPadding : @(20),
 			 AMOptionsBadgePosition : @(220),
 			 AMOptionsHeaderHeight : @(22),
