@@ -106,6 +106,7 @@ AMOptionsCellSeparatorUpper       // UIColor, Color used in the menu separator. 
 AMOptionsCellSeparatorLower       // UIColor, Color used in the menu separator. Defaults to the one in the main screenshot of this page
 AMOptionsCellShadowColor          // UIColor, Shadow color used in the menu item. Defaults to the one in the main screenshot of this page
 AMOptionsImagePadding             // @(float), Padding used in the menu icon. Defaults to 50
+AMOptionsImageLeftPadding         // @(float), Left padding used in the menu icon for the image. Defaults to 5
 AMOptionsTextPadding              // @(float), Padding used in the menu item. Defaults to 20
 AMOptionsBadgePosition            // @(float), Badge's left offset. Defaults to 220
 AMOptionsHeaderHeight             // @(float), Menu header's height. Defaults to 22
