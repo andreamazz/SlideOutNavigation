@@ -223,8 +223,8 @@
 	if ([self.options[AMOptionsEnableShadow] boolValue]) {
 		self.contentController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.contentController.view.bounds].CGPath;
 		self.contentController.view.layer.shadowColor = [UIColor blackColor].CGColor;
-		self.contentController.view.layer.shadowOffset = CGSizeMake(-6, 0);
-		self.contentController.view.layer.shadowOpacity = 0.4;
+		self.contentController.view.layer.shadowOffset = CGSizeMake([self.options[AMOptionsSlideShadowOffset] floatValue], 0);
+		self.contentController.view.layer.shadowOpacity = [self.options[AMOptionsSlideShadowOpacity] floatValue];
 		self.contentController.view.clipsToBounds = NO;
 	}
 	

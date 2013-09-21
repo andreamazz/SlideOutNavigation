@@ -126,6 +126,8 @@ AMOptionsTableCellHeight          // @(float), The default cell's height. Defaul
 AMOptionsTableIconMaxSize         // @(float), the default menu item's icon. Defaults to @44
 AMOptionsSlideoutTime             // @(float), The default duration of the open/close animation. Defaults to @0.15
 AMOptionsTableBadgeHeight         // @(float), The table badge height. Defaults to @20 
+AMOptionsSlideShadowOffset        // @(float), The shadow's offset under the content controller. Defaults to -6
+AMOptionsSlideShadowOpacity       // @(float), The shadow's opacity under the content controller. Defaults to 0.4
 ```
 
 sample usage:
