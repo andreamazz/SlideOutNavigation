@@ -12,15 +12,41 @@
 @interface AMSlideTableCell()
 
 @property (nonatomic, strong) UILabel*	badge;
+@property (nonatomic, strong) UIView*	upperBorder;
+@property (nonatomic, strong) UIView*	lowerBorder;
 
 @end
 
 @implementation AMSlideTableCell
 
 @synthesize badge = _badgeValue;
+@synthesize upperBorder = _upperBorder;
+@synthesize lowerBorder = _lowerBorder;
+
+- (UIView *) upperBorder {
+    
+    if (!_upperBorder) {
+        _upperBorder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 1.0)];
+        _upperBorder.backgroundColor = self.options[AMOptionsCellSeparatorUpper];
+    }
+    return _upperBorder;
+}
+
+- (UIView *) lowerBorder {
+    
+    if (!_lowerBorder) {
+        _lowerBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width, 1.0)];
+        _lowerBorder.backgroundColor = self.options[AMOptionsCellSeparatorLower];
+    }
+    return _lowerBorder;
+}
 
 - (void)layoutSubviews
 {
+
+    [self addSubview:self.upperBorder];
+    [self addSubview:self.lowerBorder];
+    
 	self.textLabel.backgroundColor = [UIColor clearColor];
 	self.textLabel.textColor = self.options[AMOptionsCellFontColor];
 	self.textLabel.shadowOffset = CGSizeMake(0, 1);
@@ -110,24 +136,6 @@
 {
 	[self setBackgroundColor:self.options[AMOptionsCellBackground]];
 	
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	
-	CGContextSetFillColorWithColor(context, ((UIColor*)self.options[AMOptionsCellBackground]).CGColor);
-	CGContextFillRect(context, self.bounds);
-	
-	CGContextSetStrokeColorWithColor(context, ((UIColor*)self.options[AMOptionsCellSeparatorUpper]).CGColor);
-    CGContextBeginPath(context);
-	CGContextSetLineWidth(context, 2.0);
-    CGContextMoveToPoint(context, 0, 0);
-    CGContextAddLineToPoint(context, self.bounds.size.width, 0);
-    CGContextStrokePath(context);
-    
-	CGContextSetStrokeColorWithColor(context, ((UIColor*)self.options[AMOptionsCellSeparatorLower]).CGColor);
-    CGContextBeginPath(context);
-	CGContextSetLineWidth(context, 2.0);
-    CGContextMoveToPoint(context, 0, self.bounds.size.height);
-    CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height);
-    CGContextStrokePath(context);
 }
 
 @end
