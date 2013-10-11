@@ -21,6 +21,7 @@
 @property (strong, nonatomic)	UITapGestureRecognizer*	tapGesture;
 @property (strong, nonatomic)	UIPanGestureRecognizer*	panGesture;
 @property (assign, nonatomic)   BOOL                    viewHasBeenShownOnce;
+@property (strong, nonatomic)	UILabel*				badge;
 
 @end
 
@@ -158,13 +159,20 @@
 
 - (void)setBadgeValue:(NSString*)value forTag:(int)tag
 {
+	int count = 0;
 	for (NSDictionary* section in self.menuItems) {
 		for (NSMutableDictionary* item in section[kSOSection]) {
 			if ([item[kSOViewTag] intValue] == tag) {
 				item[kSOViewBadge] = value;
 			}
+			count += [item[kSOViewBadge] intValue];
 		}
 	}
+
+	if ([self.options[AMOptionsBadgeShowTotal] boolValue]) {
+		[self.badge setText:[NSString stringWithFormat:@"%d", count]];
+	}
+	
 	// Save and reselect the row after the reload
 	NSIndexPath *ipath = [self.tableView indexPathForSelectedRow];
 	[self.tableView reloadData];
@@ -270,10 +278,10 @@
 		UIView *buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 22)];
 		[buttonContainer addSubview:button];
 		self.barButton = [[UIBarButtonItem alloc] initWithCustomView:buttonContainer];
-        
+
         accessibilityObject = button;
 	}
-    
+	
     if (self.accessibilityDelegate) {
         if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToSlideOutButton:)]) {
             [self.accessibilityDelegate applyAccessibilityPropertiesToSlideOutButton: accessibilityObject];
@@ -299,6 +307,33 @@
 	} else {
 		[self switchToControllerTagged:self.startingControllerTag andPerformSelector:nil withObject:nil];
 	}
+}
+
+- (UILabel*)badge
+{
+	if (_badge == nil) {
+		_badge = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+		_badge.font = self.options[AMOptionsCellBadgeFont];
+		_badge.textColor = self.options[AMOptionsCellFontColor];
+		_badge.adjustsFontSizeToFitWidth = YES;
+		if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
+			_badge.textAlignment = NSTextAlignmentCenter;
+		} else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+			_badge.textAlignment = UITextAlignmentCenter;
+#pragma clang diagnostic pop
+		}
+		_badge.opaque = YES;
+		_badge.backgroundColor = [UIColor clearColor];
+		_badge.shadowOffset = CGSizeMake(0, 1);
+		_badge.shadowColor = self.options[AMOptionsCellShadowColor];
+		_badge.layer.cornerRadius = 8;
+		_badge.layer.backgroundColor = [[UIColor blackColor] CGColor];
+		[self.barButton.customView addSubview:_badge];
+	}
+
+	return _badge;
 }
 
 - (void)viewWillAppear:(BOOL)animated

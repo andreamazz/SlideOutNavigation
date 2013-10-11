@@ -101,6 +101,8 @@ FOUNDATION_EXPORT NSString *const AMOptionsTableBadgeHeight;
 FOUNDATION_EXPORT NSString *const AMOptionsSlideShadowOffset;
 FOUNDATION_EXPORT NSString *const AMOptionsSlideShadowOpacity;
 
+FOUNDATION_EXPORT NSString *const AMOptionsBadgeShowTotal;
+
 
 @class AMSlideTableHeader;
 

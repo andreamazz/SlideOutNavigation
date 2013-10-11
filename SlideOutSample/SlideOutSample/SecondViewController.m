@@ -24,12 +24,12 @@
 
 - (IBAction)badge2:(id)sender
 {
-	[((AppDelegate*)[[UIApplication sharedApplication] delegate]) setBadgeValue:@":)" forTag:2];
+	[((AppDelegate*)[[UIApplication sharedApplication] delegate]) setBadgeValue:@"1" forTag:2];
 }
 
 - (IBAction)badge3:(id)sender
 {
-	[((AppDelegate*)[[UIApplication sharedApplication] delegate]) setBadgeValue:@"20+" forTag:3];
+	[((AppDelegate*)[[UIApplication sharedApplication] delegate]) setBadgeValue:@"50" forTag:3];
 }
 
 - (IBAction)badge4:(id)sender

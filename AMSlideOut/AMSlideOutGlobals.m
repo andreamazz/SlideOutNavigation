@@ -57,6 +57,7 @@ NSString *const AMOptionsSlideoutTime = @"AMOptionsSlideoutTime";
 NSString *const AMOptionsTableBadgeHeight = @"AMOptionsTableBadgeHeight";
 NSString *const AMOptionsSlideShadowOffset = @"AMOptionsSlideShadowOffset";
 NSString *const AMOptionsSlideShadowOpacity = @"AMOptionsSlideShadowOpacity";
+NSString *const AMOptionsBadgeShowTotal = @"AMOptionsBadgeShowTotal";
 
 @implementation AMSlideOutGlobals
 
@@ -111,7 +112,8 @@ NSString *const AMOptionsSlideShadowOpacity = @"AMOptionsSlideShadowOpacity";
 			 AMOptionsSlideoutTime: @0.15,
 			 AMOptionsTableBadgeHeight: @20,
 			 AMOptionsSlideShadowOffset: @(-6),
-			 AMOptionsSlideShadowOpacity: @0.4
+			 AMOptionsSlideShadowOpacity: @0.4,
+			 AMOptionsBadgeShowTotal: @NO
 			 };
 }
 
