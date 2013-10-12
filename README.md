@@ -11,7 +11,7 @@ Part of the code is based off [this blog post made by Nick Harris](http://nickha
 
 Screenshot
 --------------------
-![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut1508.png) ![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut130413.png)
+![SlideOutNavigation](http://www.eflatgames.com/github/slideoutios7.png) ![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut130413.png)
 
 
 Setup with Cocoapods
