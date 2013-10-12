@@ -170,13 +170,28 @@
 	}
 
 	if ([self.options[AMOptionsBadgeShowTotal] boolValue]) {
-		[self.badge setText:[NSString stringWithFormat:@"%d", count]];
+		if (count != 0) {
+			[self.badge setText:[NSString stringWithFormat:@"%d", count]];
+			[self.badge setAlpha:1];
+		} else {
+			[self.badge setAlpha:0];
+		}
 	}
 	
 	// Save and reselect the row after the reload
 	NSIndexPath *ipath = [self.tableView indexPathForSelectedRow];
 	[self.tableView reloadData];
 	[self.tableView selectRowAtIndexPath:ipath animated:NO scrollPosition:UITableViewScrollPositionNone];
+}
+
+- (void)setBadgeTotalValue:(NSString*)value
+{
+	if (value == nil) {
+		[self.badge setAlpha:0];
+	} else {
+		[self.badge setText:value];
+		[self.badge setAlpha:1];
+	}
 }
 
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon
@@ -312,9 +327,12 @@
 - (UILabel*)badge
 {
 	if (_badge == nil) {
-		_badge = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-		_badge.font = self.options[AMOptionsCellBadgeFont];
-		_badge.textColor = self.options[AMOptionsCellFontColor];
+		_badge = [[UILabel alloc] initWithFrame:CGRectMake([self.options[AMOptionsBadgeGlobalPositionX] floatValue],
+														   [self.options[AMOptionsBadgeGlobalPositionY] floatValue],
+														   [self.options[AMOptionsBadgeGlobalPositionW] floatValue],
+														   [self.options[AMOptionsBadgeGlobalPositionH] floatValue])];
+		_badge.font = self.options[AMOptionsBadgeGlobalFont];
+		_badge.textColor = self.options[AMOptionsBadgeGlobalTextColor];
 		_badge.adjustsFontSizeToFitWidth = YES;
 		if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
 			_badge.textAlignment = NSTextAlignmentCenter;
@@ -327,9 +345,9 @@
 		_badge.opaque = YES;
 		_badge.backgroundColor = [UIColor clearColor];
 		_badge.shadowOffset = CGSizeMake(0, 1);
-		_badge.shadowColor = self.options[AMOptionsCellShadowColor];
+		_badge.shadowColor = self.options[AMOptionsBadgeGlobalShadowColor];
 		_badge.layer.cornerRadius = 8;
-		_badge.layer.backgroundColor = [[UIColor blackColor] CGColor];
+		_badge.layer.backgroundColor = [self.options[AMOptionsBadgeGlobalBackColor] CGColor];
 		[self.barButton.customView addSubview:_badge];
 	}
 

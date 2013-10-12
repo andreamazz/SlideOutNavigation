@@ -20,11 +20,22 @@
 	UIViewController* controller;
 	
 	self.slideoutController = [AMSlideOutNavigationController slideOutNavigation];
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		[self.slideoutController setSlideoutOptions:[AMSlideOutGlobals defaultFlatOptions]];
+	}
+	[self.slideoutController addSectionWithTitle:nil];
 	
-	[self.slideoutController addSectionWithTitle:@""];
+	NSString* icon1 = @"icon1.png";
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		icon1 = @"icon1b.png";
+	}
+	NSString* icon2 = @"icon2.png";
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		icon2 = @"icon2b.png";
+	}
 	
 	controller = [storyboard instantiateViewControllerWithIdentifier:@"FirstController"];
-	[self.slideoutController addViewControllerToLastSection:controller tagged:1 withTitle:@"First View" andIcon:@"icon1.png"];
+	[self.slideoutController addViewControllerToLastSection:controller tagged:1 withTitle:@"First View" andIcon:icon1];
 	[self.slideoutController setBadgeValue:@"Hello" forTag:1];
 	controller = [storyboard instantiateViewControllerWithIdentifier:@"SecondController"];
 	[self.slideoutController addViewControllerToLastSection:controller tagged:2 withTitle:@"Second View" andIcon:@""];

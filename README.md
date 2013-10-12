@@ -101,6 +101,8 @@ AMOptionsHeaderSeparatorLower     // UIColor, Color used in the menu header sepa
 AMOptionsCellFont                 // UIFont, Font used in the menu item. Defaults to Helvetica@14
 AMOptionsCellFontColor            // UIColor, Font color used in the menu item. Defaults to the one in the main screenshot of this page
 AMOptionsCellBadgeFont            // UIFont, Font used in the menu badge. Defaults to Helvetica@12
+AMOptionsCellBadgeFontColor       // UIColor, Badge's font color. Defaults to white
+AMOptionsCellBadgeBackColor       // UIColor, Badge's background color. Defaults to black
 AMOptionsCellBackground           // UIColor, Menu item background color. Defaults to the one in the main screenshot of this page
 AMOptionsCellSeparatorUpper       // UIColor, Color used in the menu separator. Defaults to the one in the main screenshot of this page
 AMOptionsCellSeparatorLower       // UIColor, Color used in the menu separator. Defaults to the one in the main screenshot of this page
@@ -128,6 +130,15 @@ AMOptionsSlideoutTime             // @(float), The default duration of the open/
 AMOptionsTableBadgeHeight         // @(float), The table badge height. Defaults to @20 
 AMOptionsSlideShadowOffset        // @(float), The shadow's offset under the content controller. Defaults to -6
 AMOptionsSlideShadowOpacity       // @(float), The shadow's opacity under the content controller. Defaults to 0.4
+AMOptionsBadgeShowTotal           // @(BOOL=), Enables the automatic global badge. Defaults to @NO
+AMOptionsBadgeGlobalFont          // @(UIFont), The global badge's font. Defaults to [UIFont systemFontOfSize:8]
+AMOptionsBadgeGlobalPositionX     // @(float), The global bages's X position (relative to the bar button). Defaults to @20
+AMOptionsBadgeGlobalPositionY     // @(float), The global bages's Y position (relative to the bar button). Defaults to @(-5)
+AMOptionsBadgeGlobalPositionW     // @(float), The global bages's width. Defaults to @16
+AMOptionsBadgeGlobalPositionH     // @(float), The global bages's height. Defaults to @16
+AMOptionsBadgeGlobalTextColor     // @(UIColor), The glboal badge's text color. Defaults to white
+AMOptionsBadgeGlobalBackColor     // @(UIColor), The glboal badge's background color. Defaults to red
+AMOptionsBadgeGlobalShadowColor   // @(UIColor), The glboal badge's text shadow color. Defaults to a clear color
 ```
 
 sample usage:
@@ -244,10 +255,16 @@ Leave the section name blank if you don't want the section header visible.
 
 Badges
 --------------------
-Set the badge value (NSString) via the method ```setBadgeValue:forTag:```. This sets the badge value of the row with the numeric tag provided during the views' setup.
+Set the badge value (NSString) via the method ```setBadgeValue:forTag:```. This sets the badge value of the row with the numeric tag provided during the views' setup. If AMOptionsBadgeShowTotal is enabled, a global badge will be displayed on the left bar button.
 
 ```objc
 [self.slideoutController setBadgeValue:@"10" forTag:3];
+```
+
+You can se a custom global badge by using:
+
+```objc
+[self.slideoutController setBadgeTotalValue:@"10"];
 ```
 
 Icons
@@ -256,6 +273,10 @@ The icon must be 44x44. Blank icon name will result in a row with only text, wit
 
 Changelog 
 ==================
+
+v1.7.5
+--------------------
+- Added global badge on the tray button.
 
 v1.7
 --------------------

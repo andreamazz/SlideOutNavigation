@@ -102,7 +102,16 @@ FOUNDATION_EXPORT NSString *const AMOptionsSlideShadowOffset;
 FOUNDATION_EXPORT NSString *const AMOptionsSlideShadowOpacity;
 
 FOUNDATION_EXPORT NSString *const AMOptionsBadgeShowTotal;
-
+FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalFont;
+FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalPositionX;
+FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalPositionY;
+FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalPositionW;
+FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalPositionH;
+FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalTextColor;
+FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalBackColor;
+FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalShadowColor;
+FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeFontColor;
+FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeBackColor;
 
 @class AMSlideTableHeader;
 
@@ -117,5 +126,6 @@ FOUNDATION_EXPORT NSString *const AMOptionsBadgeShowTotal;
 @interface AMSlideOutGlobals : NSObject
 
 + (NSDictionary*)defaultOptions;
++ (NSDictionary*)defaultFlatOptions;
 
 @end

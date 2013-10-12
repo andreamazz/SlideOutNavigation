@@ -71,7 +71,7 @@
 	
 	// Set badge properties
 	self.badge.font = self.options[AMOptionsCellBadgeFont];
-	self.badge.textColor = self.options[AMOptionsCellFontColor];
+	self.badge.textColor = self.options[AMOptionsCellBadgeFontColor];
 	self.badge.adjustsFontSizeToFitWidth = YES;
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
 		self.badge.textAlignment = NSTextAlignmentCenter;
@@ -86,7 +86,7 @@
 	self.badge.shadowOffset = CGSizeMake(0, 1);
 	self.badge.shadowColor = self.options[AMOptionsCellShadowColor];
 	self.badge.layer.cornerRadius = 8;
-	self.badge.layer.backgroundColor = [[UIColor blackColor] CGColor];
+	self.badge.layer.backgroundColor = [self.options[AMOptionsCellBadgeBackColor] CGColor];
 }
 
 - (UILabel*)badge

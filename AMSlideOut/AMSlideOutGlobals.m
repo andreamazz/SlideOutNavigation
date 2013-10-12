@@ -58,6 +58,16 @@ NSString *const AMOptionsTableBadgeHeight = @"AMOptionsTableBadgeHeight";
 NSString *const AMOptionsSlideShadowOffset = @"AMOptionsSlideShadowOffset";
 NSString *const AMOptionsSlideShadowOpacity = @"AMOptionsSlideShadowOpacity";
 NSString *const AMOptionsBadgeShowTotal = @"AMOptionsBadgeShowTotal";
+NSString *const AMOptionsBadgeGlobalFont = @"AMOptionsBadgeGlobalFont";
+NSString *const AMOptionsBadgeGlobalPositionX = @"AMOptionsBadgeGlobalPositionX";
+NSString *const AMOptionsBadgeGlobalPositionY = @"AMOptionsBadgeGlobalPositionY";
+NSString *const AMOptionsBadgeGlobalPositionW = @"AMOptionsBadgeGlobalPositionW";
+NSString *const AMOptionsBadgeGlobalPositionH = @"AMOptionsBadgeGlobalPositionH";
+NSString *const AMOptionsBadgeGlobalTextColor = @"AMOptionsBadgeGlobalTextColor";
+NSString *const AMOptionsBadgeGlobalBackColor = @"AMOptionsBadgeGlobalBackColor";
+NSString *const AMOptionsBadgeGlobalShadowColor = @"AMOptionsBadgeGlobalShadowColor";
+NSString *const AMOptionsCellBadgeFontColor = @"AMOptionsCellBadgeFontColor";
+NSString *const AMOptionsCellBadgeBackColor = @"AMOptionsCellBadgeBackColor";
 
 @implementation AMSlideOutGlobals
 
@@ -97,6 +107,8 @@ NSString *const AMOptionsBadgeShowTotal = @"AMOptionsBadgeShowTotal";
 			 AMOptionsCellShadowColor : [UIColor colorWithRed:0.21 green:0.15 blue:0.19 alpha:1.0],
 			 AMOptionsImageHeight : @(44),
 			 AMOptionsImageOffsetByY : @(0),
+			 AMOptionsCellBadgeFontColor : [UIColor whiteColor],
+			 AMOptionsCellBadgeBackColor : [UIColor blackColor],
 			 AMOptionsDisableMenuScroll: @NO,
 			 AMOptionsAnimationShrink : @YES,
 			 AMOptionsAnimationShrinkValue : @0.3,
@@ -113,7 +125,81 @@ NSString *const AMOptionsBadgeShowTotal = @"AMOptionsBadgeShowTotal";
 			 AMOptionsTableBadgeHeight: @20,
 			 AMOptionsSlideShadowOffset: @(-6),
 			 AMOptionsSlideShadowOpacity: @0.4,
-			 AMOptionsBadgeShowTotal: @NO
+			 AMOptionsBadgeShowTotal: @NO,
+			 AMOptionsBadgeGlobalFont: [UIFont systemFontOfSize:8],
+			 AMOptionsBadgeGlobalPositionX: @20,
+			 AMOptionsBadgeGlobalPositionY: @(-5),
+			 AMOptionsBadgeGlobalPositionW: @16,
+			 AMOptionsBadgeGlobalPositionH: @16,
+			 AMOptionsBadgeGlobalTextColor: [UIColor whiteColor],
+			 AMOptionsBadgeGlobalBackColor: [UIColor redColor],
+			 AMOptionsBadgeGlobalShadowColor: [UIColor clearColor]
+			 };
+}
+
++ (NSDictionary*)defaultFlatOptions
+{
+	CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
+	return @{
+			 AMOptionsTableOffestY : @(offsetY),
+			 AMOptionsEnableGesture : @(YES),
+			 AMOptionsEnableShadow : @(YES),
+			 AMOptionsSetButtonDone : @(NO),
+			 AMOptionsUseBorderedButton : @(NO),
+			 AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlideBlack.png"],
+			 AMOptionsUseDefaultTitles : @(YES),
+			 AMOptionsSlideValue : @(270),
+			 AMOptionsBackground : [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0],
+			 AMOptionsSelectionBackground : [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0],
+			 AMOptionsImagePadding : @(50),
+			 AMOptionsImageLeftPadding : @(0),
+			 AMOptionsTextPadding : @(20),
+			 AMOptionsBadgePosition : @(220),
+			 AMOptionsHeaderHeight : @(22),
+			 AMOptionsHeaderFont : [UIFont systemFontOfSize:13],
+			 AMOptionsHeaderFontColor : [UIColor blackColor],
+			 AMOptionsHeaderShadowColor : [UIColor clearColor],
+			 AMOptionsHeaderPadding : @(10),
+			 AMOptionsHeaderGradientUp :  [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0],
+			 AMOptionsHeaderGradientDown : [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0],
+			 AMOptionsHeaderSeparatorUpper : [UIColor clearColor],
+			 AMOptionsHeaderSeparatorLower : [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0],
+			 AMOptionsCellFont : [UIFont systemFontOfSize:14],
+			 AMOptionsCellBadgeFont : [UIFont systemFontOfSize:10],
+			 AMOptionsCellBadgeFontColor : [UIColor whiteColor],
+			 AMOptionsCellBadgeBackColor : [UIColor blackColor],
+			 AMOptionsCellFontColor : [UIColor blackColor],
+			 AMOptionsCellBackground : [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0],
+			 AMOptionsCellSeparatorUpper : [UIColor clearColor],
+			 AMOptionsCellSeparatorLower : [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0],
+			 AMOptionsCellShadowColor : [UIColor clearColor],
+			 AMOptionsImageHeight : @(44),
+			 AMOptionsImageOffsetByY : @(0),
+			 AMOptionsDisableMenuScroll: @NO,
+			 AMOptionsAnimationShrink : @YES,
+			 AMOptionsAnimationShrinkValue : @0.3,
+			 AMOptionsAnimationDarken : @YES,
+			 AMOptionsAnimationDarkenValue : @0.7,
+			 AMOptionsAnimationDarkenColor : [UIColor blackColor],
+			 AMOptionsAnimationSlide : @NO,
+			 AMOptionsAnimationSlidePercentage : @0.3f,
+			 AMOptionsTableHeaderClass: @"AMSlideTableHeader",
+			 AMOptionsTableCellClass: @"AMSlideTableCell",
+			 AMOptionsTableCellHeight: @44,
+			 AMOptionsTableIconMaxSize: @44,
+			 AMOptionsSlideoutTime: @0.15,
+			 AMOptionsTableBadgeHeight: @20,
+			 AMOptionsSlideShadowOffset: @(-1),
+			 AMOptionsSlideShadowOpacity: @0.4,
+			 AMOptionsBadgeShowTotal: @NO,
+			 AMOptionsBadgeGlobalFont: [UIFont systemFontOfSize:8],
+			 AMOptionsBadgeGlobalPositionX: @20,
+			 AMOptionsBadgeGlobalPositionY: @(-5),
+			 AMOptionsBadgeGlobalPositionW: @16,
+			 AMOptionsBadgeGlobalPositionH: @16,
+			 AMOptionsBadgeGlobalTextColor: [UIColor whiteColor],
+			 AMOptionsBadgeGlobalBackColor: [UIColor redColor],
+			 AMOptionsBadgeGlobalShadowColor: [UIColor clearColor]
 			 };
 }
 

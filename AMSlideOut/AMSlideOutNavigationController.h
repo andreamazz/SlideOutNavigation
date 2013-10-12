@@ -46,10 +46,30 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 
 @property (weak, nonatomic) id<AMSlideOutAccessibilityDelegate>  accessibilityDelegate;
 
+/**-----------------------------------------------------------------------------
+ * @name Instantiating AMSlideOutNavigationController
+ * -----------------------------------------------------------------------------
+ */
+
+/** Instantiate with a given array of menu items.
+ *
+ * @param items The items array.
+ */
 + (id)slideOutNavigationWithMenuItems:(NSArray*)items;
+
+/** Instantiate an empty menu */
 + (id)slideOutNavigation;
+
+/** Instantiate with a given array of menu items.
+ *
+ * @param items The items array.
+ */
 - (id)initWithMenuItems:(NSArray*)items;
 
+/** Setups the slideout options
+ *
+ * @param options The optiosn dictionary.
+ */
 - (void)setSlideoutOptions:(NSDictionary *)options;
 
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon;
@@ -65,13 +85,49 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 
 - (void)addSectionWithTitle:(NSString*)title;
 - (void)addSectionWithTitle:(NSString*)title andHeaderClassName:(NSString*)klass withHeight:(CGFloat)height;
+
+/** Sets the value for a specific menu item's badge
+ *
+ * If AMOptionsBadgeShowTotal is set to YES, the global badge will be updated with the
+ * badge count of each menu item, when applicable.
+ *
+ * @param value The string that will be displayed in the item's badge.
+ * @param tag	The tag number of the menu item.
+ */
 - (void)setBadgeValue:(NSString*)value forTag:(int)tag;
+
+/** Sets a custom value in the bar button's badge.
+ *
+ * Make sure that AMOptionsBadgeShowTotal is set to NO, or the value will be overriden when a new
+ * badge value is set for any menu item.
+ * Pass a nil value to hide the badge.
+ *
+ * @param value The string that will be displayed in the bar button's badge.
+ */
+- (void)setBadgeTotalValue:(NSString*)value;
+
+/** Opens the menu's tray */
 - (void)showSideMenu;
+
+/** Closes the menu's tray */
 - (void)hideSideMenu;
+
+/** Manually reloads the menu item's table */
 - (void)reloadTableView;
 
+/** Enables or disables the vertical scrolling of the slide menu.
+ *
+ * When the scroll is disabled, the value is ignored if the view's content size is greater
+ * then the table size
+ *
+ * @param enabled	The enabled/disabled boolean flag.
+ */
 - (void)setMenuScrollingEnabled:(BOOL)enabled;
 
+/** Sets a custom left bar button item
+ *
+ * @param barButton The custom UIBarButtonItem instance.
+ */
 - (void)setLeftBarButton:(UIBarButtonItem*)barButton;
 
 @end
