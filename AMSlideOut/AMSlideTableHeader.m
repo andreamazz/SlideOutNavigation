@@ -21,6 +21,8 @@
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
+    
 	self.titleLabel.backgroundColor = [UIColor clearColor];
 	self.titleLabel.font = self.options[AMOptionsHeaderFont];
 	self.titleLabel.textColor = self.options[AMOptionsHeaderFontColor];
