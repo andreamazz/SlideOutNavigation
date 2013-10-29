@@ -47,7 +47,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsSetButtonDone;
 FOUNDATION_EXPORT NSString *const AMOptionsUseBorderedButton;
 FOUNDATION_EXPORT NSString *const AMOptionsButtonIcon;
 FOUNDATION_EXPORT NSString *const AMOptionsTableBackground;
-FOUNDATION_EXPORT NSString *const AMOptionsTableOffestY;
+FOUNDATION_EXPORT NSString *const AMOptionsTableOffsetY;
 FOUNDATION_EXPORT NSString *const AMOptionsUseDefaultTitles;
 
 FOUNDATION_EXPORT NSString *const AMOptionsSlideValue;
