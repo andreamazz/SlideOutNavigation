@@ -37,6 +37,9 @@
 #define kSOSectionHeight	@"headerHeight"
 #define kSOItemIsAction		@"isAction"
 
+// This is to support prior versions where there was a typo in this option definition:
+#define AMOptionsTableOffestY AMOptionsTableOffsetY
+
 #ifndef SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #endif
