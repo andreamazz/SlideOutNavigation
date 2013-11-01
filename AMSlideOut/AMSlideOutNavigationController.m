@@ -227,7 +227,7 @@
 	[view setBackgroundColor:self.options[AMOptionsBackground]];
 	
 	// Table View setup
-	self.tableView = [[AMTableView alloc] initWithFrame:CGRectMake(0, [self.options[AMOptionsTableOffsetY] floatValue], [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 20)];
+	self.tableView = [[AMTableView alloc] initWithFrame:CGRectMake([self.options[AMOptionsTableInsetX] floatValue], [self.options[AMOptionsTableOffsetY] floatValue],[self.options[AMOptionsSlideValue] floatValue]-[self.options[AMOptionsTableInsetX] floatValue]*2, [[UIScreen mainScreen] bounds].size.height - 20)];
 	self.tableView.options = self.options;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.backgroundColor = self.options[AMOptionsBackground];
@@ -564,7 +564,7 @@
 						 // Slide the table
 						 if ([self.options[AMOptionsAnimationSlide] boolValue]) {
 							 CGRect tableFrame = self.tableView.frame;
-							 tableFrame.origin.x = 0;
+							 tableFrame.origin.x = [self.options[AMOptionsTableInsetX] floatValue];
 							 [self.tableView setFrame:tableFrame];
 						 }
 						 

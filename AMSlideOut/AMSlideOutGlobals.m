@@ -15,6 +15,7 @@ NSString *const AMOptionsUseBorderedButton = @"AMOptionsUseBorderedButton";
 NSString *const AMOptionsButtonIcon = @"AMOptionsButtonIcon";
 NSString *const AMOptionsTableBackground = @"AMOptionsTableBackground";
 NSString *const AMOptionsTableOffsetY = @"AMOptionsTableOffsetY";
+NSString *const AMOptionsTableInsetX = @"AMOptionsTableInsetX";
 NSString *const AMOptionsUseDefaultTitles = @"AMOptionsUseDefaultTitles";
 NSString *const AMOptionsSlideValue = @"AMOptionsSlideValue";
 NSString *const AMOptionsBackground = @"AMOptionsBackground";
@@ -76,6 +77,7 @@ NSString *const AMOptionsCellBadgeBackColor = @"AMOptionsCellBadgeBackColor";
 	CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
 	return @{
 			 AMOptionsTableOffsetY : @(offsetY),
+             AMOptionsTableInsetX : @(0),             
 			 AMOptionsEnableGesture : @(YES),
 			 AMOptionsEnableShadow : @(YES),
 			 AMOptionsSetButtonDone : @(NO),
@@ -142,6 +144,7 @@ NSString *const AMOptionsCellBadgeBackColor = @"AMOptionsCellBadgeBackColor";
 	CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
 	return @{
 			 AMOptionsTableOffsetY : @(offsetY),
+             AMOptionsTableInsetX : @(0),
 			 AMOptionsEnableGesture : @(YES),
 			 AMOptionsEnableShadow : @(YES),
 			 AMOptionsSetButtonDone : @(NO),

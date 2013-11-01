@@ -35,6 +35,8 @@
 		   AMOptionsAnimationSlidePercentage: @0.7f,
 		   AMOptionsEnableShadow : @YES,
 		   AMOptionsBadgeShowTotal: @YES,
+           // Want inset cell widths? uncomment and set size of gap that goes on both sides
+           //AMOptionsTableInsetX : @(10),
 		   // Want a custom cell? uncomment and use your own class that inherits from AMSlideTableCell
 		   //AMOptionsTableCellClass: @"CustomCell",
 		   AMOptionsHeaderFont : [UIFont systemFontOfSize:14]
