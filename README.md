@@ -1,6 +1,7 @@
 AMSlideOutNavigationController
 ==================
-[![Stories in Ready](https://badge.waffle.io/andreamazz/SlideOutNavigation.png?label=ready)](https://waffle.io/andreamazz/SlideOutNavigation)  
+[![Stories in Ready](https://badge.waffle.io/andreamazz/SlideOutNavigation.png?label=ready)](https://waffle.io/andreamazz/SlideOutNavigation) 
+[![Build Status](https://travis-ci.org/andreamazz/SlideOutNavigation.png)](https://travis-ci.org/andreamazz/SlideOutNavigation) 
 
 SlideOut Navigation Controller for iOS.
 This controller replicates the behaviour of the 'slide-out' navigation of applications like Facebook or Steam.
