@@ -1,5 +1,4 @@
 language: objective-c
-before_script:
-  - cd SlideOutSample
-xcode_sdk: iphonesimulator
-
+install:
+- cd SlideOutSample
+script: xctool -project SlideOutSample.xcodeproj -scheme 'SlideOutSample' -configuration Release -sdk iphonesimulator -arch i386 build
