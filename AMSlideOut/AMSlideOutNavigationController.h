@@ -68,9 +68,12 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 
 /** Setups the slideout options
  *
- * @param options The optiosn dictionary.
+ * @param options The options dictionary.
  */
 - (void)setSlideoutOptions:(NSDictionary *)options;
+
+/** Sets container view to a view controller without adding it to the menu  **/
+- (void)setContentViewController:(UIViewController *)controller;
 
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon;
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after;
