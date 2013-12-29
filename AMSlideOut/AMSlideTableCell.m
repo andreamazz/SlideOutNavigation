@@ -134,7 +134,27 @@
 
 - (void)drawRect:(CGRect)aRect
 {
-	[self setBackgroundColor:self.options[AMOptionsCellBackground]];
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	
+	CGContextSetFillColorWithColor(context, ((UIColor*)self.options[AMOptionsCellBackground]).CGColor);
+	CGContextFillRect(context, self.bounds);
+	
+	CGContextSetStrokeColorWithColor(context, ((UIColor*)self.options[AMOptionsCellSeparatorUpper]).CGColor);
+    CGContextBeginPath(context);
+	CGContextSetLineWidth(context, 2.0);
+    CGContextMoveToPoint(context, 0, 0);
+    CGContextAddLineToPoint(context, self.bounds.size.width, 0);
+    CGContextStrokePath(context);
+    
+	if([self.options[AMOptionsShowCellSeparatorLowerBeforeHeader] boolValue] == YES || [self isCellBeforeHeader] == NO)
+    {
+        CGContextSetStrokeColorWithColor(context, ((UIColor*)self.options[AMOptionsCellSeparatorLower]).CGColor);
+        CGContextBeginPath(context);
+        CGContextSetLineWidth(context, 2.0);
+        CGContextMoveToPoint(context, 0, self.bounds.size.height);
+        CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height);
+        CGContextStrokePath(context);
+    }
 	
 }
 

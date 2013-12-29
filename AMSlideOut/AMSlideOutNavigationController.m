@@ -127,7 +127,9 @@
 		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
 		item[kSOController] = controller;
 		item[kSOViewTitle] = title;
-		item[kSOViewIcon] = icon;
+		if (icon) {
+            item[kSOViewIcon] = icon;
+        }
 		if (before) {
 			item[kSOBeforeBlock] = [before copy];
 		}
@@ -155,6 +157,47 @@
 	} else {
 		NSLog(@"AMSlideOutNavigation: section index out of bounds");
 	}
+}
+
+- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section
+{
+	[self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                       toSection:section
+                    beforeChange:nil
+                  onCompletition:nil];
+}
+
+- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section  beforeChange:(void(^)())before onCompletition:(void(^)())after
+{
+    if([cls isSubclassOfClass:[UIViewController class]]) {
+        if (section < [self.menuItems count]) {
+            NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
+            item[kSOItemClass] = cls;
+            if(nibName) {
+                item[kSOItemNibName] = nibName;
+            }
+            item[kSOViewTitle] = title;
+            if (icon) {
+                item[kSOViewIcon] = icon;
+            }
+            if (before) {
+                item[kSOBeforeBlock] = [before copy];
+            }
+            if (after) {
+                item[kSOAfterBlock] = [after copy];
+            }
+            item[kSOViewTag] = @(tag);
+            [(self.menuItems)[section][kSOSection] addObject:item];
+        } else {
+            NSLog(@"AMSlideOutNavigation: section index out of bounds");
+        }
+    } else {
+        NSLog(@"AMSlideOutNavigation: controller class must be a subclass of UIViewController");
+    }
 }
 
 - (void)setBadgeValue:(NSString*)value forTag:(int)tag
@@ -216,6 +259,14 @@
     self.currentViewController = controller;
 }
 
+- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon {
+    [self addViewControllerClass:cls withNibName:nibName tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
+}
+
+- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after {
+    [self addViewControllerClass:cls withNibName:nibName tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1) beforeChange:before onCompletition:after];
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
 	[self.currentViewController.navigationController.navigationBar sizeToFit];
@@ -242,7 +293,8 @@
 	
 	// The content is displayed in a UINavigationController
 	self.contentController = [[self.navigationControllerClass alloc] initWithNavigationBarClass:self.navigationBarClass toolbarClass:self.navigationToolbarClass];
-	
+    self.contentController.navigationBar.translucent = NO;
+    
 	if ([self.options[AMOptionsEnableShadow] boolValue]) {
 		self.contentController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.contentController.view.bounds].CGPath;
 		self.contentController.view.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -322,6 +374,11 @@
 	} else {
 		[self switchToControllerTagged:self.startingControllerTag andPerformSelector:nil withObject:nil];
 	}
+    
+    id navbarImage = self.options[AMOptionsNavBarImage];
+    if([navbarImage isKindOfClass:[UIImage class]]) {
+        [[[self contentController] navigationBar] setBackgroundImage:navbarImage forBarMetrics:UIBarMetricsDefault];
+    }
 }
 
 - (UILabel*)badge
@@ -407,6 +464,13 @@
 		[selection setBackgroundColor:self.options[AMOptionsSelectionBackground]];
 		cell.selectedBackgroundView = selection;
 	}
+    
+    if([indexPath row] >= [(self.menuItems)[[indexPath section]][kSOSection] count] - 1 &&
+       [indexPath section] < [self.menuItems count] - 1) {
+        [(AMSlideTableCell*)cell setIsCellBeforeHeader:YES];
+    } else {
+        [(AMSlideTableCell*)cell setIsCellBeforeHeader:NO];
+	}
 	
 	((AMSlideTableCell*)cell).options = self.options;
 	cell.textLabel.text = dict[kSOViewTitle];
@@ -461,7 +525,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 	NSString* title = [self tableView:tableView titleForHeaderInSection:section];
-	if (title == nil) {
+	if (title == nil || [title isEqualToString:@""]) {
 		return 0;
 	}
 	// If the header has a specific height use that
@@ -481,6 +545,11 @@
 {
 	NSDictionary* dict = (self.menuItems)[indexPath.section][kSOSection][indexPath.row];
 	
+    if([dict[kSOViewTag] integerValue] == self.currentTag) {
+        [self hideSideMenu];
+        return;
+    }
+    
 	AMSlideOutBeforeHandler before = dict[kSOBeforeBlock];
 	if (before) {
 		before();
@@ -493,12 +562,26 @@
 		return;
 	}
 	
-	[self setContentViewController:dict[kSOController]];
+    UIViewController* newController = dict[kSOController];
+    if(dict[kSOItemClass] != nil) {
+        Class controllerClass = dict[kSOItemClass];
+        if([dict[kSOItemNibName] isKindOfClass:[NSString class]]) {
+            newController = (UIViewController*)[[controllerClass alloc] initWithNibName:dict[kSOItemNibName] bundle:nil];
+        } else {
+            newController = (UIViewController*)[controllerClass new];
+        }
+    }
+    
+    [self.contentController setViewControllers:@[newController]];
+    [newController.navigationItem setLeftBarButtonItem:self.barButton];
+    self.currentViewController = newController;
+    _currentTag = [dict[kSOViewTag] integerValue];
+    
 	if ([self.options[AMOptionsUseDefaultTitles] boolValue]) {
-		[dict[kSOController] setTitle:dict[kSOViewTitle]];
+		[newController setTitle:dict[kSOViewTitle]];
 	}
     [self hideSideMenu];
-	AMSlideOutBeforeHandler after = dict[kSOAfterBlock];
+	AMSlideOutCompletionHandler after = dict[kSOAfterBlock];
 	if (after) {
 		after();
 	}
@@ -535,6 +618,29 @@
 	}
 }
 
+- (id)getControllerWithTag:(int)tag {
+    for (NSDictionary* section in self.menuItems) {
+		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
+			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
+                if(item[kSOController]) {
+                    return item[kSOController];
+                } else {
+                    return item[kSOItemClass];
+                }
+			}
+		}
+	}
+    return nil;
+}
+
+- (void)disableGesture {
+    [[self options] setObject:[NSNumber numberWithBool:NO] forKey:AMOptionsEnableGesture];
+}
+
+- (void)enableGesture {
+    [[self options] setObject:[NSNumber numberWithBool:YES] forKey:AMOptionsEnableGesture];
+}
+
 - (void)toggleMenu
 {
 	if (self.menuVisible) {
@@ -546,6 +652,7 @@
 
 - (void)showSideMenu
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_WILL_SHOW object:self];
     [UIView animateWithDuration:[self.options[AMOptionsSlideoutTime] floatValue]
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -581,6 +688,7 @@
 						 if ([self.options[AMOptionsSetButtonDone] boolValue]) {
 							 [self.barButton setStyle:UIBarButtonItemStyleDone];
 						 }
+                         [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_DID_SHOW object:self];
 					 }];
 	
 }
@@ -589,6 +697,7 @@
 {
     // this animates the view back to the left before telling the app delegate to swap out the MenuViewController
     // it tells the app delegate using the completion block of the animation
+    [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_WILL_HIDE object:self];
     [UIView animateWithDuration:[self.options[AMOptionsSlideoutTime] floatValue]
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -624,6 +733,7 @@
 						 self.menuVisible = NO;
 						 [self.tableView setScrollsToTop:NO];
 						 [self.barButton setStyle:UIBarButtonItemStylePlain];
+                         [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_DID_HIDE object:self];
 					 }];
 }
 
