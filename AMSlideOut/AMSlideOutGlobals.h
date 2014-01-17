@@ -36,6 +36,8 @@
 #define kSOSectionClass		@"headerClass"
 #define kSOSectionHeight	@"headerHeight"
 #define kSOItemIsAction		@"isAction"
+#define kSOItemClass        @"itemClass"
+#define kSOItemNibName      @"itemNibName"
 
 // This is to support prior versions where there was a typo in this option definition:
 #define AMOptionsTableOffestY AMOptionsTableOffsetY
@@ -49,6 +51,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsEnableShadow;
 FOUNDATION_EXPORT NSString *const AMOptionsSetButtonDone;
 FOUNDATION_EXPORT NSString *const AMOptionsUseBorderedButton;
 FOUNDATION_EXPORT NSString *const AMOptionsButtonIcon;
+FOUNDATION_EXPORT NSString *const AMOptionsNavBarImage;
 FOUNDATION_EXPORT NSString *const AMOptionsTableBackground;
 FOUNDATION_EXPORT NSString *const AMOptionsTableOffsetY;
 FOUNDATION_EXPORT NSString *const AMOptionsTableInsetX;
@@ -74,6 +77,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeFont;
 FOUNDATION_EXPORT NSString *const AMOptionsCellBackground;
 FOUNDATION_EXPORT NSString *const AMOptionsCellSeparatorUpper;
 FOUNDATION_EXPORT NSString *const AMOptionsCellSeparatorLower;
+FOUNDATION_EXPORT NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader;
 FOUNDATION_EXPORT NSString *const AMOptionsCellShadowColor;
 
 FOUNDATION_EXPORT NSString *const AMOptionsImagePadding;
@@ -116,6 +120,13 @@ FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalBackColor;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalShadowColor;
 FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeFontColor;
 FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeBackColor;
+
+// Notifications
+
+#define SLIDEOUT_MENU_WILL_SHOW     @"SlideOutMenuWillShowed"
+#define SLIDEOUT_MENU_DID_SHOW      @"SlideOutMenuDidShowed"
+#define SLIDEOUT_MENU_WILL_HIDE     @"SlideOutMenuWillHide"
+#define SLIDEOUT_MENU_DID_HIDE      @"SlideOutMenuDidHide"
 
 @class AMSlideTableHeader;
 
