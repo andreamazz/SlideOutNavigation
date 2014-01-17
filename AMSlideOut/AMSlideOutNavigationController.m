@@ -652,7 +652,7 @@
 
 - (void)showSideMenu
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_WILL_SHOW object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAMSlideOutMenuWillShow object:self];
     [UIView animateWithDuration:[self.options[AMOptionsSlideoutTime] floatValue]
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -688,7 +688,7 @@
 						 if ([self.options[AMOptionsSetButtonDone] boolValue]) {
 							 [self.barButton setStyle:UIBarButtonItemStyleDone];
 						 }
-                         [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_DID_SHOW object:self];
+                         [[NSNotificationCenter defaultCenter] postNotificationName:kAMSlideOutDidShow object:self];
 					 }];
 	
 }
@@ -697,7 +697,7 @@
 {
     // this animates the view back to the left before telling the app delegate to swap out the MenuViewController
     // it tells the app delegate using the completion block of the animation
-    [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_WILL_HIDE object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAMSlideOutWillHide object:self];
     [UIView animateWithDuration:[self.options[AMOptionsSlideoutTime] floatValue]
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -733,7 +733,7 @@
 						 self.menuVisible = NO;
 						 [self.tableView setScrollsToTop:NO];
 						 [self.barButton setStyle:UIBarButtonItemStylePlain];
-                         [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_DID_HIDE object:self];
+                         [[NSNotificationCenter defaultCenter] postNotificationName:kAMSlideOutDidHide object:self];
 					 }];
 }
 

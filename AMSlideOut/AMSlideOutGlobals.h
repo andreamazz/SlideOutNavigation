@@ -123,10 +123,10 @@ FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeBackColor;
 
 // Notifications
 
-#define SLIDEOUT_MENU_WILL_SHOW     @"SlideOutMenuWillShowed"
-#define SLIDEOUT_MENU_DID_SHOW      @"SlideOutMenuDidShowed"
-#define SLIDEOUT_MENU_WILL_HIDE     @"SlideOutMenuWillHide"
-#define SLIDEOUT_MENU_DID_HIDE      @"SlideOutMenuDidHide"
+#define kAMSlideOutMenuWillShow     @"SlideOutMenuWillShow"
+#define kAMSlideOutDidShow			@"SlideOutMenuDidShow"
+#define kAMSlideOutWillHide			@"SlideOutMenuWillHide"
+#define kAMSlideOutDidHide			@"SlideOutMenuDidHide"
 
 @class AMSlideTableHeader;
 
