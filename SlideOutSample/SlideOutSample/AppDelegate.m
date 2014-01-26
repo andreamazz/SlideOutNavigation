@@ -65,9 +65,10 @@
 	// Add a second section
 	[self.slideoutController addSectionWithTitle:@"SECOND SECTION"];
 
-	// Add two viewcontrollers to the second section
-	controller = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
-	[self.slideoutController addViewControllerToLastSection:controller
+	// Add two viewcontrollers to the second section (with lazy initialization)
+    
+	[self.slideoutController addViewControllerClassToLastSection:[FirstViewController class]
+                                                withNibName:@"FirstViewController"
 													 tagged:3
 												  withTitle:@"First View"
 													andIcon:[UIImage imageNamed:icon1]
@@ -77,8 +78,7 @@
 												   NSLog(@"Done");
 											   }];
 	
-	controller = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
-	[self.slideoutController addViewControllerToLastSection:controller tagged:4 withTitle:@"Second View" andIcon:icon2];
+	[self.slideoutController addViewControllerClassToLastSection:[SecondViewController class] withNibName:@"SecondViewController" tagged:4 withTitle:@"Second View" andIcon:icon2];
 	
 	/* To use a custom header: */
 //	[self.slideoutController addSectionWithTitle:@"" andHeaderClassName:@"CustomHeader" withHeight:5];

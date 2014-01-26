@@ -1,6 +1,6 @@
 AMSlideOutNavigationController
 ==================
-[![Stories in Ready](https://badge.waffle.io/andreamazz/SlideOutNavigation.png?label=ready)](https://waffle.io/andreamazz/SlideOutNavigation) 
+[![Cocoapods](https://cocoapod-badges.herokuapp.com/v/AMSlideOutController/badge.png)](http://beta.cocoapods.org/?q=amslideoutcontroller)
 [![Build Status](https://travis-ci.org/andreamazz/SlideOutNavigation.png)](https://travis-ci.org/andreamazz/SlideOutNavigation) 
 
 SlideOut Navigation Controller for iOS.

@@ -33,4 +33,6 @@
 
 - (void)setBadgeText:(NSString*)text;
 
+@property (nonatomic, assign) BOOL isCellBeforeHeader;
+
 @end
