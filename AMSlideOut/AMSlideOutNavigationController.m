@@ -60,7 +60,7 @@
 {
 	self = [super init];
 	if (self) {
-		[self commonInitialization];		
+		[self commonInitialization];
 		_menuItems = [[NSMutableArray alloc] init];
 	}
 	return self;
@@ -211,7 +211,7 @@
 			count += [item[kSOViewBadge] intValue];
 		}
 	}
-
+	
 	if ([self.options[AMOptionsBadgeShowTotal] boolValue]) {
 		if (count != 0) {
 			[self.badge setText:[NSString stringWithFormat:@"%d", count]];
@@ -259,11 +259,13 @@
     self.currentViewController = controller;
 }
 
-- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon {
+- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon
+{
     [self addViewControllerClass:cls withNibName:nibName tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
 }
 
-- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after {
+- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after
+{
     [self addViewControllerClass:cls withNibName:nibName tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1) beforeChange:before onCompletition:after];
 }
 
@@ -278,8 +280,9 @@
 	[view setBackgroundColor:self.options[AMOptionsBackground]];
 	
 	// Table View setup
-	self.tableView = [[AMTableView alloc] initWithFrame:CGRectMake([self.options[AMOptionsTableInsetX] floatValue], [self.options[AMOptionsTableOffsetY] floatValue],[self.options[AMOptionsSlideValue] floatValue]-[self.options[AMOptionsTableInsetX] floatValue]*2, SCREEN_HEIGHT - 20)];
+	self.tableView = [[AMTableView alloc] initWithFrame:CGRectMake([self.options[AMOptionsTableInsetX] floatValue], [self.options[AMOptionsTableOffsetY] floatValue],[self.options[AMOptionsSlideValue] floatValue]-[self.options[AMOptionsTableInsetX] floatValue]*2, [[UIScreen mainScreen] bounds].size.height - 20)];
 	self.tableView.options = self.options;
+	self.tableView.autoresizingMask = ~UIViewAutoresizingFlexibleBottomMargin;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.backgroundColor = self.options[AMOptionsBackground];
 	[self.tableView setScrollsToTop:NO];
@@ -314,7 +317,6 @@
 	[view addSubview:self.contentController.view];
 	
 	self.view = view;
-    
 }
 
 - (void)viewDidLoad
@@ -345,7 +347,7 @@
 		UIView *buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 22)];
 		[buttonContainer addSubview:button];
 		self.barButton = [[UIBarButtonItem alloc] initWithCustomView:buttonContainer];
-
+		
         accessibilityObject = button;
 	}
 	
@@ -407,7 +409,7 @@
 		_badge.layer.backgroundColor = [self.options[AMOptionsBadgeGlobalBackColor] CGColor];
 		[self.barButton.customView addSubview:_badge];
 	}
-
+	
 	return _badge;
 }
 
@@ -525,7 +527,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 	NSString* title = [self tableView:tableView titleForHeaderInSection:section];
-	if (title == nil || [title isEqualToString:@""]) {
+	if (title == nil) {
 		return 0;
 	}
 	// If the header has a specific height use that
@@ -545,11 +547,6 @@
 {
 	NSDictionary* dict = (self.menuItems)[indexPath.section][kSOSection][indexPath.row];
 	
-    if([dict[kSOViewTag] integerValue] == self.currentTag) {
-        [self hideSideMenu];
-        return;
-    }
-    
 	AMSlideOutBeforeHandler before = dict[kSOBeforeBlock];
 	if (before) {
 		before();
@@ -572,9 +569,7 @@
         }
     }
     
-    [self.contentController setViewControllers:@[newController]];
-    [newController.navigationItem setLeftBarButtonItem:self.barButton];
-    self.currentViewController = newController;
+	[self setContentViewController:newController];
     _currentTag = [dict[kSOViewTag] integerValue];
     
 	if ([self.options[AMOptionsUseDefaultTitles] boolValue]) {
@@ -618,7 +613,8 @@
 	}
 }
 
-- (id)getControllerWithTag:(int)tag {
+- (id)getControllerWithTag:(int)tag
+{
     for (NSDictionary* section in self.menuItems) {
 		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
 			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
@@ -633,11 +629,13 @@
     return nil;
 }
 
-- (void)disableGesture {
+- (void)disableGesture
+{
     [[self options] setObject:[NSNumber numberWithBool:NO] forKey:AMOptionsEnableGesture];
 }
 
-- (void)enableGesture {
+- (void)enableGesture
+{
     [[self options] setObject:[NSNumber numberWithBool:YES] forKey:AMOptionsEnableGesture];
 }
 
@@ -846,6 +844,11 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
+	self.tableView.frame = (CGRect){
+		[self.options[AMOptionsTableInsetX] floatValue],
+		[self.options[AMOptionsTableOffsetY] floatValue],
+		[self.options[AMOptionsSlideValue] floatValue]-[self.options[AMOptionsTableInsetX] floatValue]*2,
+		SCREEN_HEIGHT - 20};
 	[self setMenuScrollingEnabled:![self.options[AMOptionsDisableMenuScroll] boolValue]];
 }
 
