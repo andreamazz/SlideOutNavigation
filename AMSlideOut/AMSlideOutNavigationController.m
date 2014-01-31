@@ -342,11 +342,9 @@
 		UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
 		[button setImage:self.options[AMOptionsButtonIcon] forState:UIControlStateNormal];
 		[button setFrame:CGRectMake(0, 0, 44, 22)];
+		button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
 		[button addTarget:self action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
-		// Adding the button as subview to an UIView prevents the touch area to be too wide
-		UIView *buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 22)];
-		[buttonContainer addSubview:button];
-		self.barButton = [[UIBarButtonItem alloc] initWithCustomView:buttonContainer];
+		self.barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
 		
         accessibilityObject = button;
 	}
