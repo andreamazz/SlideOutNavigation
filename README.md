@@ -275,6 +275,10 @@ The icon must be 44x44. Blank icon name will result in a row with only text, wit
 Changelog 
 ==================
 
+v1.8
+--------------------
+- Added lazy instantiation of view controllers. Thanks to [mixalich7b](https://github.com/mixalich7b)
+
 v1.7.5
 --------------------
 - Added global badge on the tray button.
