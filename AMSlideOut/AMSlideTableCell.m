@@ -114,7 +114,7 @@
 #pragma clang diagnostic pop
 		}
 #else
-		fontSize = [text sizeWithFont:self.options[AMOptionsCellBadgeFont]];
+		fontSize = [text sizeWithAttributes:self.options[AMOptionsCellBadgeFont]];
 #endif
 		float y = [self.options[AMOptionsTableCellHeight] floatValue] / 2 - [self.options[AMOptionsTableBadgeHeight] floatValue] / 2;
 		CGRect badgeFrame = CGRectMake([self.options[AMOptionsBadgePosition] floatValue] - (fontSize.width + 15.0) / 2.0,
