@@ -71,6 +71,7 @@ NSString *const AMOptionsCellBadgeFontColor = @"AMOptionsCellBadgeFontColor";
 NSString *const AMOptionsCellBadgeBackColor = @"AMOptionsCellBadgeBackColor";
 NSString *const AMOptionsNavBarImage = @"AMOptionsNavBarImage";
 NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCellSeparatorLowerBeforeHeader";
+NSString *const AMOptionsNavbarTranslucent = @"AMOptionsNavbarTranslucent";
 
 @implementation AMSlideOutGlobals
 
@@ -93,6 +94,7 @@ NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCel
 			 AMOptionsImageLeftPadding : @(0),
 			 AMOptionsTextPadding : @(20),
 			 AMOptionsBadgePosition : @(220),
+			 AMOptionsNavbarTranslucent: @NO,
 			 AMOptionsHeaderHeight : @(22),
 			 AMOptionsHeaderFont : [UIFont fontWithName:@"Helvetica" size:13],
 			 AMOptionsHeaderFontColor : [UIColor colorWithRed:0.49 green:0.50 blue:0.57 alpha:1.0],
@@ -163,6 +165,7 @@ NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCel
 			 AMOptionsTextPadding : @(20),
 			 AMOptionsBadgePosition : @(220),
 			 AMOptionsHeaderHeight : @(22),
+			 AMOptionsNavbarTranslucent: @NO,
 			 AMOptionsHeaderFont : [UIFont systemFontOfSize:13],
 			 AMOptionsHeaderFontColor : [UIColor blackColor],
 			 AMOptionsHeaderShadowColor : [UIColor clearColor],

@@ -257,6 +257,12 @@
 	[self.contentController setViewControllers:@[controller]];
     [controller.navigationItem setLeftBarButtonItem:self.barButton];
     self.currentViewController = controller;
+	if (self.contentController.navigationBar.translucent) {
+		if ([self.currentViewController respondsToSelector:@selector(edgesForExtendedLayout)]) {
+			self.currentViewController.edgesForExtendedLayout = UIRectEdgeNone;
+		}
+	}
+
 }
 
 - (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon
@@ -296,7 +302,7 @@
 	
 	// The content is displayed in a UINavigationController
 	self.contentController = [[self.navigationControllerClass alloc] initWithNavigationBarClass:self.navigationBarClass toolbarClass:self.navigationToolbarClass];
-    self.contentController.navigationBar.translucent = NO;
+    self.contentController.navigationBar.translucent = [self.options[AMOptionsNavbarTranslucent] boolValue];
     
 	if ([self.options[AMOptionsEnableShadow] boolValue]) {
 		self.contentController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.contentController.view.bounds].CGPath;

@@ -140,6 +140,7 @@ AMOptionsBadgeGlobalPositionH     // @(float), The global bages's height. Defaul
 AMOptionsBadgeGlobalTextColor     // @(UIColor), The glboal badge's text color. Defaults to white
 AMOptionsBadgeGlobalBackColor     // @(UIColor), The glboal badge's background color. Defaults to red
 AMOptionsBadgeGlobalShadowColor   // @(UIColor), The glboal badge's text shadow color. Defaults to a clear color
+AMOptionsNavbarTranslucent        // @(BOOL), The navbar translucent state. Defaults to @NO
 ```
 
 sample usage:
