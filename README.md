@@ -13,7 +13,7 @@ Part of the code is based off [this blog post made by Nick Harris](http://nickha
 
 Screenshot
 --------------------
-![SlideOutNavigation](http://www.eflatgames.com/github/slideoutios7.png) ![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut130413.png)
+![AMSlideOutNavigationController](https://raw.githubusercontent.com/andreamazz/SlideOutNavigation/master/screenshot.png)
 
 
 Setup with Cocoapods
@@ -224,7 +224,7 @@ If you use Storyboard you can easily integrate AMSlideOutNavigationController wi
 
 Just set a Storyboard ID for each of your ViewController that will become a root element of the navigation tree:
 
-![SlideOutNavigationStoryboard](http://www.eflatgames.com/github/AMSlideOutStory.png)
+![SlideOutNavigationStoryboard](https://raw.githubusercontent.com/andreamazz/SlideOutNavigation/master/storyboard.png)
 
 then instantiate your ViewControllers in your AppDelegate like this:
 
