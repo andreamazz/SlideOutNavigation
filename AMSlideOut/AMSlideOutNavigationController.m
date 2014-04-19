@@ -10,18 +10,21 @@
 #import "AMSlideTableCell.h"
 #import "AMSlideTableHeader.h"
 
+#define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
+
 @interface AMSlideOutNavigationController ()
 
-@property (strong, nonatomic)	NSMutableDictionary*	options;
-@property (strong, nonatomic)	AMTableView*			tableView;
-@property BOOL											menuVisible;
-@property (strong, nonatomic)	UIView*					overlayView;
-@property (strong, nonatomic)	UIView*					darkView;
-@property (strong, nonatomic)	UIBarButtonItem*		barButton;
-@property (strong, nonatomic)	UITapGestureRecognizer*	tapGesture;
-@property (strong, nonatomic)	UIPanGestureRecognizer*	panGesture;
+@property (strong, nonatomic)	NSMutableDictionary     *options;
+@property (strong, nonatomic)	AMTableView             *tableView;
+@property (strong, nonatomic)	UIView					*overlayView;
+@property (strong, nonatomic)	UIView					*darkView;
+@property (strong, nonatomic)	UIBarButtonItem         *barButton;
+@property (strong, nonatomic)	UITapGestureRecognizer	*tapGesture;
+@property (strong, nonatomic)	UIPanGestureRecognizer	*panGesture;
+@property (strong, nonatomic)	UILabel                 *badge;
+@property (assign, nonatomic)   BOOL                    menuVisible;
 @property (assign, nonatomic)   BOOL                    viewHasBeenShownOnce;
-@property (strong, nonatomic)	UILabel*				badge;
 
 @end
 
@@ -282,11 +285,11 @@
 
 - (void)loadView
 {
-	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 	[view setBackgroundColor:self.options[AMOptionsBackground]];
 	
 	// Table View setup
-	self.tableView = [[AMTableView alloc] initWithFrame:CGRectMake([self.options[AMOptionsTableInsetX] floatValue], [self.options[AMOptionsTableOffsetY] floatValue],[self.options[AMOptionsSlideValue] floatValue]-[self.options[AMOptionsTableInsetX] floatValue]*2, [[UIScreen mainScreen] bounds].size.height - 20)];
+	self.tableView = [[AMTableView alloc] initWithFrame:[self tableRect]];
 	self.tableView.options = self.options;
 	self.tableView.autoresizingMask = ~UIViewAutoresizingFlexibleBottomMargin;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -295,7 +298,7 @@
     
 	// Dark view
 	self.darkView = [[UIView alloc] initWithFrame:
-					 CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)
+					 CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
 					 ];
 	[self.darkView setBackgroundColor:self.options[AMOptionsAnimationDarkenColor]];
 	[self.darkView setAlpha:0];
@@ -378,7 +381,7 @@
 		[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
 		[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 	} else {
-		[self switchToControllerTagged:self.startingControllerTag andPerformSelector:nil withObject:nil];
+		[self switchToControllerTagged:(int)self.startingControllerTag andPerformSelector:nil withObject:nil];
 	}
     
     id navbarImage = self.options[AMOptionsNavBarImage];
@@ -422,9 +425,22 @@
 	[super viewWillAppear:animated];
 }
 
+- (CGRect)tableRect
+{
+    return (CGRect){
+        (CGPoint){
+            [self.options[AMOptionsTableInsetX] floatValue],
+            [self.options[AMOptionsTableOffsetY] floatValue]
+        }, (CGSize) {
+            [self.options[AMOptionsSlideValue] floatValue]-[self.options[AMOptionsTableInsetX] floatValue]*2,
+            SCREEN_HEIGHT - 20}
+    };
+}
+
 - (void)viewDidLayoutSubviews
 {
     [self setMenuScrollingEnabled:![self.options[AMOptionsDisableMenuScroll] boolValue]];
+    self.tableView.frame = [self tableRect];
 }
 
 - (void)setMenuItems:(NSArray *)menuItems
@@ -601,8 +617,8 @@
 	for (NSDictionary* section in self.menuItems) {
 		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
 			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
-				int sectionIndex = [self.menuItems indexOfObject:section];
-				int rowIndex = [[section objectForKey:kSOSection] indexOfObject:item];
+				int sectionIndex = (int)[self.menuItems indexOfObject:section];
+				int rowIndex = (int)[[section objectForKey:kSOSection] indexOfObject:item];
 				[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex] animated:YES scrollPosition:UITableViewScrollPositionNone];
 				[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex]];
 #pragma clang diagnostic push
@@ -848,11 +864,7 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	self.tableView.frame = (CGRect){
-		[self.options[AMOptionsTableInsetX] floatValue],
-		[self.options[AMOptionsTableOffsetY] floatValue],
-		[self.options[AMOptionsSlideValue] floatValue]-[self.options[AMOptionsTableInsetX] floatValue]*2,
-		SCREEN_HEIGHT - 20};
+    self.tableView.frame = [self tableRect];
 	[self setMenuScrollingEnabled:![self.options[AMOptionsDisableMenuScroll] boolValue]];
 }
 

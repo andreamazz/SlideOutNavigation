@@ -79,9 +79,6 @@
 											   }];
 	
 	[self.slideoutController addViewControllerClassToLastSection:[SecondViewController class] withNibName:@"SecondViewController" tagged:4 withTitle:@"Second View" andIcon:icon2];
-	[self.slideoutController addViewControllerClassToLastSection:[SecondViewController class] withNibName:@"SecondViewController" tagged:4 withTitle:@"Second View" andIcon:icon2];
-	[self.slideoutController addViewControllerClassToLastSection:[SecondViewController class] withNibName:@"SecondViewController" tagged:4 withTitle:@"Second View" andIcon:icon2];
-	[self.slideoutController addViewControllerClassToLastSection:[SecondViewController class] withNibName:@"SecondViewController" tagged:4 withTitle:@"Second View" andIcon:icon2];
 
 	/* To use a custom header: */
 //	[self.slideoutController addSectionWithTitle:@"" andHeaderClassName:@"CustomHeader" withHeight:5];
