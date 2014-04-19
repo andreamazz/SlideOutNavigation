@@ -72,6 +72,7 @@ NSString *const AMOptionsCellBadgeBackColor = @"AMOptionsCellBadgeBackColor";
 NSString *const AMOptionsNavBarImage = @"AMOptionsNavBarImage";
 NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCellSeparatorLowerBeforeHeader";
 NSString *const AMOptionsNavbarTranslucent = @"AMOptionsNavbarTranslucent";
+NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
 
 @implementation AMSlideOutGlobals
 
@@ -80,6 +81,7 @@ NSString *const AMOptionsNavbarTranslucent = @"AMOptionsNavbarTranslucent";
 	CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
 	return @{
 			 AMOptionsTableOffsetY : @(offsetY),
+             AMOptionsContentInsetTop : @0,
              AMOptionsTableInsetX : @(0),             
 			 AMOptionsEnableGesture : @(YES),
 			 AMOptionsEnableShadow : @(YES),
@@ -150,6 +152,7 @@ NSString *const AMOptionsNavbarTranslucent = @"AMOptionsNavbarTranslucent";
 	CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
 	return @{
 			 AMOptionsTableOffsetY : @(offsetY),
+             AMOptionsContentInsetTop : @0,
              AMOptionsTableInsetX : @(0),
 			 AMOptionsEnableGesture : @(YES),
 			 AMOptionsEnableShadow : @(YES),

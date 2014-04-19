@@ -295,6 +295,8 @@
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.backgroundColor = self.options[AMOptionsBackground];
 	[self.tableView setScrollsToTop:NO];
+        
+    self.tableView.contentInset = UIEdgeInsetsMake([self.options[AMOptionsContentInsetTop] floatValue], 0, 0, 0);
     
 	// Dark view
 	self.darkView = [[UIView alloc] initWithFrame:
@@ -433,7 +435,7 @@
             [self.options[AMOptionsTableOffsetY] floatValue]
         }, (CGSize) {
             [self.options[AMOptionsSlideValue] floatValue]-[self.options[AMOptionsTableInsetX] floatValue]*2,
-            SCREEN_HEIGHT - 20}
+            SCREEN_HEIGHT - [self.options[AMOptionsTableOffsetY] floatValue]}
     };
 }
 

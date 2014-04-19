@@ -24,14 +24,6 @@ Setup with Cocoapods
 * Import ```AMSlideOutNavigationController.h``` in your AppDelegate
 * Init ```AMSlideOutNavigationController```  using the data structure as follows.
 
-Setup without Cocoapods
---------------------
-* Clone this repo
-* Add the ```AMSlideOut``` folder to your project
-* Link against ```QuartzCore``` framework
-* Import ```AMSlideOutNavigationController.h``` in your AppDelegate
-* Init ```AMSlideOutNavigationController```  using the data structure as follows.
-
 Init data
 --------------------
 The ViewControllers presented by the SlideOut navigation are arranged in sections and rows of a UITableView.
@@ -142,6 +134,7 @@ AMOptionsBadgeGlobalTextColor     // @(UIColor), The glboal badge's text color. 
 AMOptionsBadgeGlobalBackColor     // @(UIColor), The glboal badge's background color. Defaults to red
 AMOptionsBadgeGlobalShadowColor   // @(UIColor), The glboal badge's text shadow color. Defaults to a clear color
 AMOptionsNavbarTranslucent        // @(BOOL), The navbar translucent state. Defaults to @NO
+AMOptionsContentInsetTop          // @(float), The top content inset of the table view. Defaults to @0
 ```
 
 sample usage:

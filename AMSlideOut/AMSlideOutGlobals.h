@@ -123,6 +123,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalShadowColor;
 FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeFontColor;
 FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeBackColor;
 FOUNDATION_EXPORT NSString *const AMOptionsNavbarTranslucent;
+FOUNDATION_EXPORT NSString *const AMOptionsContentInsetTop;
 
 // Notifications
 
