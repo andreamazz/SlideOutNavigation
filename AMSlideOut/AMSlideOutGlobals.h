@@ -24,20 +24,21 @@
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#define kSOViewTitle		@"title"
-#define kSOController		@"controller"
-#define kSOViewIcon			@"icon"
-#define kSOViewTag			@"tag"
-#define kSOViewBadge		@"badge"
-#define kSOSection			@"section"
-#define kSOBeforeBlock		@"before"
-#define kSOAfterBlock		@"after"
-#define kSOSectionTitle		@"title"
-#define kSOSectionClass		@"headerClass"
-#define kSOSectionHeight	@"headerHeight"
-#define kSOItemIsAction		@"isAction"
-#define kSOItemClass        @"itemClass"
-#define kSOItemNibName      @"itemNibName"
+#define kSOViewTitle            @"title"
+#define kSOController           @"controller"
+#define kSOViewIcon             @"icon"
+#define kSOViewSelectionIcon    @"selectionIcon"
+#define kSOViewTag              @"tag"
+#define kSOViewBadge            @"badge"
+#define kSOSection              @"section"
+#define kSOBeforeBlock          @"before"
+#define kSOAfterBlock           @"after"
+#define kSOSectionTitle         @"title"
+#define kSOSectionClass         @"headerClass"
+#define kSOSectionHeight        @"headerHeight"
+#define kSOItemIsAction         @"isAction"
+#define kSOItemClass            @"itemClass"
+#define kSOItemNibName          @"itemNibName"
 
 // This is to support prior versions where there was a typo in this option definition:
 #define AMOptionsTableOffestY AMOptionsTableOffsetY
@@ -75,6 +76,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsHeaderSeparatorLower;
 
 FOUNDATION_EXPORT NSString *const AMOptionsCellFont;
 FOUNDATION_EXPORT NSString *const AMOptionsCellFontColor;
+FOUNDATION_EXPORT NSString *const AMOptionsCellSelectionFontColor;
 FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeFont;
 FOUNDATION_EXPORT NSString *const AMOptionsCellBackground;
 FOUNDATION_EXPORT NSString *const AMOptionsCellSeparatorUpper;
