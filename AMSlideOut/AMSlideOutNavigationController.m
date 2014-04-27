@@ -113,18 +113,65 @@
 	[self.menuItems addObject:section];
 }
 
-- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section
+- (void)addViewController:(UIViewController*)controller
+                   tagged:(int)tag
+                withTitle:(NSString*)title
+                  andIcon:(id)icon
+                toSection:(NSInteger)section
 {
 	[self addViewController:controller
 					 tagged:tag
 				  withTitle:title
 					andIcon:icon
+           andSelectionIcon:nil
 				  toSection:section
 			   beforeChange:nil
 			 onCompletition:nil];
 }
 
-- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section  beforeChange:(void(^)())before onCompletition:(void(^)())after
+- (void)addViewController:(UIViewController*)controller
+                   tagged:(int)tag
+                withTitle:(NSString*)title
+                  andIcon:(id)icon
+         andSelectionIcon:(id)selectionIcon
+                toSection:(NSInteger)section
+{
+	[self addViewController:controller
+					 tagged:tag
+				  withTitle:title
+					andIcon:icon
+           andSelectionIcon:selectionIcon
+				  toSection:section
+			   beforeChange:nil
+			 onCompletition:nil];
+}
+
+- (void)addViewController:(UIViewController*)controller
+                   tagged:(int)tag
+                withTitle:(NSString*)title
+                  andIcon:(id)icon
+                toSection:(NSInteger)section
+             beforeChange:(void(^)())before
+           onCompletition:(void(^)())after
+{
+	[self addViewController:controller
+                     tagged:tag
+                  withTitle:title
+                    andIcon:icon
+           andSelectionIcon:nil
+                  toSection:section
+               beforeChange:before
+             onCompletition:after];
+}
+
+- (void)addViewController:(UIViewController*)controller
+                   tagged:(int)tag
+                withTitle:(NSString*)title
+                  andIcon:(id)icon
+         andSelectionIcon:(id)selectionIcon
+                toSection:(NSInteger)section
+             beforeChange:(void(^)())before
+           onCompletition:(void(^)())after
 {
 	if (section < [self.menuItems count]) {
 		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
@@ -132,6 +179,9 @@
 		item[kSOViewTitle] = title;
 		if (icon) {
             item[kSOViewIcon] = icon;
+        }
+        if (selectionIcon) {
+            item[kSOViewSelectionIcon] = selectionIcon;
         }
 		if (before) {
 			item[kSOBeforeBlock] = [before copy];
@@ -146,12 +196,34 @@
 	}
 }
 
-- (void)addAction:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section
+- (void)addAction:(void(^)())action
+           tagged:(int)tag
+        withTitle:(NSString*)title
+          andIcon:(id)icon
+        toSection:(NSInteger)section
+{
+    [self addAction:action
+             tagged:tag
+          withTitle:title
+            andIcon:icon
+   andSelectionIcon:nil
+          toSection:section];
+}
+
+- (void)addAction:(void(^)())action
+           tagged:(int)tag
+        withTitle:(NSString*)title
+          andIcon:(id)icon
+ andSelectionIcon:(id)selectionIcon
+        toSection:(NSInteger)section
 {
 	if (section < [self.menuItems count]) {
 		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
 		item[kSOViewTitle] = title;
 		item[kSOViewIcon] = icon;
+        if (selectionIcon) {
+            item[kSOViewSelectionIcon] = selectionIcon;
+        }
 		// Note: The action is stored in the before block
 		item[kSOBeforeBlock] = [action copy];
 		item[kSOViewTag] = @(tag);
@@ -162,19 +234,72 @@
 	}
 }
 
-- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section
+- (void)addViewControllerClass:(Class)cls
+                   withNibName:(NSString*)nibName
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+                     toSection:(NSInteger)section
 {
 	[self addViewControllerClass:cls
                      withNibName:nibName
                           tagged:tag
                        withTitle:title
                          andIcon:icon
+                andSelectionIcon:nil
                        toSection:section
                     beforeChange:nil
                   onCompletition:nil];
 }
 
-- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section  beforeChange:(void(^)())before onCompletition:(void(^)())after
+- (void)addViewControllerClass:(Class)cls
+                   withNibName:(NSString*)nibName
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+              andSelectionIcon:(id)selectionIcon
+                     toSection:(NSInteger)section
+{
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                andSelectionIcon:selectionIcon
+                       toSection:section
+                    beforeChange:nil
+                  onCompletition:nil];
+}
+
+- (void)addViewControllerClass:(Class)cls
+                   withNibName:(NSString*)nibName
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+                     toSection:(NSInteger)section
+                  beforeChange:(void(^)())before
+                onCompletition:(void(^)())after
+{
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                andSelectionIcon:nil
+                       toSection:section
+                    beforeChange:before
+                  onCompletition:after];
+}
+
+- (void)addViewControllerClass:(Class)cls
+                   withNibName:(NSString*)nibName
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+              andSelectionIcon:(id)selectionIcon
+                     toSection:(NSInteger)section
+                  beforeChange:(void(^)())before
+                onCompletition:(void(^)())after
 {
     if([cls isSubclassOfClass:[UIViewController class]]) {
         if (section < [self.menuItems count]) {
@@ -186,6 +311,9 @@
             item[kSOViewTitle] = title;
             if (icon) {
                 item[kSOViewIcon] = icon;
+            }
+            if (selectionIcon) {
+                item[kSOViewSelectionIcon] = selectionIcon;
             }
             if (before) {
                 item[kSOBeforeBlock] = [before copy];
@@ -240,19 +368,90 @@
 	}
 }
 
-- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon
+- (void)addViewControllerToLastSection:(UIViewController*)controller
+                                tagged:(int)tag
+                             withTitle:(NSString*)title
+                               andIcon:(id)icon
 {
-	[self addViewController:controller tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
+	[self addViewController:controller
+                     tagged:tag
+                  withTitle:title
+                    andIcon:icon
+                  toSection:([self.menuItems count]-1)];
 }
 
-- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after
+- (void)addViewControllerToLastSection:(UIViewController*)controller
+                                tagged:(int)tag
+                             withTitle:(NSString*)title
+                               andIcon:(id)icon
+                      andSelectionIcon:(id)selectionIcon
 {
-	[self addViewController:controller tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1) beforeChange:before onCompletition:after];
+	[self addViewController:controller
+                     tagged:tag
+                  withTitle:title
+                    andIcon:icon
+           andSelectionIcon:selectionIcon
+                  toSection:([self.menuItems count]-1)];
 }
 
-- (void)addActionToLastSection:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon
+- (void)addViewControllerToLastSection:(UIViewController*)controller
+                                tagged:(int)tag
+                             withTitle:(NSString*)title
+                               andIcon:(id)icon
+                          beforeChange:(void(^)())before
+                        onCompletition:(void(^)())after
 {
-	[self addAction:action tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
+	[self addViewController:controller
+                     tagged:tag
+                  withTitle:title
+                    andIcon:icon
+                  toSection:([self.menuItems count]-1)
+               beforeChange:before
+             onCompletition:after];
+}
+
+- (void)addViewControllerToLastSection:(UIViewController*)controller
+                                tagged:(int)tag
+                             withTitle:(NSString*)title
+                               andIcon:(id)icon
+                      andSelectionIcon:(id)selectionIcon
+                          beforeChange:(void(^)())before
+                        onCompletition:(void(^)())after
+{
+	[self addViewController:controller
+                     tagged:tag
+                  withTitle:title
+                    andIcon:icon
+           andSelectionIcon:selectionIcon
+                  toSection:([self.menuItems count]-1)
+               beforeChange:before
+             onCompletition:after];
+}
+
+- (void)addActionToLastSection:(void(^)())action
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+{
+	[self addAction:action
+             tagged:tag
+          withTitle:title
+            andIcon:icon
+          toSection:([self.menuItems count]-1)];
+}
+
+- (void)addActionToLastSection:(void(^)())action
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+              andSelectionIcon:(id)selectionIcon
+{
+	[self addAction:action
+             tagged:tag
+          withTitle:title
+            andIcon:icon
+   andSelectionIcon:selectionIcon
+          toSection:([self.menuItems count]-1)];
 }
 
 - (void)setContentViewController:(UIViewController *)controller
@@ -268,14 +467,72 @@
 
 }
 
-- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon
+- (void)addViewControllerClassToLastSection:(Class)cls
+                                withNibName:(NSString*)nibName
+                                     tagged:(int)tag
+                                  withTitle:(NSString*)title
+                                    andIcon:(id)icon
 {
-    [self addViewControllerClass:cls withNibName:nibName tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                       toSection:([self.menuItems count]-1)];
 }
 
-- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after
+- (void)addViewControllerClassToLastSection:(Class)cls
+                                withNibName:(NSString*)nibName
+                                     tagged:(int)tag
+                                  withTitle:(NSString*)title
+                                    andIcon:(id)icon
+                           andSelectionIcon:(id)selectionIcon
 {
-    [self addViewControllerClass:cls withNibName:nibName tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1) beforeChange:before onCompletition:after];
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                andSelectionIcon:selectionIcon
+                       toSection:([self.menuItems count]-1)];
+}
+
+- (void)addViewControllerClassToLastSection:(Class)cls
+                                withNibName:(NSString*)nibName
+                                     tagged:(int)tag
+                                  withTitle:(NSString*)title
+                                    andIcon:(id)icon
+                               beforeChange:(void(^)())before
+                             onCompletition:(void(^)())after
+{
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                       toSection:([self.menuItems count]-1)
+                    beforeChange:before
+                  onCompletition:after];
+}
+
+- (void)addViewControllerClassToLastSection:(Class)cls
+                                withNibName:(NSString*)nibName
+                                     tagged:(int)tag
+                                  withTitle:(NSString*)title
+                                    andIcon:(id)icon
+                           andSelectionIcon:(id)selectionIcon
+                               beforeChange:(void(^)())before
+                             onCompletition:(void(^)())after
+{
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                andSelectionIcon:selectionIcon
+                       toSection:([self.menuItems count]-1)
+                    beforeChange:before
+                  onCompletition:after];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -487,6 +744,7 @@
 		selection.frame = selFrame;
 		[selection setBackgroundColor:self.options[AMOptionsSelectionBackground]];
 		cell.selectedBackgroundView = selection;
+        [cell.textLabel setHighlightedTextColor:self.options[AMOptionsCellSelectionFontColor]];
 	}
     
     if([indexPath row] >= [(self.menuItems)[[indexPath section]][kSOSection] count] - 1 &&
@@ -513,6 +771,20 @@
 	} else {
 		cell.imageView.image = nil;
 	}
+    
+    id selectionImageData = dict[kSOViewSelectionIcon];
+    
+    if (selectionImageData != nil) {
+        if ([selectionImageData isKindOfClass:[NSString class]] && ![selectionImageData isEqualToString:@""]) {
+			cell.imageView.highlightedImage = [UIImage imageNamed:selectionImageData];
+		} else if ([selectionImageData isKindOfClass:[UIImage class]]) {
+			cell.imageView.highlightedImage = selectionImageData;
+		} else {
+			cell.imageView.highlightedImage = nil;
+		}
+    } else {
+        cell.imageView.highlightedImage = nil;
+    }
     
     if (self.accessibilityDelegate) {
         if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToSlideOutCell:withTag:fromSection:)]) {

@@ -49,6 +49,7 @@
     
 	self.textLabel.backgroundColor = [UIColor clearColor];
 	self.textLabel.textColor = self.options[AMOptionsCellFontColor];
+    self.textLabel.highlightedTextColor = self.options[AMOptionsCellSelectionFontColor];
 	self.textLabel.shadowOffset = CGSizeMake(0, 1);
 	self.textLabel.shadowColor = self.options[AMOptionsCellShadowColor];
 	self.textLabel.font = self.options[AMOptionsCellFont];
