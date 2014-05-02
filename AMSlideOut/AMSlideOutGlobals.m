@@ -31,6 +31,7 @@ NSString *const AMOptionsHeaderSeparatorUpper = @"AMOptionsHeaderSeparatorUpper"
 NSString *const AMOptionsHeaderSeparatorLower = @"AMOptionsHeaderSeparatorLower";
 NSString *const AMOptionsCellFont = @"AMOptionsCellFont";
 NSString *const AMOptionsCellFontColor = @"AMOptionsCellFontColor";
+NSString *const AMOptionsCellSelectionFontColor = @"AMOptionsCellSelectionFontColor";
 NSString *const AMOptionsCellBadgeFont = @"AMOptionsCellBadgeFont";
 NSString *const AMOptionsCellBackground = @"AMOptionsCellBackground";
 NSString *const AMOptionsCellSeparatorUpper = @"AMOptionsCellSeparatorUpper";
@@ -109,6 +110,7 @@ NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
 			 AMOptionsCellFont : [UIFont fontWithName:@"Helvetica" size:14],
 			 AMOptionsCellBadgeFont : [UIFont fontWithName:@"Helvetica" size:12],
 			 AMOptionsCellFontColor : [UIColor colorWithRed:0.77 green:0.8 blue:0.85 alpha:1.0],
+             AMOptionsCellSelectionFontColor : [UIColor colorWithRed:0.77 green:0.8 blue:0.85 alpha:1.0],
 			 AMOptionsCellBackground : [UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0],
 			 AMOptionsCellSeparatorUpper : [UIColor colorWithRed:0.24 green:0.27 blue:0.33 alpha:1.0],
 			 AMOptionsCellSeparatorLower : [UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0],
@@ -182,6 +184,7 @@ NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
 			 AMOptionsCellBadgeFontColor : [UIColor whiteColor],
 			 AMOptionsCellBadgeBackColor : [UIColor blackColor],
 			 AMOptionsCellFontColor : [UIColor blackColor],
+             AMOptionsCellSelectionFontColor : [UIColor blackColor],
 			 AMOptionsCellBackground : [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0],
 			 AMOptionsCellSeparatorUpper : [UIColor clearColor],
 			 AMOptionsCellSeparatorLower : [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0],
