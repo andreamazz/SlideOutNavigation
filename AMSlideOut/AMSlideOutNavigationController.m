@@ -287,9 +287,10 @@
 {
 	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 	[view setBackgroundColor:self.options[AMOptionsBackground]];
-	
+
 	// Table View setup
 	self.tableView = [[AMTableView alloc] initWithFrame:[self tableRect]];
+
 	self.tableView.options = self.options;
 	self.tableView.autoresizingMask = ~UIViewAutoresizingFlexibleBottomMargin;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -307,6 +308,8 @@
 	
 	// The content is displayed in a UINavigationController
 	self.contentController = [[self.navigationControllerClass alloc] initWithNavigationBarClass:self.navigationBarClass toolbarClass:self.navigationToolbarClass];
+    [self.contentController.view setFrame:view.frame];
+
     self.contentController.navigationBar.translucent = [self.options[AMOptionsNavbarTranslucent] boolValue];
     
 	if ([self.options[AMOptionsEnableShadow] boolValue]) {
