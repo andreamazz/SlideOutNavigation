@@ -69,6 +69,16 @@
 	return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+	if (self) {
+		[self commonInitialization];
+		_menuItems = [[NSMutableArray alloc] init];
+	}
+	return self;
+}
+
 + (id)slideOutNavigation
 {
 	return [[AMSlideOutNavigationController alloc] init];
