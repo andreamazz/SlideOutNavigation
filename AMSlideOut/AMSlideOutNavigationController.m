@@ -10,18 +10,21 @@
 #import "AMSlideTableCell.h"
 #import "AMSlideTableHeader.h"
 
+#define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
+
 @interface AMSlideOutNavigationController ()
 
-@property (strong, nonatomic)	NSMutableDictionary*	options;
-@property (strong, nonatomic)	AMTableView*			tableView;
-@property BOOL											menuVisible;
-@property (strong, nonatomic)	UIView*					overlayView;
-@property (strong, nonatomic)	UIView*					darkView;
-@property (strong, nonatomic)	UIBarButtonItem*		barButton;
-@property (strong, nonatomic)	UITapGestureRecognizer*	tapGesture;
-@property (strong, nonatomic)	UIPanGestureRecognizer*	panGesture;
+@property (strong, nonatomic)	NSMutableDictionary     *options;
+@property (strong, nonatomic)	AMTableView             *tableView;
+@property (strong, nonatomic)	UIView					*overlayView;
+@property (strong, nonatomic)	UIView					*darkView;
+@property (strong, nonatomic)	UIBarButtonItem         *barButton;
+@property (strong, nonatomic)	UITapGestureRecognizer	*tapGesture;
+@property (strong, nonatomic)	UIPanGestureRecognizer	*panGesture;
+@property (strong, nonatomic)	UILabel                 *badge;
+@property (assign, nonatomic)   BOOL                    menuVisible;
 @property (assign, nonatomic)   BOOL                    viewHasBeenShownOnce;
-@property (strong, nonatomic)	UILabel*				badge;
 
 @end
 
@@ -60,7 +63,7 @@
 {
 	self = [super init];
 	if (self) {
-		[self commonInitialization];		
+		[self commonInitialization];
 		_menuItems = [[NSMutableArray alloc] init];
 	}
 	return self;
@@ -110,18 +113,65 @@
 	[self.menuItems addObject:section];
 }
 
-- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section
+- (void)addViewController:(UIViewController*)controller
+                   tagged:(int)tag
+                withTitle:(NSString*)title
+                  andIcon:(id)icon
+                toSection:(NSInteger)section
 {
 	[self addViewController:controller
 					 tagged:tag
 				  withTitle:title
 					andIcon:icon
+           andSelectionIcon:nil
 				  toSection:section
 			   beforeChange:nil
 			 onCompletition:nil];
 }
 
-- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section  beforeChange:(void(^)())before onCompletition:(void(^)())after
+- (void)addViewController:(UIViewController*)controller
+                   tagged:(int)tag
+                withTitle:(NSString*)title
+                  andIcon:(id)icon
+         andSelectionIcon:(id)selectionIcon
+                toSection:(NSInteger)section
+{
+	[self addViewController:controller
+					 tagged:tag
+				  withTitle:title
+					andIcon:icon
+           andSelectionIcon:selectionIcon
+				  toSection:section
+			   beforeChange:nil
+			 onCompletition:nil];
+}
+
+- (void)addViewController:(UIViewController*)controller
+                   tagged:(int)tag
+                withTitle:(NSString*)title
+                  andIcon:(id)icon
+                toSection:(NSInteger)section
+             beforeChange:(void(^)())before
+           onCompletition:(void(^)())after
+{
+	[self addViewController:controller
+                     tagged:tag
+                  withTitle:title
+                    andIcon:icon
+           andSelectionIcon:nil
+                  toSection:section
+               beforeChange:before
+             onCompletition:after];
+}
+
+- (void)addViewController:(UIViewController*)controller
+                   tagged:(int)tag
+                withTitle:(NSString*)title
+                  andIcon:(id)icon
+         andSelectionIcon:(id)selectionIcon
+                toSection:(NSInteger)section
+             beforeChange:(void(^)())before
+           onCompletition:(void(^)())after
 {
 	if (section < [self.menuItems count]) {
 		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
@@ -129,6 +179,9 @@
 		item[kSOViewTitle] = title;
 		if (icon) {
             item[kSOViewIcon] = icon;
+        }
+        if (selectionIcon) {
+            item[kSOViewSelectionIcon] = selectionIcon;
         }
 		if (before) {
 			item[kSOBeforeBlock] = [before copy];
@@ -143,12 +196,34 @@
 	}
 }
 
-- (void)addAction:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section
+- (void)addAction:(void(^)())action
+           tagged:(int)tag
+        withTitle:(NSString*)title
+          andIcon:(id)icon
+        toSection:(NSInteger)section
+{
+    [self addAction:action
+             tagged:tag
+          withTitle:title
+            andIcon:icon
+   andSelectionIcon:nil
+          toSection:section];
+}
+
+- (void)addAction:(void(^)())action
+           tagged:(int)tag
+        withTitle:(NSString*)title
+          andIcon:(id)icon
+ andSelectionIcon:(id)selectionIcon
+        toSection:(NSInteger)section
 {
 	if (section < [self.menuItems count]) {
 		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
 		item[kSOViewTitle] = title;
 		item[kSOViewIcon] = icon;
+        if (selectionIcon) {
+            item[kSOViewSelectionIcon] = selectionIcon;
+        }
 		// Note: The action is stored in the before block
 		item[kSOBeforeBlock] = [action copy];
 		item[kSOViewTag] = @(tag);
@@ -159,19 +234,72 @@
 	}
 }
 
-- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section
+- (void)addViewControllerClass:(Class)cls
+                   withNibName:(NSString*)nibName
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+                     toSection:(NSInteger)section
 {
 	[self addViewControllerClass:cls
                      withNibName:nibName
                           tagged:tag
                        withTitle:title
                          andIcon:icon
+                andSelectionIcon:nil
                        toSection:section
                     beforeChange:nil
                   onCompletition:nil];
 }
 
-- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section  beforeChange:(void(^)())before onCompletition:(void(^)())after
+- (void)addViewControllerClass:(Class)cls
+                   withNibName:(NSString*)nibName
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+              andSelectionIcon:(id)selectionIcon
+                     toSection:(NSInteger)section
+{
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                andSelectionIcon:selectionIcon
+                       toSection:section
+                    beforeChange:nil
+                  onCompletition:nil];
+}
+
+- (void)addViewControllerClass:(Class)cls
+                   withNibName:(NSString*)nibName
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+                     toSection:(NSInteger)section
+                  beforeChange:(void(^)())before
+                onCompletition:(void(^)())after
+{
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                andSelectionIcon:nil
+                       toSection:section
+                    beforeChange:before
+                  onCompletition:after];
+}
+
+- (void)addViewControllerClass:(Class)cls
+                   withNibName:(NSString*)nibName
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+              andSelectionIcon:(id)selectionIcon
+                     toSection:(NSInteger)section
+                  beforeChange:(void(^)())before
+                onCompletition:(void(^)())after
 {
     if([cls isSubclassOfClass:[UIViewController class]]) {
         if (section < [self.menuItems count]) {
@@ -183,6 +311,9 @@
             item[kSOViewTitle] = title;
             if (icon) {
                 item[kSOViewIcon] = icon;
+            }
+            if (selectionIcon) {
+                item[kSOViewSelectionIcon] = selectionIcon;
             }
             if (before) {
                 item[kSOBeforeBlock] = [before copy];
@@ -211,7 +342,7 @@
 			count += [item[kSOViewBadge] intValue];
 		}
 	}
-
+	
 	if ([self.options[AMOptionsBadgeShowTotal] boolValue]) {
 		if (count != 0) {
 			[self.badge setText:[NSString stringWithFormat:@"%d", count]];
@@ -237,19 +368,90 @@
 	}
 }
 
-- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon
+- (void)addViewControllerToLastSection:(UIViewController*)controller
+                                tagged:(int)tag
+                             withTitle:(NSString*)title
+                               andIcon:(id)icon
 {
-	[self addViewController:controller tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
+	[self addViewController:controller
+                     tagged:tag
+                  withTitle:title
+                    andIcon:icon
+                  toSection:([self.menuItems count]-1)];
 }
 
-- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after
+- (void)addViewControllerToLastSection:(UIViewController*)controller
+                                tagged:(int)tag
+                             withTitle:(NSString*)title
+                               andIcon:(id)icon
+                      andSelectionIcon:(id)selectionIcon
 {
-	[self addViewController:controller tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1) beforeChange:before onCompletition:after];
+	[self addViewController:controller
+                     tagged:tag
+                  withTitle:title
+                    andIcon:icon
+           andSelectionIcon:selectionIcon
+                  toSection:([self.menuItems count]-1)];
 }
 
-- (void)addActionToLastSection:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon
+- (void)addViewControllerToLastSection:(UIViewController*)controller
+                                tagged:(int)tag
+                             withTitle:(NSString*)title
+                               andIcon:(id)icon
+                          beforeChange:(void(^)())before
+                        onCompletition:(void(^)())after
 {
-	[self addAction:action tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
+	[self addViewController:controller
+                     tagged:tag
+                  withTitle:title
+                    andIcon:icon
+                  toSection:([self.menuItems count]-1)
+               beforeChange:before
+             onCompletition:after];
+}
+
+- (void)addViewControllerToLastSection:(UIViewController*)controller
+                                tagged:(int)tag
+                             withTitle:(NSString*)title
+                               andIcon:(id)icon
+                      andSelectionIcon:(id)selectionIcon
+                          beforeChange:(void(^)())before
+                        onCompletition:(void(^)())after
+{
+	[self addViewController:controller
+                     tagged:tag
+                  withTitle:title
+                    andIcon:icon
+           andSelectionIcon:selectionIcon
+                  toSection:([self.menuItems count]-1)
+               beforeChange:before
+             onCompletition:after];
+}
+
+- (void)addActionToLastSection:(void(^)())action
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+{
+	[self addAction:action
+             tagged:tag
+          withTitle:title
+            andIcon:icon
+          toSection:([self.menuItems count]-1)];
+}
+
+- (void)addActionToLastSection:(void(^)())action
+                        tagged:(int)tag
+                     withTitle:(NSString*)title
+                       andIcon:(id)icon
+              andSelectionIcon:(id)selectionIcon
+{
+	[self addAction:action
+             tagged:tag
+          withTitle:title
+            andIcon:icon
+   andSelectionIcon:selectionIcon
+          toSection:([self.menuItems count]-1)];
 }
 
 - (void)setContentViewController:(UIViewController *)controller
@@ -257,14 +459,80 @@
 	[self.contentController setViewControllers:@[controller]];
     [controller.navigationItem setLeftBarButtonItem:self.barButton];
     self.currentViewController = controller;
+	if (self.contentController.navigationBar.translucent) {
+		if ([self.currentViewController respondsToSelector:@selector(edgesForExtendedLayout)]) {
+			self.currentViewController.edgesForExtendedLayout = UIRectEdgeNone;
+		}
+	}
+
 }
 
-- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon {
-    [self addViewControllerClass:cls withNibName:nibName tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1)];
+- (void)addViewControllerClassToLastSection:(Class)cls
+                                withNibName:(NSString*)nibName
+                                     tagged:(int)tag
+                                  withTitle:(NSString*)title
+                                    andIcon:(id)icon
+{
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                       toSection:([self.menuItems count]-1)];
 }
 
-- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after {
-    [self addViewControllerClass:cls withNibName:nibName tagged:tag withTitle:title andIcon:icon toSection:([self.menuItems count]-1) beforeChange:before onCompletition:after];
+- (void)addViewControllerClassToLastSection:(Class)cls
+                                withNibName:(NSString*)nibName
+                                     tagged:(int)tag
+                                  withTitle:(NSString*)title
+                                    andIcon:(id)icon
+                           andSelectionIcon:(id)selectionIcon
+{
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                andSelectionIcon:selectionIcon
+                       toSection:([self.menuItems count]-1)];
+}
+
+- (void)addViewControllerClassToLastSection:(Class)cls
+                                withNibName:(NSString*)nibName
+                                     tagged:(int)tag
+                                  withTitle:(NSString*)title
+                                    andIcon:(id)icon
+                               beforeChange:(void(^)())before
+                             onCompletition:(void(^)())after
+{
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                       toSection:([self.menuItems count]-1)
+                    beforeChange:before
+                  onCompletition:after];
+}
+
+- (void)addViewControllerClassToLastSection:(Class)cls
+                                withNibName:(NSString*)nibName
+                                     tagged:(int)tag
+                                  withTitle:(NSString*)title
+                                    andIcon:(id)icon
+                           andSelectionIcon:(id)selectionIcon
+                               beforeChange:(void(^)())before
+                             onCompletition:(void(^)())after
+{
+    [self addViewControllerClass:cls
+                     withNibName:nibName
+                          tagged:tag
+                       withTitle:title
+                         andIcon:icon
+                andSelectionIcon:selectionIcon
+                       toSection:([self.menuItems count]-1)
+                    beforeChange:before
+                  onCompletition:after];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -274,26 +542,32 @@
 
 - (void)loadView
 {
-	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 	[view setBackgroundColor:self.options[AMOptionsBackground]];
-	
+
 	// Table View setup
-	self.tableView = [[AMTableView alloc] initWithFrame:CGRectMake([self.options[AMOptionsTableInsetX] floatValue], [self.options[AMOptionsTableOffsetY] floatValue],[self.options[AMOptionsSlideValue] floatValue]-[self.options[AMOptionsTableInsetX] floatValue]*2, [[UIScreen mainScreen] bounds].size.height - 20)];
+	self.tableView = [[AMTableView alloc] initWithFrame:[self tableRect]];
+
 	self.tableView.options = self.options;
+	self.tableView.autoresizingMask = ~UIViewAutoresizingFlexibleBottomMargin;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	self.tableView.backgroundColor = self.options[AMOptionsBackground];
 	[self.tableView setScrollsToTop:NO];
+        
+    self.tableView.contentInset = UIEdgeInsetsMake([self.options[AMOptionsContentInsetTop] floatValue], 0, 0, 0);
     
 	// Dark view
 	self.darkView = [[UIView alloc] initWithFrame:
-					 CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)
+					 CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
 					 ];
 	[self.darkView setBackgroundColor:self.options[AMOptionsAnimationDarkenColor]];
 	[self.darkView setAlpha:0];
 	
 	// The content is displayed in a UINavigationController
 	self.contentController = [[self.navigationControllerClass alloc] initWithNavigationBarClass:self.navigationBarClass toolbarClass:self.navigationToolbarClass];
-    self.contentController.navigationBar.translucent = NO;
+    [self.contentController.view setFrame:view.frame];
+
+    self.contentController.navigationBar.translucent = [self.options[AMOptionsNavbarTranslucent] boolValue];
     
 	if ([self.options[AMOptionsEnableShadow] boolValue]) {
 		self.contentController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.contentController.view.bounds].CGPath;
@@ -314,7 +588,6 @@
 	[view addSubview:self.contentController.view];
 	
 	self.view = view;
-    
 }
 
 - (void)viewDidLoad
@@ -340,12 +613,10 @@
 		UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
 		[button setImage:self.options[AMOptionsButtonIcon] forState:UIControlStateNormal];
 		[button setFrame:CGRectMake(0, 0, 44, 22)];
+		button.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);
 		[button addTarget:self action:@selector(toggleMenu) forControlEvents:UIControlEventTouchUpInside];
-		// Adding the button as subview to an UIView prevents the touch area to be too wide
-		UIView *buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 22)];
-		[buttonContainer addSubview:button];
-		self.barButton = [[UIBarButtonItem alloc] initWithCustomView:buttonContainer];
-
+		self.barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+		
         accessibilityObject = button;
 	}
 	
@@ -372,7 +643,7 @@
 		[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
 		[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 	} else {
-		[self switchToControllerTagged:self.startingControllerTag andPerformSelector:nil withObject:nil];
+		[self switchToControllerTagged:(int)self.startingControllerTag andPerformSelector:nil withObject:nil];
 	}
     
     id navbarImage = self.options[AMOptionsNavBarImage];
@@ -407,7 +678,7 @@
 		_badge.layer.backgroundColor = [self.options[AMOptionsBadgeGlobalBackColor] CGColor];
 		[self.barButton.customView addSubview:_badge];
 	}
-
+	
 	return _badge;
 }
 
@@ -416,9 +687,22 @@
 	[super viewWillAppear:animated];
 }
 
+- (CGRect)tableRect
+{
+    return (CGRect){
+        (CGPoint){
+            [self.options[AMOptionsTableInsetX] floatValue],
+            [self.options[AMOptionsTableOffsetY] floatValue]
+        }, (CGSize) {
+            [self.options[AMOptionsSlideValue] floatValue]-[self.options[AMOptionsTableInsetX] floatValue]*2,
+            SCREEN_HEIGHT - [self.options[AMOptionsTableOffsetY] floatValue]}
+    };
+}
+
 - (void)viewDidLayoutSubviews
 {
     [self setMenuScrollingEnabled:![self.options[AMOptionsDisableMenuScroll] boolValue]];
+    self.tableView.frame = [self tableRect];
 }
 
 - (void)setMenuItems:(NSArray *)menuItems
@@ -463,6 +747,7 @@
 		selection.frame = selFrame;
 		[selection setBackgroundColor:self.options[AMOptionsSelectionBackground]];
 		cell.selectedBackgroundView = selection;
+        [cell.textLabel setHighlightedTextColor:self.options[AMOptionsCellSelectionFontColor]];
 	}
     
     if([indexPath row] >= [(self.menuItems)[[indexPath section]][kSOSection] count] - 1 &&
@@ -489,6 +774,20 @@
 	} else {
 		cell.imageView.image = nil;
 	}
+    
+    id selectionImageData = dict[kSOViewSelectionIcon];
+    
+    if (selectionImageData != nil) {
+        if ([selectionImageData isKindOfClass:[NSString class]] && ![selectionImageData isEqualToString:@""]) {
+			cell.imageView.highlightedImage = [UIImage imageNamed:selectionImageData];
+		} else if ([selectionImageData isKindOfClass:[UIImage class]]) {
+			cell.imageView.highlightedImage = selectionImageData;
+		} else {
+			cell.imageView.highlightedImage = nil;
+		}
+    } else {
+        cell.imageView.highlightedImage = nil;
+    }
     
     if (self.accessibilityDelegate) {
         if ([self.accessibilityDelegate respondsToSelector: @selector(applyAccessibilityPropertiesToSlideOutCell:withTag:fromSection:)]) {
@@ -525,7 +824,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 	NSString* title = [self tableView:tableView titleForHeaderInSection:section];
-	if (title == nil || [title isEqualToString:@""]) {
+	if (title == nil) {
 		return 0;
 	}
 	// If the header has a specific height use that
@@ -545,11 +844,6 @@
 {
 	NSDictionary* dict = (self.menuItems)[indexPath.section][kSOSection][indexPath.row];
 	
-    if([dict[kSOViewTag] integerValue] == self.currentTag) {
-        [self hideSideMenu];
-        return;
-    }
-    
 	AMSlideOutBeforeHandler before = dict[kSOBeforeBlock];
 	if (before) {
 		before();
@@ -572,9 +866,7 @@
         }
     }
     
-    [self.contentController setViewControllers:@[newController]];
-    [newController.navigationItem setLeftBarButtonItem:self.barButton];
-    self.currentViewController = newController;
+	[self setContentViewController:newController];
     _currentTag = [dict[kSOViewTag] integerValue];
     
 	if ([self.options[AMOptionsUseDefaultTitles] boolValue]) {
@@ -602,8 +894,8 @@
 	for (NSDictionary* section in self.menuItems) {
 		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
 			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
-				int sectionIndex = [self.menuItems indexOfObject:section];
-				int rowIndex = [[section objectForKey:kSOSection] indexOfObject:item];
+				int sectionIndex = (int)[self.menuItems indexOfObject:section];
+				int rowIndex = (int)[[section objectForKey:kSOSection] indexOfObject:item];
 				[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex] animated:YES scrollPosition:UITableViewScrollPositionNone];
 				[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex]];
 #pragma clang diagnostic push
@@ -618,7 +910,8 @@
 	}
 }
 
-- (id)getControllerWithTag:(int)tag {
+- (id)getControllerWithTag:(int)tag
+{
     for (NSDictionary* section in self.menuItems) {
 		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
 			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
@@ -633,11 +926,13 @@
     return nil;
 }
 
-- (void)disableGesture {
+- (void)disableGesture
+{
     [[self options] setObject:[NSNumber numberWithBool:NO] forKey:AMOptionsEnableGesture];
 }
 
-- (void)enableGesture {
+- (void)enableGesture
+{
     [[self options] setObject:[NSNumber numberWithBool:YES] forKey:AMOptionsEnableGesture];
 }
 
@@ -652,7 +947,7 @@
 
 - (void)showSideMenu
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_WILL_SHOW object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAMSlideOutMenuWillShow object:self];
     [UIView animateWithDuration:[self.options[AMOptionsSlideoutTime] floatValue]
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -688,7 +983,7 @@
 						 if ([self.options[AMOptionsSetButtonDone] boolValue]) {
 							 [self.barButton setStyle:UIBarButtonItemStyleDone];
 						 }
-                         [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_DID_SHOW object:self];
+                         [[NSNotificationCenter defaultCenter] postNotificationName:kAMSlideOutDidShow object:self];
 					 }];
 	
 }
@@ -697,7 +992,7 @@
 {
     // this animates the view back to the left before telling the app delegate to swap out the MenuViewController
     // it tells the app delegate using the completion block of the animation
-    [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_WILL_HIDE object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kAMSlideOutWillHide object:self];
     [UIView animateWithDuration:[self.options[AMOptionsSlideoutTime] floatValue]
 						  delay:0
 						options:UIViewAnimationOptionCurveEaseInOut
@@ -733,7 +1028,7 @@
 						 self.menuVisible = NO;
 						 [self.tableView setScrollsToTop:NO];
 						 [self.barButton setStyle:UIBarButtonItemStylePlain];
-                         [[NSNotificationCenter defaultCenter] postNotificationName:SLIDEOUT_MENU_DID_HIDE object:self];
+                         [[NSNotificationCenter defaultCenter] postNotificationName:kAMSlideOutDidHide object:self];
 					 }];
 }
 
@@ -846,6 +1141,7 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
+    self.tableView.frame = [self tableRect];
 	[self setMenuScrollingEnabled:![self.options[AMOptionsDisableMenuScroll] boolValue]];
 }
 

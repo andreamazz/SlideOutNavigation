@@ -31,6 +31,7 @@ NSString *const AMOptionsHeaderSeparatorUpper = @"AMOptionsHeaderSeparatorUpper"
 NSString *const AMOptionsHeaderSeparatorLower = @"AMOptionsHeaderSeparatorLower";
 NSString *const AMOptionsCellFont = @"AMOptionsCellFont";
 NSString *const AMOptionsCellFontColor = @"AMOptionsCellFontColor";
+NSString *const AMOptionsCellSelectionFontColor = @"AMOptionsCellSelectionFontColor";
 NSString *const AMOptionsCellBadgeFont = @"AMOptionsCellBadgeFont";
 NSString *const AMOptionsCellBackground = @"AMOptionsCellBackground";
 NSString *const AMOptionsCellSeparatorUpper = @"AMOptionsCellSeparatorUpper";
@@ -71,6 +72,8 @@ NSString *const AMOptionsCellBadgeFontColor = @"AMOptionsCellBadgeFontColor";
 NSString *const AMOptionsCellBadgeBackColor = @"AMOptionsCellBadgeBackColor";
 NSString *const AMOptionsNavBarImage = @"AMOptionsNavBarImage";
 NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCellSeparatorLowerBeforeHeader";
+NSString *const AMOptionsNavbarTranslucent = @"AMOptionsNavbarTranslucent";
+NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
 
 @implementation AMSlideOutGlobals
 
@@ -79,6 +82,7 @@ NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCel
 	CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
 	return @{
 			 AMOptionsTableOffsetY : @(offsetY),
+             AMOptionsContentInsetTop : @0,
              AMOptionsTableInsetX : @(0),             
 			 AMOptionsEnableGesture : @(YES),
 			 AMOptionsEnableShadow : @(YES),
@@ -93,6 +97,7 @@ NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCel
 			 AMOptionsImageLeftPadding : @(0),
 			 AMOptionsTextPadding : @(20),
 			 AMOptionsBadgePosition : @(220),
+			 AMOptionsNavbarTranslucent: @NO,
 			 AMOptionsHeaderHeight : @(22),
 			 AMOptionsHeaderFont : [UIFont fontWithName:@"Helvetica" size:13],
 			 AMOptionsHeaderFontColor : [UIColor colorWithRed:0.49 green:0.50 blue:0.57 alpha:1.0],
@@ -105,6 +110,7 @@ NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCel
 			 AMOptionsCellFont : [UIFont fontWithName:@"Helvetica" size:14],
 			 AMOptionsCellBadgeFont : [UIFont fontWithName:@"Helvetica" size:12],
 			 AMOptionsCellFontColor : [UIColor colorWithRed:0.77 green:0.8 blue:0.85 alpha:1.0],
+             AMOptionsCellSelectionFontColor : [UIColor colorWithRed:0.77 green:0.8 blue:0.85 alpha:1.0],
 			 AMOptionsCellBackground : [UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0],
 			 AMOptionsCellSeparatorUpper : [UIColor colorWithRed:0.24 green:0.27 blue:0.33 alpha:1.0],
 			 AMOptionsCellSeparatorLower : [UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0],
@@ -148,6 +154,7 @@ NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCel
 	CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
 	return @{
 			 AMOptionsTableOffsetY : @(offsetY),
+             AMOptionsContentInsetTop : @0,
              AMOptionsTableInsetX : @(0),
 			 AMOptionsEnableGesture : @(YES),
 			 AMOptionsEnableShadow : @(YES),
@@ -163,6 +170,7 @@ NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCel
 			 AMOptionsTextPadding : @(20),
 			 AMOptionsBadgePosition : @(220),
 			 AMOptionsHeaderHeight : @(22),
+			 AMOptionsNavbarTranslucent: @NO,
 			 AMOptionsHeaderFont : [UIFont systemFontOfSize:13],
 			 AMOptionsHeaderFontColor : [UIColor blackColor],
 			 AMOptionsHeaderShadowColor : [UIColor clearColor],
@@ -176,6 +184,7 @@ NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCel
 			 AMOptionsCellBadgeFontColor : [UIColor whiteColor],
 			 AMOptionsCellBadgeBackColor : [UIColor blackColor],
 			 AMOptionsCellFontColor : [UIColor blackColor],
+             AMOptionsCellSelectionFontColor : [UIColor blackColor],
 			 AMOptionsCellBackground : [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0],
 			 AMOptionsCellSeparatorUpper : [UIColor clearColor],
 			 AMOptionsCellSeparatorLower : [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0],

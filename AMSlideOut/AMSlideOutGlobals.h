@@ -24,20 +24,21 @@
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#define kSOViewTitle		@"title"
-#define kSOController		@"controller"
-#define kSOViewIcon			@"icon"
-#define kSOViewTag			@"tag"
-#define kSOViewBadge		@"badge"
-#define kSOSection			@"section"
-#define kSOBeforeBlock		@"before"
-#define kSOAfterBlock		@"after"
-#define kSOSectionTitle		@"title"
-#define kSOSectionClass		@"headerClass"
-#define kSOSectionHeight	@"headerHeight"
-#define kSOItemIsAction		@"isAction"
-#define kSOItemClass        @"itemClass"
-#define kSOItemNibName      @"itemNibName"
+#define kSOViewTitle            @"title"
+#define kSOController           @"controller"
+#define kSOViewIcon             @"icon"
+#define kSOViewSelectionIcon    @"selectionIcon"
+#define kSOViewTag              @"tag"
+#define kSOViewBadge            @"badge"
+#define kSOSection              @"section"
+#define kSOBeforeBlock          @"before"
+#define kSOAfterBlock           @"after"
+#define kSOSectionTitle         @"title"
+#define kSOSectionClass         @"headerClass"
+#define kSOSectionHeight        @"headerHeight"
+#define kSOItemIsAction         @"isAction"
+#define kSOItemClass            @"itemClass"
+#define kSOItemNibName          @"itemNibName"
 
 // This is to support prior versions where there was a typo in this option definition:
 #define AMOptionsTableOffestY AMOptionsTableOffsetY
@@ -45,6 +46,8 @@
 #ifndef SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #endif
+
+#define SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
 
 FOUNDATION_EXPORT NSString *const AMOptionsEnableGesture;
 FOUNDATION_EXPORT NSString *const AMOptionsEnableShadow;
@@ -73,6 +76,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsHeaderSeparatorLower;
 
 FOUNDATION_EXPORT NSString *const AMOptionsCellFont;
 FOUNDATION_EXPORT NSString *const AMOptionsCellFontColor;
+FOUNDATION_EXPORT NSString *const AMOptionsCellSelectionFontColor;
 FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeFont;
 FOUNDATION_EXPORT NSString *const AMOptionsCellBackground;
 FOUNDATION_EXPORT NSString *const AMOptionsCellSeparatorUpper;
@@ -120,13 +124,15 @@ FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalBackColor;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalShadowColor;
 FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeFontColor;
 FOUNDATION_EXPORT NSString *const AMOptionsCellBadgeBackColor;
+FOUNDATION_EXPORT NSString *const AMOptionsNavbarTranslucent;
+FOUNDATION_EXPORT NSString *const AMOptionsContentInsetTop;
 
 // Notifications
 
-#define SLIDEOUT_MENU_WILL_SHOW     @"SlideOutMenuWillShowed"
-#define SLIDEOUT_MENU_DID_SHOW      @"SlideOutMenuDidShowed"
-#define SLIDEOUT_MENU_WILL_HIDE     @"SlideOutMenuWillHide"
-#define SLIDEOUT_MENU_DID_HIDE      @"SlideOutMenuDidHide"
+#define kAMSlideOutMenuWillShow     @"SlideOutMenuWillShow"
+#define kAMSlideOutDidShow			@"SlideOutMenuDidShow"
+#define kAMSlideOutWillHide			@"SlideOutMenuWillHide"
+#define kAMSlideOutDidHide			@"SlideOutMenuDidHide"
 
 @class AMSlideTableHeader;
 

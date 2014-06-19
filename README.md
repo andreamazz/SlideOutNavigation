@@ -1,7 +1,8 @@
 AMSlideOutNavigationController
 ==================
-[![Stories in Ready](https://badge.waffle.io/andreamazz/SlideOutNavigation.png?label=ready)](https://waffle.io/andreamazz/SlideOutNavigation) 
+[![Cocoapods](https://cocoapod-badges.herokuapp.com/v/AMSlideOutController/badge.png)](http://beta.cocoapods.org/?q=amslideoutcontroller)
 [![Build Status](https://travis-ci.org/andreamazz/SlideOutNavigation.png)](https://travis-ci.org/andreamazz/SlideOutNavigation) 
+[![Analytics](https://ga-beacon.appspot.com/UA-42282237-8/AMSlideOutController/README)](https://github.com/igrigorik/ga-beacon)
 
 SlideOut Navigation Controller for iOS.
 This controller replicates the behaviour of the 'slide-out' navigation of applications like Facebook or Steam.
@@ -12,7 +13,7 @@ Part of the code is based off [this blog post made by Nick Harris](http://nickha
 
 Screenshot
 --------------------
-![SlideOutNavigation](http://www.eflatgames.com/github/slideoutios7.png) ![SlideOutNavigation](http://www.eflatgames.com/github/AMSlideOut130413.png)
+![AMSlideOutNavigationController](https://raw.githubusercontent.com/andreamazz/SlideOutNavigation/master/screenshot.png)
 
 
 Setup with Cocoapods
@@ -20,14 +21,6 @@ Setup with Cocoapods
 * Add ```pod 'AMSlideOutController'``` to your Podfile
 * Run ```pod install```
 * Run ```open App.xcworkspace```
-* Import ```AMSlideOutNavigationController.h``` in your AppDelegate
-* Init ```AMSlideOutNavigationController```  using the data structure as follows.
-
-Setup without Cocoapods
---------------------
-* Clone this repo
-* Add the ```AMSlideOut``` folder to your project
-* Link against ```QuartzCore``` framework
 * Import ```AMSlideOutNavigationController.h``` in your AppDelegate
 * Init ```AMSlideOutNavigationController```  using the data structure as follows.
 
@@ -140,6 +133,8 @@ AMOptionsBadgeGlobalPositionH     // @(float), The global bages's height. Defaul
 AMOptionsBadgeGlobalTextColor     // @(UIColor), The glboal badge's text color. Defaults to white
 AMOptionsBadgeGlobalBackColor     // @(UIColor), The glboal badge's background color. Defaults to red
 AMOptionsBadgeGlobalShadowColor   // @(UIColor), The glboal badge's text shadow color. Defaults to a clear color
+AMOptionsNavbarTranslucent        // @(BOOL), The navbar translucent state. Defaults to @NO
+AMOptionsContentInsetTop          // @(float), The top content inset of the table view. Defaults to @0
 ```
 
 sample usage:
@@ -222,7 +217,7 @@ If you use Storyboard you can easily integrate AMSlideOutNavigationController wi
 
 Just set a Storyboard ID for each of your ViewController that will become a root element of the navigation tree:
 
-![SlideOutNavigationStoryboard](http://www.eflatgames.com/github/AMSlideOutStory.png)
+![SlideOutNavigationStoryboard](https://raw.githubusercontent.com/andreamazz/SlideOutNavigation/master/storyboard.png)
 
 then instantiate your ViewControllers in your AppDelegate like this:
 
@@ -274,6 +269,10 @@ The icon must be 44x44. Blank icon name will result in a row with only text, wit
 
 Changelog 
 ==================
+
+v1.8
+--------------------
+- Added lazy instantiation of view controllers. Thanks to [mixalich7b](https://github.com/mixalich7b)
 
 v1.7.5
 --------------------
