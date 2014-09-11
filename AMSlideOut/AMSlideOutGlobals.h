@@ -140,7 +140,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsContentInsetTop;
 
 @optional
 - (void)applyAccessibilityPropertiesToHeaderView: (AMSlideTableHeader*)headerView fromSection: (NSInteger)section;
-- (void)applyAccessibilityPropertiesToSlideOutCell: (UITableViewCell*)slideOutCell withTag: (int)tag fromSection: (NSInteger)section;
+- (void)applyAccessibilityPropertiesToSlideOutCell: (UITableViewCell*)slideOutCell withTag: (NSInteger)tag fromSection: (NSInteger)section;
 - (void)applyAccessibilityPropertiesToSlideOutButton: (NSObject*)accessibleButton;
 @end
 
