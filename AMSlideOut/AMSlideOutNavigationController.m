@@ -894,18 +894,18 @@
     [self.tableView reloadData];
 }
 
-- (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj
+- (void)switchToControllerTagged:(NSInteger)tag andPerformSelector:(SEL)selector withObject:(id)obj
 {
 	[self switchToControllerTagged:tag andPerformSelector:selector withObject:obj afterDelay:0];
 }
 
-- (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj afterDelay:(NSTimeInterval)delay
+- (void)switchToControllerTagged:(NSInteger)tag andPerformSelector:(SEL)selector withObject:(id)obj afterDelay:(NSTimeInterval)delay
 {
 	for (NSDictionary* section in self.menuItems) {
 		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
 			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
-				int sectionIndex = (int)[self.menuItems indexOfObject:section];
-				int rowIndex = (int)[[section objectForKey:kSOSection] indexOfObject:item];
+				NSInteger sectionIndex = (int)[self.menuItems indexOfObject:section];
+				NSInteger rowIndex = (int)[[section objectForKey:kSOSection] indexOfObject:item];
 				[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex] animated:YES scrollPosition:UITableViewScrollPositionNone];
 				[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex]];
 #pragma clang diagnostic push
