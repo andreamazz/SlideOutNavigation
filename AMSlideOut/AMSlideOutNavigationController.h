@@ -76,30 +76,30 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 /** Sets container view to a view controller without adding it to the menu  **/
 - (void)setContentViewController:(UIViewController *)controller;
 
-- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon;
-- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon;
-- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after;
-- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon beforeChange:(void(^)())before onCompletition:(void(^)())after;
-- (void)addActionToLastSection:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon;
-- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon;
-- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon;
-- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after;
-- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon beforeChange:(void(^)())before onCompletition:(void(^)())after;
+- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon;
+- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon;
+- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after;
+- (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon beforeChange:(void(^)())before onCompletition:(void(^)())after;
+- (void)addActionToLastSection:(void(^)())action tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon;
+- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon;
+- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon;
+- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletition:(void(^)())after;
+- (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon beforeChange:(void(^)())before onCompletition:(void(^)())after;
 
-- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section;
-- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section;
-- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletition:(void(^)())after;
-- (void)addViewController:(UIViewController*)controller tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletition:(void(^)())after;
-- (void)addAction:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section;
-- (void)addAction:(void(^)())action tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section;
+- (void)addViewController:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section;
+- (void)addViewController:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section;
+- (void)addViewController:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletition:(void(^)())after;
+- (void)addViewController:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletition:(void(^)())after;
+- (void)addAction:(void(^)())action tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section;
+- (void)addAction:(void(^)())action tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section;
 // Controller will created only when it will picked from menu, and destroyed when user pick another controller
-- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section;
-- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section;
-- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletition:(void(^)())after;
-- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(int)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletition:(void(^)())after;
+- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section;
+- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section;
+- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletition:(void(^)())after;
+- (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletition:(void(^)())after;
 
-- (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj;
-- (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj afterDelay:(NSTimeInterval)delay;
+- (void)switchToControllerTagged:(NSInteger)tag andPerformSelector:(SEL)selector withObject:(id)obj;
+- (void)switchToControllerTagged:(NSInteger)tag andPerformSelector:(SEL)selector withObject:(id)obj afterDelay:(NSTimeInterval)delay;
 
 - (void)addSectionWithTitle:(NSString*)title;
 - (void)addSectionWithTitle:(NSString*)title andHeaderClassName:(NSString*)klass withHeight:(CGFloat)height;
@@ -112,7 +112,7 @@ typedef void (^AMSlideOutCompletionHandler)(void);
  * @param value The string that will be displayed in the item's badge.
  * @param tag	The tag number of the menu item.
  */
-- (void)setBadgeValue:(NSString*)value forTag:(int)tag;
+- (void)setBadgeValue:(NSString*)value forTag:(NSInteger)tag;
 
 /** Sets a custom value in the bar button's badge.
  *
@@ -148,7 +148,7 @@ typedef void (^AMSlideOutCompletionHandler)(void);
  */
 - (void)setLeftBarButton:(UIBarButtonItem*)barButton;
 
-- (id)getControllerWithTag:(int)tag;
+- (id)getControllerWithTag:(NSInteger)tag;
 
 - (void)disableGesture;
 - (void)enableGesture;

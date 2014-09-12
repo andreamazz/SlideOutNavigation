@@ -124,7 +124,7 @@
 }
 
 - (void)addViewController:(UIViewController*)controller
-                   tagged:(int)tag
+                   tagged:(NSInteger)tag
                 withTitle:(NSString*)title
                   andIcon:(id)icon
                 toSection:(NSInteger)section
@@ -140,7 +140,7 @@
 }
 
 - (void)addViewController:(UIViewController*)controller
-                   tagged:(int)tag
+                   tagged:(NSInteger)tag
                 withTitle:(NSString*)title
                   andIcon:(id)icon
          andSelectionIcon:(id)selectionIcon
@@ -157,7 +157,7 @@
 }
 
 - (void)addViewController:(UIViewController*)controller
-                   tagged:(int)tag
+                   tagged:(NSInteger)tag
                 withTitle:(NSString*)title
                   andIcon:(id)icon
                 toSection:(NSInteger)section
@@ -175,7 +175,7 @@
 }
 
 - (void)addViewController:(UIViewController*)controller
-                   tagged:(int)tag
+                   tagged:(NSInteger)tag
                 withTitle:(NSString*)title
                   andIcon:(id)icon
          andSelectionIcon:(id)selectionIcon
@@ -207,7 +207,7 @@
 }
 
 - (void)addAction:(void(^)())action
-           tagged:(int)tag
+           tagged:(NSInteger)tag
         withTitle:(NSString*)title
           andIcon:(id)icon
         toSection:(NSInteger)section
@@ -221,7 +221,7 @@
 }
 
 - (void)addAction:(void(^)())action
-           tagged:(int)tag
+           tagged:(NSInteger)tag
         withTitle:(NSString*)title
           andIcon:(id)icon
  andSelectionIcon:(id)selectionIcon
@@ -246,7 +246,7 @@
 
 - (void)addViewControllerClass:(Class)cls
                    withNibName:(NSString*)nibName
-                        tagged:(int)tag
+                        tagged:(NSInteger)tag
                      withTitle:(NSString*)title
                        andIcon:(id)icon
                      toSection:(NSInteger)section
@@ -264,7 +264,7 @@
 
 - (void)addViewControllerClass:(Class)cls
                    withNibName:(NSString*)nibName
-                        tagged:(int)tag
+                        tagged:(NSInteger)tag
                      withTitle:(NSString*)title
                        andIcon:(id)icon
               andSelectionIcon:(id)selectionIcon
@@ -283,7 +283,7 @@
 
 - (void)addViewControllerClass:(Class)cls
                    withNibName:(NSString*)nibName
-                        tagged:(int)tag
+                        tagged:(NSInteger)tag
                      withTitle:(NSString*)title
                        andIcon:(id)icon
                      toSection:(NSInteger)section
@@ -303,7 +303,7 @@
 
 - (void)addViewControllerClass:(Class)cls
                    withNibName:(NSString*)nibName
-                        tagged:(int)tag
+                        tagged:(NSInteger)tag
                      withTitle:(NSString*)title
                        andIcon:(id)icon
               andSelectionIcon:(id)selectionIcon
@@ -341,7 +341,7 @@
     }
 }
 
-- (void)setBadgeValue:(NSString*)value forTag:(int)tag
+- (void)setBadgeValue:(NSString*)value forTag:(NSInteger)tag
 {
 	int count = 0;
 	for (NSDictionary* section in self.menuItems) {
@@ -379,7 +379,7 @@
 }
 
 - (void)addViewControllerToLastSection:(UIViewController*)controller
-                                tagged:(int)tag
+                                tagged:(NSInteger)tag
                              withTitle:(NSString*)title
                                andIcon:(id)icon
 {
@@ -391,7 +391,7 @@
 }
 
 - (void)addViewControllerToLastSection:(UIViewController*)controller
-                                tagged:(int)tag
+                                tagged:(NSInteger)tag
                              withTitle:(NSString*)title
                                andIcon:(id)icon
                       andSelectionIcon:(id)selectionIcon
@@ -405,7 +405,7 @@
 }
 
 - (void)addViewControllerToLastSection:(UIViewController*)controller
-                                tagged:(int)tag
+                                tagged:(NSInteger)tag
                              withTitle:(NSString*)title
                                andIcon:(id)icon
                           beforeChange:(void(^)())before
@@ -421,7 +421,7 @@
 }
 
 - (void)addViewControllerToLastSection:(UIViewController*)controller
-                                tagged:(int)tag
+                                tagged:(NSInteger)tag
                              withTitle:(NSString*)title
                                andIcon:(id)icon
                       andSelectionIcon:(id)selectionIcon
@@ -439,7 +439,7 @@
 }
 
 - (void)addActionToLastSection:(void(^)())action
-                        tagged:(int)tag
+                        tagged:(NSInteger)tag
                      withTitle:(NSString*)title
                        andIcon:(id)icon
 {
@@ -451,7 +451,7 @@
 }
 
 - (void)addActionToLastSection:(void(^)())action
-                        tagged:(int)tag
+                        tagged:(NSInteger)tag
                      withTitle:(NSString*)title
                        andIcon:(id)icon
               andSelectionIcon:(id)selectionIcon
@@ -479,7 +479,7 @@
 
 - (void)addViewControllerClassToLastSection:(Class)cls
                                 withNibName:(NSString*)nibName
-                                     tagged:(int)tag
+                                     tagged:(NSInteger)tag
                                   withTitle:(NSString*)title
                                     andIcon:(id)icon
 {
@@ -493,7 +493,7 @@
 
 - (void)addViewControllerClassToLastSection:(Class)cls
                                 withNibName:(NSString*)nibName
-                                     tagged:(int)tag
+                                     tagged:(NSInteger)tag
                                   withTitle:(NSString*)title
                                     andIcon:(id)icon
                            andSelectionIcon:(id)selectionIcon
@@ -509,7 +509,7 @@
 
 - (void)addViewControllerClassToLastSection:(Class)cls
                                 withNibName:(NSString*)nibName
-                                     tagged:(int)tag
+                                     tagged:(NSInteger)tag
                                   withTitle:(NSString*)title
                                     andIcon:(id)icon
                                beforeChange:(void(^)())before
@@ -527,7 +527,7 @@
 
 - (void)addViewControllerClassToLastSection:(Class)cls
                                 withNibName:(NSString*)nibName
-                                     tagged:(int)tag
+                                     tagged:(NSInteger)tag
                                   withTitle:(NSString*)title
                                     andIcon:(id)icon
                            andSelectionIcon:(id)selectionIcon
@@ -653,7 +653,7 @@
 		[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
 		[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 	} else {
-		[self switchToControllerTagged:(int)self.startingControllerTag andPerformSelector:nil withObject:nil];
+		[self switchToControllerTagged:self.startingControllerTag andPerformSelector:nil withObject:nil];
 	}
     
     id navbarImage = self.options[AMOptionsNavBarImage];
@@ -894,18 +894,18 @@
     [self.tableView reloadData];
 }
 
-- (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj
+- (void)switchToControllerTagged:(NSInteger)tag andPerformSelector:(SEL)selector withObject:(id)obj
 {
 	[self switchToControllerTagged:tag andPerformSelector:selector withObject:obj afterDelay:0];
 }
 
-- (void)switchToControllerTagged:(int)tag andPerformSelector:(SEL)selector withObject:(id)obj afterDelay:(NSTimeInterval)delay
+- (void)switchToControllerTagged:(NSInteger)tag andPerformSelector:(SEL)selector withObject:(id)obj afterDelay:(NSTimeInterval)delay
 {
 	for (NSDictionary* section in self.menuItems) {
 		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
 			if ([[item objectForKey:kSOViewTag] intValue] == tag) {
-				int sectionIndex = (int)[self.menuItems indexOfObject:section];
-				int rowIndex = (int)[[section objectForKey:kSOSection] indexOfObject:item];
+				NSInteger sectionIndex = [self.menuItems indexOfObject:section];
+				NSInteger rowIndex = [[section objectForKey:kSOSection] indexOfObject:item];
 				[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex] animated:YES scrollPosition:UITableViewScrollPositionNone];
 				[self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex]];
 #pragma clang diagnostic push
@@ -920,7 +920,7 @@
 	}
 }
 
-- (id)getControllerWithTag:(int)tag
+- (id)getControllerWithTag:(NSInteger)tag
 {
     for (NSDictionary* section in self.menuItems) {
 		for (NSMutableDictionary* item in [section objectForKey:kSOSection]) {
