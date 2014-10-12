@@ -10,8 +10,12 @@
 #import "AMSlideTableCell.h"
 #import "AMSlideTableHeader.h"
 
-#define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
-#define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define UISCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
+#define UISCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
+#define IS_PORTRAIT_ORIENTATION ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)))
+#define SCREEN_WIDTH (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")? UISCREEN_WIDTH : (IS_PORTRAIT_ORIENTATION ? UISCREEN_WIDTH : UISCREEN_HEIGHT))
+#define SCREEN_HEIGHT (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")? UISCREEN_HEIGHT : (IS_PORTRAIT_ORIENTATION ? UISCREEN_HEIGHT : UISCREEN_WIDTH))
 
 @interface AMSlideOutNavigationController ()
 
