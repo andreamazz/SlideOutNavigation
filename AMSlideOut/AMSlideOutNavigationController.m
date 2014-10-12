@@ -597,6 +597,7 @@
     [view addSubview:self.darkView];
 	[view addSubview:self.contentController.view];
 	
+    [self addChildViewController:self.contentController];
 	self.view = view;
 }
 
