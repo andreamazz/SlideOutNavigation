@@ -74,7 +74,7 @@
 													andIcon:[UIImage imageNamed:icon1]
 											   beforeChange:^{
 												   NSLog(@"Changing viewController");
-											   } onCompletition:^{
+											   } onCompletion:^{
 												   NSLog(@"Done");
 											   }];
 	

@@ -140,7 +140,7 @@
            andSelectionIcon:nil
 				  toSection:section
 			   beforeChange:nil
-			 onCompletition:nil];
+			 onCompletion:nil];
 }
 
 - (void)addViewController:(UIViewController*)controller
@@ -157,7 +157,7 @@
            andSelectionIcon:selectionIcon
 				  toSection:section
 			   beforeChange:nil
-			 onCompletition:nil];
+			 onCompletion:nil];
 }
 
 - (void)addViewController:(UIViewController*)controller
@@ -166,7 +166,7 @@
                   andIcon:(id)icon
                 toSection:(NSInteger)section
              beforeChange:(void(^)())before
-           onCompletition:(void(^)())after
+           onCompletion:(void(^)())after
 {
 	[self addViewController:controller
                      tagged:tag
@@ -175,7 +175,7 @@
            andSelectionIcon:nil
                   toSection:section
                beforeChange:before
-             onCompletition:after];
+             onCompletion:after];
 }
 
 - (void)addViewController:(UIViewController*)controller
@@ -185,7 +185,7 @@
          andSelectionIcon:(id)selectionIcon
                 toSection:(NSInteger)section
              beforeChange:(void(^)())before
-           onCompletition:(void(^)())after
+           onCompletion:(void(^)())after
 {
 	if (section < [self.menuItems count]) {
 		NSMutableDictionary* item = [[NSMutableDictionary alloc] init];
@@ -263,7 +263,7 @@
                 andSelectionIcon:nil
                        toSection:section
                     beforeChange:nil
-                  onCompletition:nil];
+                  onCompletion:nil];
 }
 
 - (void)addViewControllerClass:(Class)cls
@@ -282,7 +282,7 @@
                 andSelectionIcon:selectionIcon
                        toSection:section
                     beforeChange:nil
-                  onCompletition:nil];
+                  onCompletion:nil];
 }
 
 - (void)addViewControllerClass:(Class)cls
@@ -292,7 +292,7 @@
                        andIcon:(id)icon
                      toSection:(NSInteger)section
                   beforeChange:(void(^)())before
-                onCompletition:(void(^)())after
+                onCompletion:(void(^)())after
 {
     [self addViewControllerClass:cls
                      withNibName:nibName
@@ -302,7 +302,7 @@
                 andSelectionIcon:nil
                        toSection:section
                     beforeChange:before
-                  onCompletition:after];
+                  onCompletion:after];
 }
 
 - (void)addViewControllerClass:(Class)cls
@@ -313,7 +313,7 @@
               andSelectionIcon:(id)selectionIcon
                      toSection:(NSInteger)section
                   beforeChange:(void(^)())before
-                onCompletition:(void(^)())after
+                onCompletion:(void(^)())after
 {
     if([cls isSubclassOfClass:[UIViewController class]]) {
         if (section < [self.menuItems count]) {
@@ -413,7 +413,7 @@
                              withTitle:(NSString*)title
                                andIcon:(id)icon
                           beforeChange:(void(^)())before
-                        onCompletition:(void(^)())after
+                        onCompletion:(void(^)())after
 {
 	[self addViewController:controller
                      tagged:tag
@@ -421,7 +421,7 @@
                     andIcon:icon
                   toSection:([self.menuItems count]-1)
                beforeChange:before
-             onCompletition:after];
+             onCompletion:after];
 }
 
 - (void)addViewControllerToLastSection:(UIViewController*)controller
@@ -430,7 +430,7 @@
                                andIcon:(id)icon
                       andSelectionIcon:(id)selectionIcon
                           beforeChange:(void(^)())before
-                        onCompletition:(void(^)())after
+                        onCompletion:(void(^)())after
 {
 	[self addViewController:controller
                      tagged:tag
@@ -439,7 +439,7 @@
            andSelectionIcon:selectionIcon
                   toSection:([self.menuItems count]-1)
                beforeChange:before
-             onCompletition:after];
+             onCompletion:after];
 }
 
 - (void)addActionToLastSection:(void(^)())action
@@ -517,7 +517,7 @@
                                   withTitle:(NSString*)title
                                     andIcon:(id)icon
                                beforeChange:(void(^)())before
-                             onCompletition:(void(^)())after
+                             onCompletion:(void(^)())after
 {
     [self addViewControllerClass:cls
                      withNibName:nibName
@@ -526,7 +526,7 @@
                          andIcon:icon
                        toSection:([self.menuItems count]-1)
                     beforeChange:before
-                  onCompletition:after];
+                  onCompletion:after];
 }
 
 - (void)addViewControllerClassToLastSection:(Class)cls
@@ -536,7 +536,7 @@
                                     andIcon:(id)icon
                            andSelectionIcon:(id)selectionIcon
                                beforeChange:(void(^)())before
-                             onCompletition:(void(^)())after
+                             onCompletion:(void(^)())after
 {
     [self addViewControllerClass:cls
                      withNibName:nibName
@@ -546,7 +546,7 @@
                 andSelectionIcon:selectionIcon
                        toSection:([self.menuItems count]-1)
                     beforeChange:before
-                  onCompletition:after];
+                  onCompletion:after];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
