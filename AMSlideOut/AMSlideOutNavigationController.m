@@ -29,7 +29,8 @@
 @property (strong, nonatomic)	UILabel                 *badge;
 @property (assign, nonatomic)   BOOL                    menuVisible;
 @property (assign, nonatomic)   BOOL                    viewHasBeenShownOnce;
-
+@property (strong, nonatomic)   UIImageView             *logoImage;
+@property (strong, nonatomic)   NSString                *logoImageName;
 @end
 
 @implementation AMSlideOutNavigationController
@@ -63,12 +64,13 @@
 	return [[AMSlideOutNavigationController alloc] initWithMenuItems:items];
 }
 
-- (id)init
+- (id)initWithImage:(NSString *)image
 {
 	self = [super init];
 	if (self) {
 		[self commonInitialization];
 		_menuItems = [[NSMutableArray alloc] init];
+        _logoImageName = image;
 	}
 	return self;
 }
@@ -83,9 +85,9 @@
 	return self;
 }
 
-+ (id)slideOutNavigation
++ (id)slideOutNavigationWithImage:(NSString *)image
 {
-	return [[AMSlideOutNavigationController alloc] init];
+    return [[AMSlideOutNavigationController alloc] initWithImage:image];
 }
 
 - (void)commonInitialization
@@ -558,7 +560,9 @@
 {
 	UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 	[view setBackgroundColor:self.options[AMOptionsBackground]];
-
+    
+    self.logoImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 25, 115, 46)];
+    self.logoImage.image = [UIImage imageNamed:self.logoImageName];
 	// Table View setup
 	self.tableView = [[AMTableView alloc] initWithFrame:[self tableRect]];
 
@@ -597,6 +601,7 @@
 	self.overlayView.userInteractionEnabled = YES;
 	self.overlayView.backgroundColor = [UIColor clearColor];
 	
+    [view addSubview:self.logoImage];
 	[view addSubview:self.tableView];
     [view addSubview:self.darkView];
 	[view addSubview:self.contentController.view];

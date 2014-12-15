@@ -79,7 +79,7 @@ NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
 
 + (NSDictionary*)defaultOptions
 {
-	CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
+	CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 86.0f : 66.0f;
 	return @{
 			 AMOptionsTableOffsetY : @(offsetY),
              AMOptionsContentInsetTop : @0,
@@ -115,8 +115,8 @@ NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
 			 AMOptionsCellSeparatorUpper : [UIColor colorWithRed:0.24 green:0.27 blue:0.33 alpha:1.0],
 			 AMOptionsCellSeparatorLower : [UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0],
 			 AMOptionsCellShadowColor : [UIColor colorWithRed:0.21 green:0.15 blue:0.19 alpha:1.0],
-			 AMOptionsImageHeight : @(44),
-			 AMOptionsImageOffsetByY : @(0),
+			 AMOptionsImageHeight : @(20),
+			 AMOptionsImageOffsetByY : @(15),
 			 AMOptionsCellBadgeFontColor : [UIColor whiteColor],
 			 AMOptionsCellBadgeBackColor : [UIColor blackColor],
 			 AMOptionsDisableMenuScroll: @NO,
@@ -189,8 +189,8 @@ NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
 			 AMOptionsCellSeparatorUpper : [UIColor clearColor],
 			 AMOptionsCellSeparatorLower : [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0],
 			 AMOptionsCellShadowColor : [UIColor clearColor],
-			 AMOptionsImageHeight : @(44),
-			 AMOptionsImageOffsetByY : @(0),
+			 AMOptionsImageHeight : @(20),
+			 AMOptionsImageOffsetByY : @(15),
 			 AMOptionsDisableMenuScroll: @NO,
 			 AMOptionsAnimationShrink : @YES,
 			 AMOptionsAnimationShrinkValue : @0.3,
