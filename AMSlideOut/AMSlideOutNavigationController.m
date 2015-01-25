@@ -581,6 +581,7 @@
 	self.contentController = [[self.navigationControllerClass alloc] initWithNavigationBarClass:self.navigationBarClass toolbarClass:self.navigationToolbarClass];
     [self.contentController.view setFrame:view.frame];
 
+    self.contentController.navigationBarHidden =[self.options[AMOptionsNavBarHidden] boolValue];
     self.contentController.navigationBar.translucent = [self.options[AMOptionsNavbarTranslucent] boolValue];
     
 	if ([self.options[AMOptionsEnableShadow] boolValue]) {
