@@ -74,6 +74,7 @@ NSString *const AMOptionsNavBarImage = @"AMOptionsNavBarImage";
 NSString *const AMOptionsShowCellSeparatorLowerBeforeHeader = @"AMOptionsShowCellSeparatorLowerBeforeHeader";
 NSString *const AMOptionsNavbarTranslucent = @"AMOptionsNavbarTranslucent";
 NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
+NSString *const AMOptionsNavBarHidden = @"AMOptionsNavBarHidden";
 
 @implementation AMSlideOutGlobals
 
@@ -146,6 +147,7 @@ NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
 			 AMOptionsBadgeGlobalShadowColor: [UIColor clearColor],
              AMOptionsShowCellSeparatorLowerBeforeHeader: @(YES),
              AMOptionsNavBarImage : [NSNull null],
+             AMOptionsNavBarHidden: @(NO),
 			 };
 }
 
@@ -218,6 +220,7 @@ NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
 			 AMOptionsBadgeGlobalShadowColor: [UIColor clearColor],
              AMOptionsShowCellSeparatorLowerBeforeHeader: @(YES),
              AMOptionsNavBarImage : [NSNull null],
+             AMOptionsNavBarHidden: @(NO),
 			 };
 }
 
