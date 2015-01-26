@@ -59,6 +59,9 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 + (id)slideOutNavigationWithMenuItems:(NSArray*)items;
 
 /** Instantiate an empty menu */
++ (id)slideOutNavigation;
+
+/** Instantiate an menu with an image */
 + (id)slideOutNavigationWithImage:(NSString *)image;
 
 /** Instantiate with a given array of menu items.

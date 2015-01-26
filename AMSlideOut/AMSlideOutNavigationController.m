@@ -64,6 +64,16 @@
 	return [[AMSlideOutNavigationController alloc] initWithMenuItems:items];
 }
 
+- (id)int
+{
+    self = [super init];
+    if (self) {
+        [self commonInitialization];
+        _menuItems = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 - (id)initWithImage:(NSString *)image
 {
 	self = [super init];
@@ -83,6 +93,11 @@
 		_menuItems = [[NSMutableArray alloc] init];
 	}
 	return self;
+}
+
++ (id)slideOutNavigation
+{
+    return [[AMSlideOutNavigationController alloc] init];
 }
 
 + (id)slideOutNavigationWithImage:(NSString *)image
