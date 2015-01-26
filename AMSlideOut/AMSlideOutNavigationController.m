@@ -64,7 +64,7 @@
 	return [[AMSlideOutNavigationController alloc] initWithMenuItems:items];
 }
 
-- (id)int
+- (id)init
 {
     self = [super init];
     if (self) {
