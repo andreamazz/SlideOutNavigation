@@ -65,6 +65,7 @@ NSString *const AMOptionsBadgeGlobalPositionX = @"AMOptionsBadgeGlobalPositionX"
 NSString *const AMOptionsBadgeGlobalPositionY = @"AMOptionsBadgeGlobalPositionY";
 NSString *const AMOptionsBadgeGlobalPositionW = @"AMOptionsBadgeGlobalPositionW";
 NSString *const AMOptionsBadgeGlobalPositionH = @"AMOptionsBadgeGlobalPositionH";
+NSString *const AMOptionsBadgeGlobalCornerRadius = @"AMOptionsBadgeGlobalCornerRadius";
 NSString *const AMOptionsBadgeGlobalTextColor = @"AMOptionsBadgeGlobalTextColor";
 NSString *const AMOptionsBadgeGlobalBackColor = @"AMOptionsBadgeGlobalBackColor";
 NSString *const AMOptionsBadgeGlobalShadowColor = @"AMOptionsBadgeGlobalShadowColor";
@@ -141,6 +142,7 @@ NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
 			 AMOptionsBadgeGlobalPositionY: @(-5),
 			 AMOptionsBadgeGlobalPositionW: @16,
 			 AMOptionsBadgeGlobalPositionH: @16,
+             AMOptionsBadgeGlobalCornerRadius: @8,
 			 AMOptionsBadgeGlobalTextColor: [UIColor whiteColor],
 			 AMOptionsBadgeGlobalBackColor: [UIColor redColor],
 			 AMOptionsBadgeGlobalShadowColor: [UIColor clearColor],
@@ -213,6 +215,7 @@ NSString *const AMOptionsContentInsetTop = @"AMOptionsContentInsetTop";
 			 AMOptionsBadgeGlobalPositionY: @(-5),
 			 AMOptionsBadgeGlobalPositionW: @16,
 			 AMOptionsBadgeGlobalPositionH: @16,
+             AMOptionsBadgeGlobalCornerRadius: @8,
 			 AMOptionsBadgeGlobalTextColor: [UIColor whiteColor],
 			 AMOptionsBadgeGlobalBackColor: [UIColor redColor],
 			 AMOptionsBadgeGlobalShadowColor: [UIColor clearColor],
