@@ -694,7 +694,7 @@
 		_badge.backgroundColor = [UIColor clearColor];
 		_badge.shadowOffset = CGSizeMake(0, 1);
 		_badge.shadowColor = self.options[AMOptionsBadgeGlobalShadowColor];
-		_badge.layer.cornerRadius = 8;
+		_badge.layer.cornerRadius = 10;
 		_badge.layer.backgroundColor = [self.options[AMOptionsBadgeGlobalBackColor] CGColor];
 		[self.barButton.customView addSubview:_badge];
 	}
