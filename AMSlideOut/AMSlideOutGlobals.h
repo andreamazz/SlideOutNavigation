@@ -117,6 +117,7 @@ FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalPositionX;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalPositionY;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalPositionW;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalPositionH;
+FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalCornerRadius;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalTextColor;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalBackColor;
 FOUNDATION_EXPORT NSString *const AMOptionsBadgeGlobalShadowColor;
