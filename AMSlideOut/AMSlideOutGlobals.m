@@ -81,6 +81,8 @@ NSString *const AMOptionsNavBarHidden = @"AMOptionsNavBarHidden";
 
 + (NSDictionary*)defaultOptions
 {
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    
 	CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
 	return @{
 			 AMOptionsTableOffsetY : @(offsetY),
@@ -90,7 +92,7 @@ NSString *const AMOptionsNavBarHidden = @"AMOptionsNavBarHidden";
 			 AMOptionsEnableShadow : @(YES),
 			 AMOptionsSetButtonDone : @(NO),
 			 AMOptionsUseBorderedButton : @(NO),
-			 AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlide.png"],
+			 AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlide" inBundle:bundle compatibleWithTraitCollection:nil],
 			 AMOptionsUseDefaultTitles : @(YES),
 			 AMOptionsSlideValue : @(270),
 			 AMOptionsBackground : [UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0],
