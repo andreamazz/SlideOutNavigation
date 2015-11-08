@@ -3,7 +3,7 @@
 //  AMSlideOutNavigationController
 //
 //  Created by Andrea on 12/08/12.
-//  Copyright (c) 2012 Andrea Mazzini. All rights reserved.
+//  Copyright (c) 2015 Andrea Mazzini. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -29,28 +29,66 @@
 #import "AMSlideOutGlobals.h"
 #import "AMTableView.h"
 
+/**
+ * Handler fired before showing the menu
+ */
 typedef void (^AMSlideOutBeforeHandler)(void);
+
+/**
+ * Completion handler fired when the transition is complete
+ */
 typedef void (^AMSlideOutCompletionHandler)(void);
 
+/**
+ * @name AMSlideOutNavigationController
+ * SlideOut Navigation Controller
+ */
 @interface AMSlideOutNavigationController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic)		UIViewController*		currentViewController;
-@property (readonly, nonatomic) NSInteger               currentTag;
-@property (strong, nonatomic)	NSMutableArray*			menuItems;
-@property (strong, nonatomic)	UINavigationController*	contentController;
+/**
+ * Controller currenlty presented
+ */
+@property (weak, nonatomic)	UIViewController *currentViewController;
 
-@property (assign, nonatomic) NSInteger					startingControllerTag;
+/**
+ * The tag of the controller currenlty presented
+ */
+@property (readonly, nonatomic) NSInteger currentTag;
 
+/**
+ * Holds the items of the menu
+ */
+@property (strong, nonatomic) NSMutableArray *menuItems;
+
+/**
+ * The main controller showing the current controller
+ */
+@property (strong, nonatomic) UINavigationController* contentController;
+
+/**
+ * The tag of the first controller that will be displayed
+ */
+@property (assign, nonatomic) NSInteger startingControllerTag;
+
+/**
+ * The class of the navigation controller. Defaults to UINavigationController
+ */
 @property (nonatomic, assign) Class navigationControllerClass;
+
+/**
+ * The class of the navigation bar. Default to UINavigationBar
+ */
 @property (nonatomic, assign) Class navigationBarClass;
+
+/**
+ * The class of the toolbar. Defaults to UIToolbar
+ */
 @property (nonatomic, assign) Class navigationToolbarClass;
 
-@property (weak, nonatomic) id<AMSlideOutAccessibilityDelegate>  accessibilityDelegate;
-
-/**-----------------------------------------------------------------------------
- * @name Instantiating AMSlideOutNavigationController
- * -----------------------------------------------------------------------------
+/**
+ * The accessibility delegate
  */
+@property (weak, nonatomic) id<AMSlideOutAccessibilityDelegate>  accessibilityDelegate;
 
 /** Instantiate with a given array of menu items.
  *
@@ -61,7 +99,10 @@ typedef void (^AMSlideOutCompletionHandler)(void);
 /** Instantiate an empty menu */
 + (id)slideOutNavigation;
 
-/** Instantiate an menu with an image */
+/** Instantiate an menu with an image 
+ *
+ * @param image The menu icon
+ */
 + (id)slideOutNavigationWithImage:(NSString *)image;
 
 /** Instantiate with a given array of menu items.
