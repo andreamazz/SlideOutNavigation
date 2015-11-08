@@ -299,9 +299,23 @@ FOUNDATION_EXPORT NSString *const AMOptionsNavBarHidden;
 
 @end
 
+/**
+ * Global options
+ */
 @interface AMSlideOutGlobals : NSObject
 
+/**
+ * Default options
+ *
+ * @returns NSDictionary
+ */
 + (NSDictionary*)defaultOptions;
+
+/**
+ * Global options with a flat appearance
+ *
+ * @returns NSDictionary
+ */
 + (NSDictionary*)defaultFlatOptions;
 
 @end

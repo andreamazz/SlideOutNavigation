@@ -117,35 +117,255 @@ typedef void (^AMSlideOutCompletionHandler)(void);
  */
 - (void)setSlideoutOptions:(NSDictionary *)options;
 
-/** Sets container view to a view controller without adding it to the menu  **/
+/** Sets container view to a view controller without adding it to the menu  
+ *
+ * @param controller the controller
+ */
 - (void)setContentViewController:(UIViewController *)controller;
 
+/** Add a view controller to the last section created
+ *
+ * @param controller the controller
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ */
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon;
+
+/** Add a view controller to the last section created
+ *
+ * @param controller the controller
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param selectionIcon the selected icon
+ */
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon;
+
+/** Add a view controller to the last section created
+ *
+ * @param controller the controller
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param before the block fired before the change
+ * @param after the block after before the change
+ */
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletion:(void(^)())after;
+
+/** Add a view controller to the last section created
+ *
+ * @param controller the controller
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param selectionIcon the selected icon
+ * @param before the block fired before the change
+ * @param after the block after before the change
+ */
 - (void)addViewControllerToLastSection:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon beforeChange:(void(^)())before onCompletion:(void(^)())after;
+
+/** Add an action to the last section
+ *
+ * @param action the action block
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ */
 - (void)addActionToLastSection:(void(^)())action tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon;
+
+/** Add a view controller to the last section created given a Class
+ *
+ * @param clas the controller's class
+ * @param nibName the NIB to load
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ */
 - (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon;
+
+/** Add a view controller to the last section created given a Class
+ *
+ * @param clas the controller's class
+ * @param nibName the NIB to load
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param selectionIcon the selected icon
+ */
 - (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon;
+
+/** Add a view controller to the last section created given a Class
+ *
+ * @param clas the controller's class
+ * @param nibName the NIB to load
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param before the block fired before the change
+ * @param after the block after before the change
+ */
 - (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon beforeChange:(void(^)())before onCompletion:(void(^)())after;
+
+/** Add a view controller to the last section created given a Class
+ *
+ * @param clas the controller's class
+ * @param nibName the NIB to load
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param selectionIcon the selected icon
+ * @param before the block fired before the change
+ * @param after the block after before the change
+ */
 - (void)addViewControllerClassToLastSection:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon beforeChange:(void(^)())before onCompletion:(void(^)())after;
 
+/** Add a view controller to a given section
+ *
+ * @param controller the controller
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param section the section index
+ */
 - (void)addViewController:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section;
+
+/** Add a view controller to a given section
+ *
+ * @param controller the controller
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param selectionIcon the selected icon
+ * @param section the section index
+ */
 - (void)addViewController:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section;
+
+/** Add a view controller to a given section
+ *
+ * @param controller the controller
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param section the section index
+ * @param before the block fired before the change
+ * @param after the block after before the change
+ */
 - (void)addViewController:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletion:(void(^)())after;
+
+/** Add a view controller to a given section
+ *
+ * @param controller the controller
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param selectionIcon the selected icon
+ * @param section the section index
+ * @param before the block fired before the change
+ * @param after the block after before the change
+ */
 - (void)addViewController:(UIViewController*)controller tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletion:(void(^)())after;
+
+/** Add an action to a given action
+ *
+ * @param action the action block
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param section the section index
+ */
 - (void)addAction:(void(^)())action tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section;
+
+/** Add an action to a given action
+ *
+ * @param action the action block
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param selectionIcon the selected icon
+ * @param section the section index
+ */
 - (void)addAction:(void(^)())action tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section;
-// Controller will created only when it will picked from menu, and destroyed when user pick another controller
+
+/** Add a view controller for a given Class to a given section
+ *
+ * @param clas the controller's class
+ * @param nibName the NIB to load
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param section the section index
+ */
 - (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section;
+
+/** Add a view controller for a given Class to a given section
+ *
+ * @param clas the controller's class
+ * @param nibName the NIB to load
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param selectionIcon the selected icon
+ * @param section the section index
+ */
 - (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section;
+
+/** Add a view controller for a given Class to a given section
+ *
+ * @param clas the controller's class
+ * @param nibName the NIB to load
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param section the section index
+ * @param before the block fired before the change
+ * @param after the block after before the change
+ */
 - (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletion:(void(^)())after;
+
+/** Add a view controller for a given Class to a given section
+ *
+ * @param clas the controller's class
+ * @param nibName the NIB to load
+ * @param tag the controller tag
+ * @param title the controller title
+ * @param icon the icon
+ * @param selectionIcon the selected icon
+ * @param section the section index
+ * @param before the block fired before the change
+ * @param after the block after before the change
+ */
 - (void)addViewControllerClass:(Class)cls withNibName:(NSString*)nibName tagged:(NSInteger)tag withTitle:(NSString*)title andIcon:(id)icon andSelectionIcon:(id)selectionIcon toSection:(NSInteger)section beforeChange:(void(^)())before onCompletion:(void(^)())after;
 
+/** Switch to a controller given a tag
+ *
+ * @param tag the controller tag
+ * @param selector the selector to perform
+ * @param obj the object passed
+ */
 - (void)switchToControllerTagged:(NSInteger)tag andPerformSelector:(SEL)selector withObject:(id)obj;
+
+/** Switch to a controller given a tag
+ *
+ * @param tag the controller tag
+ * @param selector the selector to perform
+ * @param obj the object passed
+ * @param delay the delay
+ */
 - (void)switchToControllerTagged:(NSInteger)tag andPerformSelector:(SEL)selector withObject:(id)obj afterDelay:(NSTimeInterval)delay;
 
+/** Add section
+ *
+ * @param title the title of the section
+ */
 - (void)addSectionWithTitle:(NSString*)title;
+
+/** Add section
+ *
+ * @param title the title of the section
+ * @param klass the header's class
+ * @param height the height of the header
+ */
 - (void)addSectionWithTitle:(NSString*)title andHeaderClassName:(NSString*)klass withHeight:(CGFloat)height;
 
 /** Sets the value for a specific menu item's badge
@@ -192,9 +412,21 @@ typedef void (^AMSlideOutCompletionHandler)(void);
  */
 - (void)setLeftBarButton:(UIBarButtonItem*)barButton;
 
+/** Returns the controller with a given tag
+ *
+ * @param tag the tag
+ * @returns the controller
+ */
 - (id)getControllerWithTag:(NSInteger)tag;
 
+/**
+ * Disable the gesture
+ */
 - (void)disableGesture;
+
+/**
+ * Enable the gesture
+ */
 - (void)enableGesture;
 
 @end

@@ -24,9 +24,21 @@
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
+/**
+ * @name AMSlideTableHEader
+ * the table header default class
+ */
 @interface AMSlideTableHeader : UIView
 
-@property (nonatomic, retain) UILabel*	titleLabel;
-@property (nonatomic, weak) NSDictionary* options;
+/**
+ * The title displayed
+ */
+@property (nonatomic, retain) UILabel *titleLabel;
+
+/**
+ * The option
+ */
+@property (nonatomic, weak) NSDictionary *options;
 
 @end

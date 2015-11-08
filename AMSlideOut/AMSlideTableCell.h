@@ -27,12 +27,27 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+/**
+ * @name AMSlideTableCell
+ * The default cell
+ */
 @interface AMSlideTableCell : UITableViewCell
 
+/**
+ * The options
+ */
 @property (nonatomic, weak) NSDictionary* options;
 
+/**
+ * Set the badge text
+ * 
+ * @param text the text
+ */
 - (void)setBadgeText:(NSString*)text;
 
+/**
+ * Define if the cell is below an header
+ */
 @property (nonatomic, assign) BOOL isCellBeforeHeader;
 
 @end
