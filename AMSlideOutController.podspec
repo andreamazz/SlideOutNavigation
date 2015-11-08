@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = "AMSlideOutController"
-  s.version      = "1.10"
+  s.version      = "1.11.0"
   s.summary      = "SlideOut Navigation Controller for iOS. Fully customizable."
   s.homepage     = "https://github.com/andreamazz/SlideOutNavigation"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Andrea Mazzini" => "andrea.mazzini@gmail.com" }
-  s.source       = { :git => "https://github.com/andreamazz/SlideOutNavigation.git", :tag => 'v1.10' }
+  s.source       = { :git => "https://github.com/andreamazz/SlideOutNavigation.git", :tag => s.version }
   s.platform     = :ios, '5.0'
   s.source_files = 'AMSlideOut', '*.{h,m}'
   s.resources    = "AMSlideOut/*.png"
