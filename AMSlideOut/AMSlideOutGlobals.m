@@ -79,10 +79,12 @@ NSString *const AMOptionsNavBarHidden = @"AMOptionsNavBarHidden";
 
 @implementation AMSlideOutGlobals
 
++ (NSBundle *)bundle {
+    return [NSBundle bundleForClass:[self class]];
+}
+
 + (NSDictionary*)defaultOptions
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    
 	CGFloat offsetY = SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ? 20.0f : 0.0f;
 	return @{
 			 AMOptionsTableOffsetY : @(offsetY),
@@ -92,7 +94,7 @@ NSString *const AMOptionsNavBarHidden = @"AMOptionsNavBarHidden";
 			 AMOptionsEnableShadow : @(YES),
 			 AMOptionsSetButtonDone : @(NO),
 			 AMOptionsUseBorderedButton : @(NO),
-			 AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlide" inBundle:bundle compatibleWithTraitCollection:nil],
+			 AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlide" inBundle:[self bundle] compatibleWithTraitCollection:nil],
 			 AMOptionsUseDefaultTitles : @(YES),
 			 AMOptionsSlideValue : @(270),
 			 AMOptionsBackground : [UIColor colorWithRed:0.19 green:0.22 blue:0.29 alpha:1.0],
@@ -166,7 +168,7 @@ NSString *const AMOptionsNavBarHidden = @"AMOptionsNavBarHidden";
 			 AMOptionsEnableShadow : @(YES),
 			 AMOptionsSetButtonDone : @(NO),
 			 AMOptionsUseBorderedButton : @(NO),
-			 AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlideBlack.png"],
+             AMOptionsButtonIcon : [UIImage imageNamed:@"iconSlideBlack" inBundle:[self bundle] compatibleWithTraitCollection:nil],
 			 AMOptionsUseDefaultTitles : @(YES),
 			 AMOptionsSlideValue : @(270),
 			 AMOptionsBackground : [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0],
