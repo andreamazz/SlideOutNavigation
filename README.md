@@ -1,6 +1,6 @@
 AMSlideOutNavigationController
 ==================
-[![Cocoapods](https://cocoapod-badges.herokuapp.com/v/AMSlideOutController/badge.png)](http://beta.cocoapods.org/?q=amslideoutcontroller)
+[![CocoaPods](https://cocoapod-badges.herokuapp.com/v/AMSlideOutController/badge.png)](http://beta.cocoapods.org/?q=amslideoutcontroller)
 [![Build Status](https://travis-ci.org/andreamazz/SlideOutNavigation.png)](https://travis-ci.org/andreamazz/SlideOutNavigation) 
 [![Analytics](https://ga-beacon.appspot.com/UA-42282237-8/AMSlideOutController/README)](https://github.com/igrigorik/ga-beacon)
 
@@ -16,7 +16,7 @@ Screenshot
 ![AMSlideOutNavigationController](https://raw.githubusercontent.com/andreamazz/SlideOutNavigation/master/screenshot.png)
 
 
-Setup with Cocoapods
+Setup with CocoaPods
 --------------------
 * Add ```pod 'AMSlideOutController'``` to your Podfile
 * Run ```pod install```
